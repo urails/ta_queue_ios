@@ -7,6 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F88C25B155422E6006EFC6E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F88C25A155422E6006EFC6E /* CFNetwork.framework */; };
+		5F88C25D155422ED006EFC6E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F88C25C155422ED006EFC6E /* CoreData.framework */; };
+		5F88C25F155422F3006EFC6E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F88C25E155422F3006EFC6E /* Security.framework */; };
+		5F88C261155422FC006EFC6E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F88C260155422FC006EFC6E /* MobileCoreServices.framework */; };
+		5F88C26315542303006EFC6E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F88C26215542303006EFC6E /* SystemConfiguration.framework */; };
+		5F88C2651554230A006EFC6E /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F88C2641554230A006EFC6E /* libxml2.dylib */; };
+		5F88C26715542311006EFC6E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F88C26615542311006EFC6E /* QuartzCore.framework */; };
+		5F88C26815542323006EFC6E /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F88C24E155421C1006EFC6E /* libRestKit.a */; };
+		5F88C26B15542426006EFC6E /* URSchool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F88C26A15542426006EFC6E /* URSchool.m */; };
+		5F88C2701554247C006EFC6E /* URInstructor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F88C26F1554247C006EFC6E /* URInstructor.m */; };
+		5F88C2731554248E006EFC6E /* URQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F88C2721554248E006EFC6E /* URQueue.m */; };
+		5F88C2761554249A006EFC6E /* URStudent.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F88C2751554249A006EFC6E /* URStudent.m */; };
+		5F88C279155424A6006EFC6E /* URTa.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F88C278155424A6006EFC6E /* URTa.m */; };
+		5F88C27E15543272006EFC6E /* SVPullToRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5F88C27B15543272006EFC6E /* SVPullToRefresh.bundle */; };
+		5F88C27F15543272006EFC6E /* SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F88C27D15543272006EFC6E /* SVPullToRefresh.m */; };
+		5F88C28215544AB9006EFC6E /* URLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F88C28115544AB9006EFC6E /* URLoginViewController.m */; };
+		5F88C28515545DD8006EFC6E /* URQueueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F88C28415545DD8006EFC6E /* URQueueViewController.m */; };
+		5F88C288155462C5006EFC6E /* URUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F88C287155462C5006EFC6E /* URUser.m */; };
+		5F88C28B1554A2DF006EFC6E /* URObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F88C28A1554A2DF006EFC6E /* URObject.m */; };
+		5F88C2F715575FAF006EFC6E /* URJuggernautClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F88C2F615575FAE006EFC6E /* URJuggernautClient.m */; };
 		5F92B8C8154876E9006AB042 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F92B8C7154876E9006AB042 /* UIKit.framework */; };
 		5F92B8CA154876EA006AB042 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F92B8C9154876EA006AB042 /* Foundation.framework */; };
 		5F92B8CC154876EA006AB042 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F92B8CB154876EA006AB042 /* CoreGraphics.framework */; };
@@ -21,9 +41,55 @@
 		5F92B8EB154876EA006AB042 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F92B8C9154876EA006AB042 /* Foundation.framework */; };
 		5F92B8F3154876EA006AB042 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5F92B8F1154876EA006AB042 /* InfoPlist.strings */; };
 		5F92B8F6154876EA006AB042 /* ta_queue_iosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F92B8F5154876EA006AB042 /* ta_queue_iosTests.m */; };
+		5FCE98511558B4E700071715 /* URNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FCE98501558B4E700071715 /* URNetworkManager.m */; };
+		5FCE98541558C45B00071715 /* URNetworkProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FCE98531558C45B00071715 /* URNetworkProxy.m */; };
+		5FCE985E1558C72800071715 /* URTACell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FCE985D1558C72800071715 /* URTACell.m */; };
+		5FCE98611558C73300071715 /* URStudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FCE98601558C73300071715 /* URStudentCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5F88C24D155421C1006EFC6E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5F88C242155421C0006EFC6E /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160D1614564E810060A5C5;
+			remoteInfo = RestKit;
+		};
+		5F88C24F155421C1006EFC6E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5F88C242155421C0006EFC6E /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160D2614564E820060A5C5;
+			remoteInfo = RestKitTests;
+		};
+		5F88C251155421C1006EFC6E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5F88C242155421C0006EFC6E /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160E62145651060060A5C5;
+			remoteInfo = RestKitFramework;
+		};
+		5F88C253155421C1006EFC6E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5F88C242155421C0006EFC6E /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160E78145651060060A5C5;
+			remoteInfo = RestKitFrameworkTests;
+		};
+		5F88C255155421C1006EFC6E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5F88C242155421C0006EFC6E /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 259C301615128079003066A2;
+			remoteInfo = RestKitResources;
+		};
+		5F88C258155422D8006EFC6E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5F88C242155421C0006EFC6E /* RestKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 25160D1514564E810060A5C5;
+			remoteInfo = RestKit;
+		};
 		5F92B8EC154876EA006AB042 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5F92B8BA154876E9006AB042 /* Project object */;
@@ -34,6 +100,38 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5F88C242155421C0006EFC6E /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = RestKit/RestKit.xcodeproj; sourceTree = "<group>"; };
+		5F88C25A155422E6006EFC6E /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		5F88C25C155422ED006EFC6E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		5F88C25E155422F3006EFC6E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		5F88C260155422FC006EFC6E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		5F88C26215542303006EFC6E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		5F88C2641554230A006EFC6E /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		5F88C26615542311006EFC6E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		5F88C26915542426006EFC6E /* URSchool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URSchool.h; sourceTree = "<group>"; };
+		5F88C26A15542426006EFC6E /* URSchool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URSchool.m; sourceTree = "<group>"; };
+		5F88C26E1554247C006EFC6E /* URInstructor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URInstructor.h; sourceTree = "<group>"; };
+		5F88C26F1554247C006EFC6E /* URInstructor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URInstructor.m; sourceTree = "<group>"; };
+		5F88C2711554248E006EFC6E /* URQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URQueue.h; sourceTree = "<group>"; };
+		5F88C2721554248E006EFC6E /* URQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URQueue.m; sourceTree = "<group>"; };
+		5F88C2741554249A006EFC6E /* URStudent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URStudent.h; sourceTree = "<group>"; };
+		5F88C2751554249A006EFC6E /* URStudent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URStudent.m; sourceTree = "<group>"; };
+		5F88C277155424A6006EFC6E /* URTa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URTa.h; sourceTree = "<group>"; };
+		5F88C278155424A6006EFC6E /* URTa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URTa.m; sourceTree = "<group>"; };
+		5F88C27B15543272006EFC6E /* SVPullToRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVPullToRefresh.bundle; sourceTree = "<group>"; };
+		5F88C27C15543272006EFC6E /* SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPullToRefresh.h; sourceTree = "<group>"; };
+		5F88C27D15543272006EFC6E /* SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPullToRefresh.m; sourceTree = "<group>"; };
+		5F88C28015544AB9006EFC6E /* URLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLoginViewController.h; sourceTree = "<group>"; };
+		5F88C28115544AB9006EFC6E /* URLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLoginViewController.m; sourceTree = "<group>"; };
+		5F88C28315545DD8006EFC6E /* URQueueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URQueueViewController.h; sourceTree = "<group>"; };
+		5F88C28415545DD8006EFC6E /* URQueueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URQueueViewController.m; sourceTree = "<group>"; };
+		5F88C286155462C5006EFC6E /* URUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URUser.h; sourceTree = "<group>"; };
+		5F88C287155462C5006EFC6E /* URUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URUser.m; sourceTree = "<group>"; };
+		5F88C2891554A2DF006EFC6E /* URObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URObject.h; sourceTree = "<group>"; };
+		5F88C28A1554A2DF006EFC6E /* URObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URObject.m; sourceTree = "<group>"; };
+		5F88C2941556CAE7006EFC6E /* libUnittWebSocketClient.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libUnittWebSocketClient.a; path = "../../../../Downloads/UnittWebSocketClient/bin/Debug-iphonesimulator/libUnittWebSocketClient.a"; sourceTree = "<group>"; };
+		5F88C2F515575FAE006EFC6E /* URJuggernautClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URJuggernautClient.h; sourceTree = "<group>"; };
+		5F88C2F615575FAE006EFC6E /* URJuggernautClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URJuggernautClient.m; sourceTree = "<group>"; };
 		5F92B8C3154876E9006AB042 /* ta_queue_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ta_queue_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F92B8C7154876E9006AB042 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5F92B8C9154876EA006AB042 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -54,6 +152,14 @@
 		5F92B8F2154876EA006AB042 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5F92B8F4154876EA006AB042 /* ta_queue_iosTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ta_queue_iosTests.h; sourceTree = "<group>"; };
 		5F92B8F5154876EA006AB042 /* ta_queue_iosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ta_queue_iosTests.m; sourceTree = "<group>"; };
+		5FCE984F1558B4E700071715 /* URNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URNetworkManager.h; sourceTree = "<group>"; };
+		5FCE98501558B4E700071715 /* URNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URNetworkManager.m; sourceTree = "<group>"; };
+		5FCE98521558C45B00071715 /* URNetworkProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URNetworkProxy.h; sourceTree = "<group>"; };
+		5FCE98531558C45B00071715 /* URNetworkProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URNetworkProxy.m; sourceTree = "<group>"; };
+		5FCE985C1558C72800071715 /* URTACell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URTACell.h; sourceTree = "<group>"; };
+		5FCE985D1558C72800071715 /* URTACell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URTACell.m; sourceTree = "<group>"; };
+		5FCE985F1558C73300071715 /* URStudentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URStudentCell.h; sourceTree = "<group>"; };
+		5FCE98601558C73300071715 /* URStudentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URStudentCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +167,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F88C26815542323006EFC6E /* libRestKit.a in Frameworks */,
+				5F88C26715542311006EFC6E /* QuartzCore.framework in Frameworks */,
+				5F88C2651554230A006EFC6E /* libxml2.dylib in Frameworks */,
+				5F88C26315542303006EFC6E /* SystemConfiguration.framework in Frameworks */,
+				5F88C261155422FC006EFC6E /* MobileCoreServices.framework in Frameworks */,
+				5F88C25F155422F3006EFC6E /* Security.framework in Frameworks */,
+				5F88C25D155422ED006EFC6E /* CoreData.framework in Frameworks */,
+				5F88C25B155422E6006EFC6E /* CFNetwork.framework in Frameworks */,
 				5F92B8C8154876E9006AB042 /* UIKit.framework in Frameworks */,
 				5F92B8CA154876EA006AB042 /* Foundation.framework in Frameworks */,
 				5F92B8CC154876EA006AB042 /* CoreGraphics.framework in Frameworks */,
@@ -80,13 +194,80 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5F88C243155421C0006EFC6E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5F88C24E155421C1006EFC6E /* libRestKit.a */,
+				5F88C250155421C1006EFC6E /* RestKitTests.octest */,
+				5F88C252155421C1006EFC6E /* RestKit.framework */,
+				5F88C254155421C1006EFC6E /* RestKitFrameworkTests.octest */,
+				5F88C256155421C1006EFC6E /* RestKitResources.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5F88C26C15542432006EFC6E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5F88C26915542426006EFC6E /* URSchool.h */,
+				5F88C26A15542426006EFC6E /* URSchool.m */,
+				5F88C26E1554247C006EFC6E /* URInstructor.h */,
+				5F88C26F1554247C006EFC6E /* URInstructor.m */,
+				5F88C2711554248E006EFC6E /* URQueue.h */,
+				5F88C2721554248E006EFC6E /* URQueue.m */,
+				5F88C2741554249A006EFC6E /* URStudent.h */,
+				5F88C2751554249A006EFC6E /* URStudent.m */,
+				5F88C277155424A6006EFC6E /* URTa.h */,
+				5F88C278155424A6006EFC6E /* URTa.m */,
+				5F88C286155462C5006EFC6E /* URUser.h */,
+				5F88C287155462C5006EFC6E /* URUser.m */,
+				5F88C2891554A2DF006EFC6E /* URObject.h */,
+				5F88C28A1554A2DF006EFC6E /* URObject.m */,
+				5F88C2F515575FAE006EFC6E /* URJuggernautClient.h */,
+				5F88C2F615575FAE006EFC6E /* URJuggernautClient.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		5F88C26D15542441006EFC6E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5F92B8DF154876EA006AB042 /* URViewController.h */,
+				5F92B8E0154876EA006AB042 /* URViewController.m */,
+				5F88C28015544AB9006EFC6E /* URLoginViewController.h */,
+				5F88C28115544AB9006EFC6E /* URLoginViewController.m */,
+				5F88C28315545DD8006EFC6E /* URQueueViewController.h */,
+				5F88C28415545DD8006EFC6E /* URQueueViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		5F88C27A15543272006EFC6E /* SVPullToRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				5F88C27B15543272006EFC6E /* SVPullToRefresh.bundle */,
+				5F88C27C15543272006EFC6E /* SVPullToRefresh.h */,
+				5F88C27D15543272006EFC6E /* SVPullToRefresh.m */,
+			);
+			path = SVPullToRefresh;
+			sourceTree = "<group>";
+		};
 		5F92B8B8154876E9006AB042 = {
 			isa = PBXGroup;
 			children = (
+				5F88C2941556CAE7006EFC6E /* libUnittWebSocketClient.a */,
+				5F88C26615542311006EFC6E /* QuartzCore.framework */,
+				5F88C2641554230A006EFC6E /* libxml2.dylib */,
+				5F88C26215542303006EFC6E /* SystemConfiguration.framework */,
+				5F88C260155422FC006EFC6E /* MobileCoreServices.framework */,
+				5F88C25E155422F3006EFC6E /* Security.framework */,
+				5F88C25C155422ED006EFC6E /* CoreData.framework */,
+				5F88C25A155422E6006EFC6E /* CFNetwork.framework */,
 				5F92B8CD154876EA006AB042 /* ta_queue_ios */,
 				5F92B8EE154876EA006AB042 /* ta_queue_iosTests */,
 				5F92B8C6154876E9006AB042 /* Frameworks */,
 				5F92B8C4154876E9006AB042 /* Products */,
+				5F88C242155421C0006EFC6E /* RestKit.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -113,12 +294,15 @@
 		5F92B8CD154876EA006AB042 /* ta_queue_ios */ = {
 			isa = PBXGroup;
 			children = (
+				5FCE98551558C60900071715 /* Views */,
+				5FCE984E1558B4D400071715 /* Networking */,
+				5F88C27A15543272006EFC6E /* SVPullToRefresh */,
+				5F88C26D15542441006EFC6E /* Controllers */,
+				5F88C26C15542432006EFC6E /* Models */,
 				5F92B8D6154876EA006AB042 /* URAppDelegate.h */,
 				5F92B8D7154876EA006AB042 /* URAppDelegate.m */,
 				5F92B8D9154876EA006AB042 /* MainStoryboard_iPhone.storyboard */,
 				5F92B8DC154876EA006AB042 /* MainStoryboard_iPad.storyboard */,
-				5F92B8DF154876EA006AB042 /* URViewController.h */,
-				5F92B8E0154876EA006AB042 /* URViewController.m */,
 				5F92B8CE154876EA006AB042 /* Supporting Files */,
 			);
 			path = ta_queue_ios;
@@ -154,6 +338,28 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		5FCE984E1558B4D400071715 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				5FCE984F1558B4E700071715 /* URNetworkManager.h */,
+				5FCE98501558B4E700071715 /* URNetworkManager.m */,
+				5FCE98521558C45B00071715 /* URNetworkProxy.h */,
+				5FCE98531558C45B00071715 /* URNetworkProxy.m */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
+		5FCE98551558C60900071715 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5FCE985C1558C72800071715 /* URTACell.h */,
+				5FCE985D1558C72800071715 /* URTACell.m */,
+				5FCE985F1558C73300071715 /* URStudentCell.h */,
+				5FCE98601558C73300071715 /* URStudentCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -168,6 +374,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				5F88C259155422D8006EFC6E /* PBXTargetDependency */,
 			);
 			name = ta_queue_ios;
 			productName = ta_queue_ios;
@@ -213,6 +420,12 @@
 			mainGroup = 5F92B8B8154876E9006AB042;
 			productRefGroup = 5F92B8C4154876E9006AB042 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 5F88C243155421C0006EFC6E /* Products */;
+					ProjectRef = 5F88C242155421C0006EFC6E /* RestKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				5F92B8C2154876E9006AB042 /* ta_queue_ios */,
@@ -220,6 +433,44 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		5F88C24E155421C1006EFC6E /* libRestKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRestKit.a;
+			remoteRef = 5F88C24D155421C1006EFC6E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5F88C250155421C1006EFC6E /* RestKitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RestKitTests.octest;
+			remoteRef = 5F88C24F155421C1006EFC6E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5F88C252155421C1006EFC6E /* RestKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RestKit.framework;
+			remoteRef = 5F88C251155421C1006EFC6E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5F88C254155421C1006EFC6E /* RestKitFrameworkTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RestKitFrameworkTests.octest;
+			remoteRef = 5F88C253155421C1006EFC6E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5F88C256155421C1006EFC6E /* RestKitResources.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RestKitResources.bundle;
+			remoteRef = 5F88C255155421C1006EFC6E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		5F92B8C1154876E9006AB042 /* Resources */ = {
@@ -229,6 +480,7 @@
 				5F92B8D2154876EA006AB042 /* InfoPlist.strings in Resources */,
 				5F92B8DB154876EA006AB042 /* MainStoryboard_iPhone.storyboard in Resources */,
 				5F92B8DE154876EA006AB042 /* MainStoryboard_iPad.storyboard in Resources */,
+				5F88C27E15543272006EFC6E /* SVPullToRefresh.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +518,21 @@
 				5F92B8D4154876EA006AB042 /* main.m in Sources */,
 				5F92B8D8154876EA006AB042 /* URAppDelegate.m in Sources */,
 				5F92B8E1154876EA006AB042 /* URViewController.m in Sources */,
+				5F88C26B15542426006EFC6E /* URSchool.m in Sources */,
+				5F88C2701554247C006EFC6E /* URInstructor.m in Sources */,
+				5F88C2731554248E006EFC6E /* URQueue.m in Sources */,
+				5F88C2761554249A006EFC6E /* URStudent.m in Sources */,
+				5F88C279155424A6006EFC6E /* URTa.m in Sources */,
+				5F88C27F15543272006EFC6E /* SVPullToRefresh.m in Sources */,
+				5F88C28215544AB9006EFC6E /* URLoginViewController.m in Sources */,
+				5F88C28515545DD8006EFC6E /* URQueueViewController.m in Sources */,
+				5F88C288155462C5006EFC6E /* URUser.m in Sources */,
+				5F88C28B1554A2DF006EFC6E /* URObject.m in Sources */,
+				5F88C2F715575FAF006EFC6E /* URJuggernautClient.m in Sources */,
+				5FCE98511558B4E700071715 /* URNetworkManager.m in Sources */,
+				5FCE98541558C45B00071715 /* URNetworkProxy.m in Sources */,
+				5FCE985E1558C72800071715 /* URTACell.m in Sources */,
+				5FCE98611558C73300071715 /* URStudentCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +547,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		5F88C259155422D8006EFC6E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = RestKit;
+			targetProxy = 5F88C258155422D8006EFC6E /* PBXContainerItemProxy */;
+		};
 		5F92B8ED154876EA006AB042 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5F92B8C2154876E9006AB042 /* ta_queue_ios */;
@@ -343,7 +615,12 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../Headers\"/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -362,8 +639,13 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../Headers\"/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -375,8 +657,15 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ta_queue_ios/ta_queue_ios-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"<Multiple",
+					"values>",
+					"\"$(BUILT_PRODUCTS_DIR)/../../Headers\"/**",
+				);
 				INFOPLIST_FILE = "ta_queue_ios/ta_queue_ios-Info.plist";
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -386,8 +675,15 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ta_queue_ios/ta_queue_ios-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"<Multiple",
+					"values>",
+					"\"$(BUILT_PRODUCTS_DIR)/../../Headers\"/**",
+				);
 				INFOPLIST_FILE = "ta_queue_ios/ta_queue_ios-Info.plist";
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -445,6 +741,7 @@
 				5F92B8FB154876EA006AB042 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5F92B8FC154876EA006AB042 /* Build configuration list for PBXNativeTarget "ta_queue_iosTests" */ = {
 			isa = XCConfigurationList;
@@ -453,6 +750,7 @@
 				5F92B8FE154876EA006AB042 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

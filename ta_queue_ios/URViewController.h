@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface URViewController : UIViewController
+@interface URViewController : UITableViewController <RKRequestDelegate> {
+
+}
+
+@property (nonatomic, retain) NSArray* schools;
+
+- (void) fetchSchools;
 
 @end

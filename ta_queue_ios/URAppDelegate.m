@@ -7,6 +7,7 @@
 //
 
 #import "URAppDelegate.h"
+#import "URSchool.h"
 
 @implementation URAppDelegate
 
@@ -14,7 +15,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    [RKClient setSharedClient:[RKClient clientWithBaseURLString:gBaseUrl]];
+
     return YES;
 }
 							
