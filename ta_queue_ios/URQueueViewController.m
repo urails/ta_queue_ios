@@ -20,7 +20,11 @@
 
 @implementation URQueueViewController
 
-@synthesize queue, currentUser, timer, networkManager;
+@synthesize queue = _queue;
+@synthesize currentUser = _currentUser;
+@synthesize timer = _timer;
+@synthesize networkManager = _networkManager;
+@synthesize delegate = _delegate;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -35,32 +39,31 @@
 {
     [super viewDidLoad];
     
-    networkManager = [[URNetworkManager alloc] initWithId:currentUser.userId andToken:currentUser.token];
+    self.tabBarController.navigationItem.hidesBackButton = YES;
     
-    URNetworkManager *tempManager = networkManager;
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStyleBordered target:self action:@selector(logoutTapped)];
+    
+    self.tabBarController.navigationItem.leftBarButtonItem = item;
+    
+    [URUser setCurrentUser:_currentUser];
+    
+    _networkManager = [[URQueueNetworkManager alloc] initWithQueue:_queue andUser:_currentUser];
+    
+    [_networkManager refreshQueue];
+    
+    __weak URQueueNetworkManager *tempManager = _networkManager;
     
     [self.tableView addPullToRefreshWithActionHandler:^{
-        [tempManager updateQueue];
+        [tempManager refreshQueue];
     }];
     
-    [networkManager updateQueue];
-    
-    [networkManager setDelegate:self];
-    
-    //timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(refreshTimerFired:) userInfo:nil repeats:YES];
-    
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [_networkManager setDelegate:self];
 }
 
 - (void)viewDidUnload
 {
-    [timer invalidate];
-    timer = nil;
+    [_timer invalidate];
+    [self setTimer:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -69,16 +72,20 @@
 #pragma mark NSTimer Methods
 
 - (void) refreshTimerFired:(NSTimer *)timer {
-    [networkManager updateQueue];
+    [_networkManager refreshQueue];
 }
 
 #pragma mark RKRequestDelegate methods
 
-- (void) networkManager:(URNetworkManager*) manager updatedQueue:(URQueue*) updatedQueue {
-    self.queue = updatedQueue;
+- (void) networkManager:(URQueueNetworkManager *)manager didReceiveQueueUpdate:(URQueue *)queue {
+    self.queue = queue;
     
     [self.tableView reloadData];
     [self.tableView.pullToRefreshView stopAnimating];
+}
+
+- (void) networkManager:(URQueueNetworkManager *)manager didLogoutUser:(URUser *)user {
+    [_delegate queueViewController:self didLogoutUser:user];
 }
 
 #pragma mark 
@@ -98,10 +105,10 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
-        return queue.tas.count;
+        return _queue.tas.count;
     }
     
-    return queue.studentsInQueue.count;
+    return _queue.studentsInQueue.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -126,14 +133,14 @@
     
     if (indexPath.section == TA_SECTION) {
         URTACell *_cell = [self.tableView dequeueReusableCellWithIdentifier:taIdentifier];
-        _cell.textLabel.text = [[queue.tas objectAtIndex:indexPath.row] username];
+        _cell.textLabel.text = [[_queue.tas objectAtIndex:indexPath.row] username];
         
         cell = _cell;
     }
     else {
-        URStudent *student = [queue.studentsInQueue objectAtIndex:indexPath.row];
+        URStudent *student = [_queue.studentsInQueue objectAtIndex:indexPath.row];
         URStudentCell *_cell = [self.tableView dequeueReusableCellWithIdentifier:studentIdentifier];
-        _cell.textLabel.text = [[queue.studentsInQueue objectAtIndex:indexPath.row] username];
+        _cell.textLabel.text = [[_queue.studentsInQueue objectAtIndex:indexPath.row] username];
         
         if (!student.taId) {
             [_cell.acceptButton addTarget:self action:@selector(acceptTapped:) forControlEvents:UIControlEventTouchUpInside];
@@ -170,15 +177,19 @@
 }
 
 - (IBAction)toggleEnterQueue:(id)sender {
-    if ([[queue currentUser] isStudent]) {
-        if ([((URStudent*)[queue currentUser]).inQueue boolValue]) {
-            [networkManager exitQueue];   
+    if ([[_queue currentUser] isStudent]) {
+        if ([((URStudent*)[_queue currentUser]).inQueue boolValue]) {
+//            [networkManager exitQueue];   
         }
         else {
-            [networkManager enterQueue];
+//            [networkManager enterQueue];
         }
     }
 
+}
+
+- (void) logoutTapped {
+    [_networkManager logout];
 }
 
 #pragma mark - Table view delegate

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08602C7AC5724FE8BF93C512 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8F312897FA241DAAAE72D47 /* libPods.a */; };
+		51F9E96F35534DE18D6DBB2C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8F312897FA241DAAAE72D47 /* libPods.a */; };
+		5F7B329715A725A000FD4973 /* URAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7B329615A725A000FD4973 /* URAlertView.m */; };
+		5F7B329C15A74F4300FD4973 /* URError.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7B329B15A74F4300FD4973 /* URError.m */; };
 		5F88C25B155422E6006EFC6E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F88C25A155422E6006EFC6E /* CFNetwork.framework */; };
 		5F88C25D155422ED006EFC6E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F88C25C155422ED006EFC6E /* CoreData.framework */; };
 		5F88C25F155422F3006EFC6E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F88C25E155422F3006EFC6E /* Security.framework */; };
@@ -14,14 +18,11 @@
 		5F88C26315542303006EFC6E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F88C26215542303006EFC6E /* SystemConfiguration.framework */; };
 		5F88C2651554230A006EFC6E /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F88C2641554230A006EFC6E /* libxml2.dylib */; };
 		5F88C26715542311006EFC6E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F88C26615542311006EFC6E /* QuartzCore.framework */; };
-		5F88C26815542323006EFC6E /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F88C24E155421C1006EFC6E /* libRestKit.a */; };
 		5F88C26B15542426006EFC6E /* URSchool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F88C26A15542426006EFC6E /* URSchool.m */; };
 		5F88C2701554247C006EFC6E /* URInstructor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F88C26F1554247C006EFC6E /* URInstructor.m */; };
 		5F88C2731554248E006EFC6E /* URQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F88C2721554248E006EFC6E /* URQueue.m */; };
 		5F88C2761554249A006EFC6E /* URStudent.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F88C2751554249A006EFC6E /* URStudent.m */; };
 		5F88C279155424A6006EFC6E /* URTa.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F88C278155424A6006EFC6E /* URTa.m */; };
-		5F88C27E15543272006EFC6E /* SVPullToRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5F88C27B15543272006EFC6E /* SVPullToRefresh.bundle */; };
-		5F88C27F15543272006EFC6E /* SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F88C27D15543272006EFC6E /* SVPullToRefresh.m */; };
 		5F88C28215544AB9006EFC6E /* URLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F88C28115544AB9006EFC6E /* URLoginViewController.m */; };
 		5F88C28515545DD8006EFC6E /* URQueueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F88C28415545DD8006EFC6E /* URQueueViewController.m */; };
 		5F88C288155462C5006EFC6E /* URUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F88C287155462C5006EFC6E /* URUser.m */; };
@@ -41,55 +42,13 @@
 		5F92B8EB154876EA006AB042 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F92B8C9154876EA006AB042 /* Foundation.framework */; };
 		5F92B8F3154876EA006AB042 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5F92B8F1154876EA006AB042 /* InfoPlist.strings */; };
 		5F92B8F6154876EA006AB042 /* ta_queue_iosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F92B8F5154876EA006AB042 /* ta_queue_iosTests.m */; };
-		5FCE98511558B4E700071715 /* URNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FCE98501558B4E700071715 /* URNetworkManager.m */; };
-		5FCE98541558C45B00071715 /* URNetworkProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FCE98531558C45B00071715 /* URNetworkProxy.m */; };
+		5FC90FCF15A6B82A00B217E2 /* URLoginNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC90FCE15A6B82A00B217E2 /* URLoginNetworkManager.m */; };
+		5FC90FD315A6C4ED00B217E2 /* URQueueNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC90FD215A6C4ED00B217E2 /* URQueueNetworkManager.m */; };
 		5FCE985E1558C72800071715 /* URTACell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FCE985D1558C72800071715 /* URTACell.m */; };
 		5FCE98611558C73300071715 /* URStudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FCE98601558C73300071715 /* URStudentCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5F88C24D155421C1006EFC6E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5F88C242155421C0006EFC6E /* RestKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 25160D1614564E810060A5C5;
-			remoteInfo = RestKit;
-		};
-		5F88C24F155421C1006EFC6E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5F88C242155421C0006EFC6E /* RestKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 25160D2614564E820060A5C5;
-			remoteInfo = RestKitTests;
-		};
-		5F88C251155421C1006EFC6E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5F88C242155421C0006EFC6E /* RestKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 25160E62145651060060A5C5;
-			remoteInfo = RestKitFramework;
-		};
-		5F88C253155421C1006EFC6E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5F88C242155421C0006EFC6E /* RestKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 25160E78145651060060A5C5;
-			remoteInfo = RestKitFrameworkTests;
-		};
-		5F88C255155421C1006EFC6E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5F88C242155421C0006EFC6E /* RestKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 259C301615128079003066A2;
-			remoteInfo = RestKitResources;
-		};
-		5F88C258155422D8006EFC6E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5F88C242155421C0006EFC6E /* RestKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 25160D1514564E810060A5C5;
-			remoteInfo = RestKit;
-		};
 		5F92B8EC154876EA006AB042 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5F92B8BA154876E9006AB042 /* Project object */;
@@ -100,7 +59,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5F88C242155421C0006EFC6E /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = RestKit/RestKit.xcodeproj; sourceTree = "<group>"; };
+		5F7B0DC3E29F451EAC8CC01B /* Pods.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		5F7B329515A725A000FD4973 /* URAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URAlertView.h; sourceTree = "<group>"; };
+		5F7B329615A725A000FD4973 /* URAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URAlertView.m; sourceTree = "<group>"; };
+		5F7B329A15A74F4300FD4973 /* URError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URError.h; sourceTree = "<group>"; };
+		5F7B329B15A74F4300FD4973 /* URError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URError.m; sourceTree = "<group>"; };
+		5F7B329D15A74FE300FD4973 /* NSString_URMethods.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSString_URMethods.h; sourceTree = "<group>"; };
 		5F88C25A155422E6006EFC6E /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		5F88C25C155422ED006EFC6E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		5F88C25E155422F3006EFC6E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -118,9 +82,6 @@
 		5F88C2751554249A006EFC6E /* URStudent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URStudent.m; sourceTree = "<group>"; };
 		5F88C277155424A6006EFC6E /* URTa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URTa.h; sourceTree = "<group>"; };
 		5F88C278155424A6006EFC6E /* URTa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URTa.m; sourceTree = "<group>"; };
-		5F88C27B15543272006EFC6E /* SVPullToRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVPullToRefresh.bundle; sourceTree = "<group>"; };
-		5F88C27C15543272006EFC6E /* SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPullToRefresh.h; sourceTree = "<group>"; };
-		5F88C27D15543272006EFC6E /* SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPullToRefresh.m; sourceTree = "<group>"; };
 		5F88C28015544AB9006EFC6E /* URLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLoginViewController.h; sourceTree = "<group>"; };
 		5F88C28115544AB9006EFC6E /* URLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLoginViewController.m; sourceTree = "<group>"; };
 		5F88C28315545DD8006EFC6E /* URQueueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URQueueViewController.h; sourceTree = "<group>"; };
@@ -129,7 +90,6 @@
 		5F88C287155462C5006EFC6E /* URUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URUser.m; sourceTree = "<group>"; };
 		5F88C2891554A2DF006EFC6E /* URObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URObject.h; sourceTree = "<group>"; };
 		5F88C28A1554A2DF006EFC6E /* URObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URObject.m; sourceTree = "<group>"; };
-		5F88C2941556CAE7006EFC6E /* libUnittWebSocketClient.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libUnittWebSocketClient.a; path = "../../../../Downloads/UnittWebSocketClient/bin/Debug-iphonesimulator/libUnittWebSocketClient.a"; sourceTree = "<group>"; };
 		5F88C2F515575FAE006EFC6E /* URJuggernautClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URJuggernautClient.h; sourceTree = "<group>"; };
 		5F88C2F615575FAE006EFC6E /* URJuggernautClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URJuggernautClient.m; sourceTree = "<group>"; };
 		5F92B8C3154876E9006AB042 /* ta_queue_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ta_queue_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,14 +112,15 @@
 		5F92B8F2154876EA006AB042 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5F92B8F4154876EA006AB042 /* ta_queue_iosTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ta_queue_iosTests.h; sourceTree = "<group>"; };
 		5F92B8F5154876EA006AB042 /* ta_queue_iosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ta_queue_iosTests.m; sourceTree = "<group>"; };
-		5FCE984F1558B4E700071715 /* URNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URNetworkManager.h; sourceTree = "<group>"; };
-		5FCE98501558B4E700071715 /* URNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URNetworkManager.m; sourceTree = "<group>"; };
-		5FCE98521558C45B00071715 /* URNetworkProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URNetworkProxy.h; sourceTree = "<group>"; };
-		5FCE98531558C45B00071715 /* URNetworkProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URNetworkProxy.m; sourceTree = "<group>"; };
+		5FC90FCD15A6B82A00B217E2 /* URLoginNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLoginNetworkManager.h; sourceTree = "<group>"; };
+		5FC90FCE15A6B82A00B217E2 /* URLoginNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLoginNetworkManager.m; sourceTree = "<group>"; };
+		5FC90FD115A6C4ED00B217E2 /* URQueueNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URQueueNetworkManager.h; sourceTree = "<group>"; };
+		5FC90FD215A6C4ED00B217E2 /* URQueueNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URQueueNetworkManager.m; sourceTree = "<group>"; };
 		5FCE985C1558C72800071715 /* URTACell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URTACell.h; sourceTree = "<group>"; };
 		5FCE985D1558C72800071715 /* URTACell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URTACell.m; sourceTree = "<group>"; };
 		5FCE985F1558C73300071715 /* URStudentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URStudentCell.h; sourceTree = "<group>"; };
 		5FCE98601558C73300071715 /* URStudentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URStudentCell.m; sourceTree = "<group>"; };
+		B8F312897FA241DAAAE72D47 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,7 +128,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F88C26815542323006EFC6E /* libRestKit.a in Frameworks */,
 				5F88C26715542311006EFC6E /* QuartzCore.framework in Frameworks */,
 				5F88C2651554230A006EFC6E /* libxml2.dylib in Frameworks */,
 				5F88C26315542303006EFC6E /* SystemConfiguration.framework in Frameworks */,
@@ -178,6 +138,7 @@
 				5F92B8C8154876E9006AB042 /* UIKit.framework in Frameworks */,
 				5F92B8CA154876EA006AB042 /* Foundation.framework in Frameworks */,
 				5F92B8CC154876EA006AB042 /* CoreGraphics.framework in Frameworks */,
+				08602C7AC5724FE8BF93C512 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,22 +149,23 @@
 				5F92B8E9154876EA006AB042 /* SenTestingKit.framework in Frameworks */,
 				5F92B8EA154876EA006AB042 /* UIKit.framework in Frameworks */,
 				5F92B8EB154876EA006AB042 /* Foundation.framework in Frameworks */,
+				51F9E96F35534DE18D6DBB2C /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5F88C243155421C0006EFC6E /* Products */ = {
+		5F7B329915A74F2800FD4973 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				5F88C24E155421C1006EFC6E /* libRestKit.a */,
-				5F88C250155421C1006EFC6E /* RestKitTests.octest */,
-				5F88C252155421C1006EFC6E /* RestKit.framework */,
-				5F88C254155421C1006EFC6E /* RestKitFrameworkTests.octest */,
-				5F88C256155421C1006EFC6E /* RestKitResources.bundle */,
+				5F7B329515A725A000FD4973 /* URAlertView.h */,
+				5F7B329615A725A000FD4973 /* URAlertView.m */,
+				5F7B329A15A74F4300FD4973 /* URError.h */,
+				5F7B329B15A74F4300FD4973 /* URError.m */,
+				5F7B329D15A74FE300FD4973 /* NSString_URMethods.h */,
 			);
-			name = Products;
+			name = Util;
 			sourceTree = "<group>";
 		};
 		5F88C26C15542432006EFC6E /* Models */ = {
@@ -242,32 +204,14 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		5F88C27A15543272006EFC6E /* SVPullToRefresh */ = {
-			isa = PBXGroup;
-			children = (
-				5F88C27B15543272006EFC6E /* SVPullToRefresh.bundle */,
-				5F88C27C15543272006EFC6E /* SVPullToRefresh.h */,
-				5F88C27D15543272006EFC6E /* SVPullToRefresh.m */,
-			);
-			path = SVPullToRefresh;
-			sourceTree = "<group>";
-		};
 		5F92B8B8154876E9006AB042 = {
 			isa = PBXGroup;
 			children = (
-				5F88C2941556CAE7006EFC6E /* libUnittWebSocketClient.a */,
-				5F88C26615542311006EFC6E /* QuartzCore.framework */,
-				5F88C2641554230A006EFC6E /* libxml2.dylib */,
-				5F88C26215542303006EFC6E /* SystemConfiguration.framework */,
-				5F88C260155422FC006EFC6E /* MobileCoreServices.framework */,
-				5F88C25E155422F3006EFC6E /* Security.framework */,
-				5F88C25C155422ED006EFC6E /* CoreData.framework */,
-				5F88C25A155422E6006EFC6E /* CFNetwork.framework */,
 				5F92B8CD154876EA006AB042 /* ta_queue_ios */,
 				5F92B8EE154876EA006AB042 /* ta_queue_iosTests */,
 				5F92B8C6154876E9006AB042 /* Frameworks */,
 				5F92B8C4154876E9006AB042 /* Products */,
-				5F88C242155421C0006EFC6E /* RestKit.xcodeproj */,
+				5F7B0DC3E29F451EAC8CC01B /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -283,10 +227,18 @@
 		5F92B8C6154876E9006AB042 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5F88C26615542311006EFC6E /* QuartzCore.framework */,
+				5F88C2641554230A006EFC6E /* libxml2.dylib */,
+				5F88C26215542303006EFC6E /* SystemConfiguration.framework */,
+				5F88C260155422FC006EFC6E /* MobileCoreServices.framework */,
+				5F88C25E155422F3006EFC6E /* Security.framework */,
+				5F88C25C155422ED006EFC6E /* CoreData.framework */,
+				5F88C25A155422E6006EFC6E /* CFNetwork.framework */,
 				5F92B8C7154876E9006AB042 /* UIKit.framework */,
 				5F92B8C9154876EA006AB042 /* Foundation.framework */,
 				5F92B8CB154876EA006AB042 /* CoreGraphics.framework */,
 				5F92B8E8154876EA006AB042 /* SenTestingKit.framework */,
+				B8F312897FA241DAAAE72D47 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -294,9 +246,9 @@
 		5F92B8CD154876EA006AB042 /* ta_queue_ios */ = {
 			isa = PBXGroup;
 			children = (
+				5F7B329915A74F2800FD4973 /* Util */,
 				5FCE98551558C60900071715 /* Views */,
 				5FCE984E1558B4D400071715 /* Networking */,
-				5F88C27A15543272006EFC6E /* SVPullToRefresh */,
 				5F88C26D15542441006EFC6E /* Controllers */,
 				5F88C26C15542432006EFC6E /* Models */,
 				5F92B8D6154876EA006AB042 /* URAppDelegate.h */,
@@ -341,10 +293,10 @@
 		5FCE984E1558B4D400071715 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				5FCE984F1558B4E700071715 /* URNetworkManager.h */,
-				5FCE98501558B4E700071715 /* URNetworkManager.m */,
-				5FCE98521558C45B00071715 /* URNetworkProxy.h */,
-				5FCE98531558C45B00071715 /* URNetworkProxy.m */,
+				5FC90FCD15A6B82A00B217E2 /* URLoginNetworkManager.h */,
+				5FC90FCE15A6B82A00B217E2 /* URLoginNetworkManager.m */,
+				5FC90FD115A6C4ED00B217E2 /* URQueueNetworkManager.h */,
+				5FC90FD215A6C4ED00B217E2 /* URQueueNetworkManager.m */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -370,11 +322,11 @@
 				5F92B8BF154876E9006AB042 /* Sources */,
 				5F92B8C0154876E9006AB042 /* Frameworks */,
 				5F92B8C1154876E9006AB042 /* Resources */,
+				C772CDBD0CC7408C83836063 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				5F88C259155422D8006EFC6E /* PBXTargetDependency */,
 			);
 			name = ta_queue_ios;
 			productName = ta_queue_ios;
@@ -389,6 +341,7 @@
 				5F92B8E3154876EA006AB042 /* Frameworks */,
 				5F92B8E4154876EA006AB042 /* Resources */,
 				5F92B8E5154876EA006AB042 /* ShellScript */,
+				C772CDBD0CC7408C83836063 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -420,12 +373,6 @@
 			mainGroup = 5F92B8B8154876E9006AB042;
 			productRefGroup = 5F92B8C4154876E9006AB042 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 5F88C243155421C0006EFC6E /* Products */;
-					ProjectRef = 5F88C242155421C0006EFC6E /* RestKit.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				5F92B8C2154876E9006AB042 /* ta_queue_ios */,
@@ -433,44 +380,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		5F88C24E155421C1006EFC6E /* libRestKit.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRestKit.a;
-			remoteRef = 5F88C24D155421C1006EFC6E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5F88C250155421C1006EFC6E /* RestKitTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = RestKitTests.octest;
-			remoteRef = 5F88C24F155421C1006EFC6E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5F88C252155421C1006EFC6E /* RestKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = RestKit.framework;
-			remoteRef = 5F88C251155421C1006EFC6E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5F88C254155421C1006EFC6E /* RestKitFrameworkTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = RestKitFrameworkTests.octest;
-			remoteRef = 5F88C253155421C1006EFC6E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5F88C256155421C1006EFC6E /* RestKitResources.bundle */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = RestKitResources.bundle;
-			remoteRef = 5F88C255155421C1006EFC6E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		5F92B8C1154876E9006AB042 /* Resources */ = {
@@ -480,7 +389,6 @@
 				5F92B8D2154876EA006AB042 /* InfoPlist.strings in Resources */,
 				5F92B8DB154876EA006AB042 /* MainStoryboard_iPhone.storyboard in Resources */,
 				5F92B8DE154876EA006AB042 /* MainStoryboard_iPad.storyboard in Resources */,
-				5F88C27E15543272006EFC6E /* SVPullToRefresh.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,6 +416,20 @@
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
 		};
+		C772CDBD0CC7408C83836063 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -523,16 +445,17 @@
 				5F88C2731554248E006EFC6E /* URQueue.m in Sources */,
 				5F88C2761554249A006EFC6E /* URStudent.m in Sources */,
 				5F88C279155424A6006EFC6E /* URTa.m in Sources */,
-				5F88C27F15543272006EFC6E /* SVPullToRefresh.m in Sources */,
 				5F88C28215544AB9006EFC6E /* URLoginViewController.m in Sources */,
 				5F88C28515545DD8006EFC6E /* URQueueViewController.m in Sources */,
 				5F88C288155462C5006EFC6E /* URUser.m in Sources */,
 				5F88C28B1554A2DF006EFC6E /* URObject.m in Sources */,
 				5F88C2F715575FAF006EFC6E /* URJuggernautClient.m in Sources */,
-				5FCE98511558B4E700071715 /* URNetworkManager.m in Sources */,
-				5FCE98541558C45B00071715 /* URNetworkProxy.m in Sources */,
 				5FCE985E1558C72800071715 /* URTACell.m in Sources */,
 				5FCE98611558C73300071715 /* URStudentCell.m in Sources */,
+				5FC90FCF15A6B82A00B217E2 /* URLoginNetworkManager.m in Sources */,
+				5FC90FD315A6C4ED00B217E2 /* URQueueNetworkManager.m in Sources */,
+				5F7B329715A725A000FD4973 /* URAlertView.m in Sources */,
+				5F7B329C15A74F4300FD4973 /* URError.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,11 +470,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		5F88C259155422D8006EFC6E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = RestKit;
-			targetProxy = 5F88C258155422D8006EFC6E /* PBXContainerItemProxy */;
-		};
 		5F92B8ED154876EA006AB042 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5F92B8C2154876E9006AB042 /* ta_queue_ios */;
@@ -597,6 +515,7 @@
 /* Begin XCBuildConfiguration section */
 		5F92B8F7154876EA006AB042 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5F7B0DC3E29F451EAC8CC01B /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
@@ -615,8 +534,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../Headers\"/**";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -628,6 +546,7 @@
 		};
 		5F92B8F8154876EA006AB042 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5F7B0DC3E29F451EAC8CC01B /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
@@ -639,8 +558,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../Headers\"/**";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -654,52 +572,56 @@
 		};
 		5F92B8FA154876EA006AB042 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5F7B0DC3E29F451EAC8CC01B /* Pods.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ta_queue_ios/ta_queue_ios-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"<Multiple",
-					"values>",
-					"\"$(BUILT_PRODUCTS_DIR)/../../Headers\"/**",
-				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "ta_queue_ios/ta_queue_ios-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "";
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		5F92B8FB154876EA006AB042 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5F7B0DC3E29F451EAC8CC01B /* Pods.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ta_queue_ios/ta_queue_ios-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"<Multiple",
-					"values>",
-					"\"$(BUILT_PRODUCTS_DIR)/../../Headers\"/**",
-				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "ta_queue_ios/ta_queue_ios-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "";
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
 		5F92B8FD154876EA006AB042 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5F7B0DC3E29F451EAC8CC01B /* Pods.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ta_queue_ios.app/ta_queue_ios";
+				DSTROOT = /tmp/xcodeproj.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ta_queue_ios/ta_queue_ios-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "ta_queue_iosTests/ta_queue_iosTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -707,16 +629,20 @@
 		};
 		5F92B8FE154876EA006AB042 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5F7B0DC3E29F451EAC8CC01B /* Pods.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ta_queue_ios.app/ta_queue_ios";
+				DSTROOT = /tmp/xcodeproj.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ta_queue_ios/ta_queue_ios-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "ta_queue_iosTests/ta_queue_iosTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};

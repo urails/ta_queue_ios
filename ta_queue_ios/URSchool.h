@@ -9,16 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "URObject.h"
 
-@interface URSchool : URObject <RKRequestDelegate> {
+@class URQueue;
+
+@interface URSchool : URObject {
     NSArray  *_aggregatedQueues;
 }
 
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *abbreviation;
 @property (nonatomic, retain) NSArray  *instructors;
-
-
-+ (RKObjectMapping*) mapping;
 
 - (NSArray*) aggregatedQueues;
 

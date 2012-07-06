@@ -14,7 +14,9 @@
 @property (nonatomic, strong) UIColor *arrowColor;
 @property (nonatomic, strong) UIColor *textColor;
 @property (nonatomic, readwrite) UIActivityIndicatorViewStyle activityIndicatorViewStyle;
+
 @property (nonatomic, strong) NSDate *lastUpdatedDate;
+@property (nonatomic, strong) NSDateFormatter *dateFormatter;
 
 - (void)triggerRefresh;
 - (void)stopAnimating;
@@ -27,7 +29,12 @@
 @interface UIScrollView (SVPullToRefresh)
 
 - (void)addPullToRefreshWithActionHandler:(void (^)(void))actionHandler;
+- (void)addInfiniteScrollingWithActionHandler:(void (^)(void))actionHandler;
 
 @property (nonatomic, strong) SVPullToRefresh *pullToRefreshView;
+@property (nonatomic, strong) SVPullToRefresh *infiniteScrollingView;
+
+@property (nonatomic, assign) BOOL showsPullToRefresh;
+@property (nonatomic, assign) BOOL showsInfiniteScrolling;
 
 @end

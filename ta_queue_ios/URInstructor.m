@@ -15,16 +15,6 @@
 @synthesize queues;
 @synthesize school;
 
-+ (RKObjectMapping*) mapping {
-    RKObjectMapping* mapping = [RKObjectMapping mappingForClass:[self class]];
-
-    [mapping mapAttributes:@"name", @"username", nil];
-    [mapping hasMany:@"queues" withMapping:[URQueue mapping]];
-    [mapping setSetNilForMissingRelationships:YES];
-    
-    return mapping;
-}
-
 - (void) parse:(NSDictionary *)attributes {
     name = [attributes valueForKey:@"name"];
     username = [attributes valueForKey:@"username"];

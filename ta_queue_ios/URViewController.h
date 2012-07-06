@@ -7,13 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "URLoginNetworkManager.h"
 
-@interface URViewController : UITableViewController <RKRequestDelegate> {
-
-}
+@interface URViewController : UITableViewController <URLoginNetworkManagerDelegate>
 
 @property (nonatomic, retain) NSArray* schools;
-
-- (void) fetchSchools;
+@property (strong) URLoginNetworkManager *networkManager;
 
 @end

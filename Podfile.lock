@@ -1,0 +1,7 @@
+PODS:
+  - SVHTTPRequest (0.0.1)
+  - SVPullToRefresh (0.2)
+
+DEPENDENCIES:
+  - SVHTTPRequest
+  - SVPullToRefresh

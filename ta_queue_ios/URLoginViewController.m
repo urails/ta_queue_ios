@@ -8,7 +8,7 @@
 
 #import "URLoginViewController.h"
 
-#import "URQueueViewController.h"
+
 
 @interface URLoginViewController ()
 
@@ -16,11 +16,12 @@
 
 @implementation URLoginViewController
 
-@synthesize typeControl;
-@synthesize nameField;
-@synthesize locationField;
-@synthesize schoolQueue;
-@synthesize client;
+@synthesize typeControl = _typeControl;
+@synthesize nameField = _nameField;
+@synthesize locationField = _locationField;
+@synthesize schoolQueue = _schoolQueue;
+@synthesize networkManager = _networkManager;
+@synthesize loggedInUser = _loggedInUser;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -34,15 +35,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.navigationItem.backBarButtonItem =
-    [[UIBarButtonItem alloc] initWithTitle:@"Logout"
-                                      style:UIBarButtonItemStyleBordered
-                                     target:nil
-                                     action:nil];
-    
-    [nameField setDelegate:self];
-    [locationField setDelegate:self];
+
+    [_nameField setDelegate:self];
+    [_locationField setDelegate:self];
+    _networkManager = [[URLoginNetworkManager alloc] init];
+    [_networkManager setDelegate:self];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)viewDidUnload
@@ -50,6 +48,7 @@
     [self setNameField:nil];
     [self setLocationField:nil];
     [self setTypeControl:nil];
+    [self setNetworkManager:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -61,8 +60,8 @@
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
-    if (textField == nameField) {
-        [locationField becomeFirstResponder];
+    if (textField == _nameField) {
+        [_locationField becomeFirstResponder];
     }
     else {
         [textField resignFirstResponder];
@@ -87,7 +86,12 @@
     if (user.isTa) {
         type = @"tas";
     }
-    [[RKClient sharedClient] delete:[NSString stringWithFormat:@"/%@/%@", type, user.userId] delegate:self];
+}
+
+#pragma mark - URQueueViewControllerDelegate methods
+
+- (void) queueViewController:(URQueueViewController *)controller didLogoutUser:(URUser *)user {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Table view data source
@@ -96,102 +100,50 @@
 #pragma mark - Table view delegate
 
 - (IBAction)loginTapped:(id)sender {
-    [locationField resignFirstResponder];
-    [nameField resignFirstResponder];
+    [_locationField resignFirstResponder];
+    [_nameField resignFirstResponder];
     
-    client = [RKClient clientWithBaseURLString:gBaseUrl];
-    
-    NSString* type = nil;
-    NSString* key = nil;
-    NSString* secondaryType = nil;
-    
-    if (typeControl.selectedSegmentIndex == 0) {
-        type = @"students";
-        key = @"student";
-        secondaryType = @"location";
+    if (_typeControl.selectedSegmentIndex == 0) {
+        [_networkManager loginStudentWithUsername:_nameField.text 
+                                      andLocation:_locationField.text 
+                                          toQueue:_schoolQueue];
     }
     else {
-        type = @"tas";
-        key = @"ta";
-        secondaryType = @"password";
+        [_networkManager loginTaWithUsername:_nameField.text
+                                 andPassword:_locationField.text 
+                                     toQueue:_schoolQueue];
     }
-    
-    NSString* path = [NSString stringWithFormat:@"/schools/%@/%@/%@/%@", [[[schoolQueue instructor] school] abbreviation], [[schoolQueue instructor] username], [schoolQueue classNumber], type];
-    
-    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:[nameField text], @"username", [locationField text], secondaryType, nil];
-    
-    params = [NSDictionary dictionaryWithObject:params forKey:key];
-    
-    [client post:path params:params delegate:self];
+}
+
+- (void) networkManager:(URLoginNetworkManager *)manager didLoginUser:(URUser *)user error:(NSError *)error {
+    if (error) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"WFT?"
+                                                            message:error.localizedDescription 
+                                                           delegate:nil 
+                                                  cancelButtonTitle:@"OK" 
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    } else {
+        _loggedInUser = user;
+        [self performSegueWithIdentifier:@"loggedIn" sender:self];
+    }
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"loggedIn"]) {
         URQueueViewController* controller = (URQueueViewController*)[[segue.destinationViewController viewControllers] objectAtIndex:0];
         
-        controller.currentUser = sender;
+        controller.delegate = self;
+        controller.currentUser = _loggedInUser;
     }
-}
-
-/**
- Sent when a request has finished loading
- 
- @param request The RKRequest object that was handling the loading.
- @param response The RKResponse object containing the result of the request.
- */
-- (void)request:(RKRequest *)request didLoadResponse:(RKResponse *)response {
-
-    NSError* error = nil;
-    NSDictionary* dict = [response parsedBody:&error];
-
-    // This is if the user is joining the queue
-    if ([response statusCode] == 201) {
-
-        URUser* user = nil;
-        
-        if (typeControl.selectedSegmentIndex == 0) {
-            user = [URStudent withAttributes:dict];
-        }
-        else {
-            user = [URTa withAttributes:dict];
-        }
-
-        
-        [URUser setCurrentUser:user];
-        
-        // PROBABLY NOT SMART TO SEND USER AS SENDER....
-        [self performSegueWithIdentifier:@"loggedIn" sender:user];
-    }
-    else if([response statusCode] == 204) {
-        // This was if the user logged out!
-    }
-    else if ([response isError]) {
-        // TODO: Error stuff...
-    }
-}
-
-
-///-----------------------------------------------------------------------------
-/// @name Handling Failed Requests
-///-----------------------------------------------------------------------------
-
-/**
- Sent when a request has failed due to an error
- 
- @param request The RKRequest object that was handling the loading.
- @param error An NSError object containing the RKRestKitError that triggered
- the callback.
- */
-- (void)request:(RKRequest *)request didFailLoadWithError:(NSError *)error {
-    NSLog(@"%@", error);
 }
 
 - (IBAction)segmentChanged:(id)sender {
-    if (typeControl.selectedSegmentIndex == 0) {
-        locationField.placeholder = @"Location";
+    if (_typeControl.selectedSegmentIndex == 0) {
+        _locationField.placeholder = @"Location";
     }
     else {
-        locationField.placeholder = @"Password";
+        _locationField.placeholder = @"Password";
     }
 }
 

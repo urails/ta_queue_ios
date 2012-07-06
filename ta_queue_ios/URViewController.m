@@ -20,51 +20,36 @@
 
 @implementation URViewController
 
-@synthesize schools;
+@synthesize schools = _schools;
+@synthesize networkManager = _networkManager;
 
 - (void)viewDidLoad
 {
-    URViewController* this = self;
+    _networkManager = [[URLoginNetworkManager alloc] init];
+    _networkManager.delegate = self;
+    __weak URLoginNetworkManager *weakManager = _networkManager;
     
     [self.tableView addPullToRefreshWithActionHandler:^(void) {
-        [this fetchSchools];
+        [weakManager fetchSchools];
     }];
     
-    [self fetchSchools];
+    [_networkManager fetchSchools];
     
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
-- (void) fetchSchools {
-    [[RKClient sharedClient] get:@"/schools" delegate:self];
-}
-
-- (void) request:(RKRequest *)request didFailLoadWithError:(NSError *)error {
-    
-}
-
-- (void) request:(RKRequest *)request didLoadResponse:(RKResponse *)response {
-    NSLog(@"%@", request.URL.path);
-    
-    NSArray* _schools = [response parsedBody:nil];
-    
-    NSMutableArray* array = [NSMutableArray arrayWithCapacity:5];
-        
-    for (NSDictionary *dict in _schools) {
-        [array addObject:[URSchool withAttributes:dict]];
-    }
-    
-    schools = array;
-    
-    [self.tableView reloadData];
+- (void) networkManager:(URLoginNetworkManager *)manager didFetchSchools:(NSArray *)schools {
+    _schools = schools;
     [self.tableView.pullToRefreshView stopAnimating];
+    [self.tableView reloadData];
 }
+
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSIndexPath* indexPath = [self.tableView indexPathForCell:sender];
     
-    URQueue* queue = [[[schools objectAtIndex:indexPath.section] aggregatedQueues] objectAtIndex:indexPath.row];
+    URQueue* queue = [[[_schools objectAtIndex:indexPath.section] aggregatedQueues] objectAtIndex:indexPath.row];
         
     if ([segue.identifier isEqualToString:@"queueLogin"]) {
         URLoginViewController* viewController = (URLoginViewController*) segue.destinationViewController;
@@ -77,17 +62,17 @@
 #pragma mark UITableViewDataSource Methods
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[[schools objectAtIndex:section] aggregatedQueues] count];
+    return [[[_schools objectAtIndex:section] aggregatedQueues] count];
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
 
     
-    return [schools count];
+    return [_schools count];
 }
 
 - (NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [[schools objectAtIndex:section] name];
+    return [[_schools objectAtIndex:section] name];
 }
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -95,11 +80,11 @@
     
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
-    URQueue* queue = [[[schools objectAtIndex:indexPath.section] aggregatedQueues] objectAtIndex:indexPath.row];
+    URQueue* queue = [[[_schools objectAtIndex:indexPath.section] aggregatedQueues] objectAtIndex:indexPath.row];
     
     [[cell textLabel] setText:[NSString stringWithFormat:@"%@ - %@", queue.classNumber, queue.title]];
 
-    [[cell detailTextLabel] setText:queue.instructor.name];
+//    [[cell detailTextLabel] setText:queue.instructor.name];
     
     return cell;
 }
@@ -111,7 +96,8 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
+    _networkManager.delegate = nil;
+    [self setNetworkManager:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

@@ -15,8 +15,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [RKClient setSharedClient:[RKClient clientWithBaseURLString:gBaseUrl]];
-
     return YES;
 }
 							

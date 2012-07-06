@@ -61,14 +61,4 @@
 //    return school;
 //}
 
-+ (RKObjectMapping*) mapping {
-    RKObjectMapping* mapping = [RKObjectMapping mappingForClass:[URSchool class]];
-    
-    [mapping mapAttributes:@"name", @"abbreviation", nil];
-    [mapping setSetNilForMissingRelationships:YES];
-    [mapping hasMany:@"instructors" withMapping:[URInstructor mapping]];
-    
-    return mapping;
-}
-
 @end

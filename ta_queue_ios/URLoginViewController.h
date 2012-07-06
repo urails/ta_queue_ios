@@ -9,23 +9,27 @@
 #import <UIKit/UIKit.h>
 #import "URQueue.h"
 #import "URUser.h"
+#import "URLoginNetworkManager.h"
+#import "URQueueViewController.h"
 
-@interface URLoginViewController : UITableViewController <UITextFieldDelegate, RKRequestDelegate>
+@interface URLoginViewController : UITableViewController <UITextFieldDelegate, URLoginNetworkManagerDelegate, URQueueViewControllerDelegate>
 
 #pragma mark IBOutlets
 
-@property (strong, nonatomic) IBOutlet UITextField *nameField;
-@property (strong, nonatomic) IBOutlet UITextField *locationField;
-@property (strong, nonatomic) IBOutlet UISegmentedControl *typeControl;
-@property (strong, nonatomic) RKClient* client;
+@property (strong) IBOutlet UITextField *nameField;
+@property (strong) IBOutlet UITextField *locationField;
+@property (strong) IBOutlet UISegmentedControl *typeControl;
 
 #pragma mark  Properties
 
-@property (nonatomic, retain) URQueue* schoolQueue;
+@property (strong) URQueue *schoolQueue;
+@property (strong) URLoginNetworkManager *networkManager;
+@property (assign) URUser *loggedInUser;
 
 #pragma mark IBAction methods
 
 - (IBAction)loginTapped:(id)sender;
+
 - (void) logout:(URUser*)user;
 
 @end

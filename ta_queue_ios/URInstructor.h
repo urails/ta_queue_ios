@@ -18,6 +18,4 @@
 @property (nonatomic, retain) NSArray  *queues;
 @property (nonatomic, retain) URSchool *school;
 
-+ (RKObjectMapping*) mapping;
-
 @end

@@ -11,20 +11,27 @@
 #import "URQueue.h"
 #import "URStudent.h"
 #import "URTa.h"
-#import "URNetworkManager.h"
+#import "URQueueNetworkManager.h"
 
-@interface URQueueViewController : UITableViewController <URNetworkManagerDelegate, UINavigationBarDelegate>
+@protocol URQueueViewControllerDelegate;
 
-@property (nonatomic, retain) URQueue *queue;
-@property (nonatomic, retain) URUser *currentUser;
-@property (nonatomic, retain) NSTimer *timer;
-@property (nonatomic, retain) URNetworkManager *networkManager;
+@interface URQueueViewController : UITableViewController <URQueueNetworkManagerDelegate>
+
+@property (strong) URQueue *queue;
+@property (assign) URUser *currentUser;
+@property (strong) NSTimer *timer;
+@property (strong) URQueueNetworkManager *networkManager;
+@property (assign) NSObject<URQueueViewControllerDelegate> *delegate;
 
 - (void) refreshTimerFired:(NSTimer*)timer;
 
 - (void) acceptTapped:(id)sender;
 - (void) removeTapped:(id)sender;
 
-- (UITableViewCell*) cellForIndexPath:(NSIndexPath*) indexPath;
+@end
 
+@protocol URQueueViewControllerDelegate <NSObject>
+
+- (void) queueViewController:(URQueueViewController *)controller didLogoutUser:(URUser *)user;
+                              
 @end

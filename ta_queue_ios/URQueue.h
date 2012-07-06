@@ -27,9 +27,6 @@
 @property (nonatomic, retain) URInstructor* instructor;
 @property (nonatomic, retain) URUser* currentUser;
 
-+ (RKObjectMapping*) mapping;
 + (URQueue*) sharedQueue;
-
-- (void) invalidate;
 
 @end

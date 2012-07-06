@@ -11,6 +11,8 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
-    #import <RestKit/RestKit.h>
+    #import "URAlertView.h"
+    #import "URError.h"
+    #import "NSString_URMethods.h"
     #define gBaseUrl @"http://localhost:3000"
 #endif
