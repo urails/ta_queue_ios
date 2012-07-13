@@ -15,7 +15,7 @@
 
 @protocol URQueueViewControllerDelegate;
 
-@interface URQueueViewController : UITableViewController <URQueueNetworkManagerDelegate>
+@interface URQueueViewController : UIViewController <URQueueNetworkManagerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (strong) URQueue *queue;
 @property (assign) URUser *currentUser;
@@ -23,10 +23,15 @@
 @property (strong) URQueueNetworkManager *networkManager;
 @property (assign) NSObject<URQueueViewControllerDelegate> *delegate;
 
-- (void) refreshTimerFired:(NSTimer*)timer;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIToolbar *toolbar;
 
-- (void) acceptTapped:(id)sender;
-- (void) removeTapped:(id)sender;
+- (void) setupUserActionToolbar;
+- (void) refreshQueue;
+
++ (URQueueViewController*) currentQueueController;
++ (void) setCurrentQueueController:(URQueueViewController *)queueController;
+
 
 @end
 

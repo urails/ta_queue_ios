@@ -84,7 +84,7 @@
     
     [[cell textLabel] setText:[NSString stringWithFormat:@"%@ - %@", queue.classNumber, queue.title]];
 
-//    [[cell detailTextLabel] setText:queue.instructor.name];
+    [[cell detailTextLabel] setText:queue.instructor.name];
     
     return cell;
 }

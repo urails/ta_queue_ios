@@ -113,14 +113,14 @@
 
 #pragma mark Student Actions
 - (void) enterQueue {
-    [self makeRequest:URRequestTypeGET urlString:@"/enter_queue" withParams:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self makeRequest:URRequestTypeGET urlString:@"/queue/enter_queue" withParams:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         self.queue = [URQueue withAttributes:response];
         [_delegate networkManager:self didReceiveQueueUpdate:self.queue];
     }];
 }
 
 - (void) exitQueue {
-    [self makeRequest:URRequestTypeGET urlString:@"/exit_queue" withParams:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self makeRequest:URRequestTypeGET urlString:@"/queue/exit_queue" withParams:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         self.queue = [URQueue withAttributes:response];
         [_delegate networkManager:self didReceiveQueueUpdate:self.queue];
     }];
@@ -166,8 +166,7 @@
                                                         forKey:@"frozen"] 
                                                        forKey:@"queue"];
     [self makeRequest:URRequestTypePUT urlString:@"/queue" withParams:params completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        _queue = [URQueue withAttributes:response];
-        [_delegate networkManager:self didReceiveQueueUpdate:_queue];
+        [self refreshQueue];
     }];
     
     
@@ -180,8 +179,7 @@
                                                         forKey:@"active"] 
                                                        forKey:@"queue"];
     [self makeRequest:URRequestTypePUT urlString:@"/queue" withParams:params completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        _queue = [URQueue withAttributes:response];
-        [_delegate networkManager:self didReceiveQueueUpdate:_queue];
+        [self refreshQueue];
     }];
 }
 

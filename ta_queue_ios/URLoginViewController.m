@@ -23,15 +23,6 @@
 @synthesize networkManager = _networkManager;
 @synthesize loggedInUser = _loggedInUser;
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -69,23 +60,6 @@
     }
 
     return YES;
-}
-
-- (void) viewWillAppear:(BOOL)animated {
-    URUser* user;
-    if ((user = [URUser currentUser])) {
-        [self logout:user];
-        
-        [URUser setCurrentUser:nil];
-    }
-}
-
-- (void) logout:(URUser *)user {
-    
-    NSString* type = @"students";
-    if (user.isTa) {
-        type = @"tas";
-    }
 }
 
 #pragma mark - URQueueViewControllerDelegate methods
@@ -131,7 +105,7 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"loggedIn"]) {
-        URQueueViewController* controller = (URQueueViewController*)[[segue.destinationViewController viewControllers] objectAtIndex:0];
+        URQueueViewController* controller = (URQueueViewController*)segue.destinationViewController;
         
         controller.delegate = self;
         controller.currentUser = _loggedInUser;
@@ -141,9 +115,14 @@
 - (IBAction)segmentChanged:(id)sender {
     if (_typeControl.selectedSegmentIndex == 0) {
         _locationField.placeholder = @"Location";
+        _locationField.secureTextEntry = NO;
     }
     else {
         _locationField.placeholder = @"Password";
+        _locationField.enabled = NO;
+        _locationField.secureTextEntry = YES;
+        _locationField.enabled = YES;
+        [_locationField becomeFirstResponder];
     }
 }
 

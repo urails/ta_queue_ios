@@ -43,11 +43,11 @@
 }
 
 - (void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    NSLog(@"Web View failed to load %@", error);
+//    NSLog(@"Web View failed to load %@", error);
 }
 
 - (void) webViewDidFinishLoad:(UIWebView *)webView {
-    NSLog(@"Web View finished loading page: %@", webView);
+//    NSLog(@"Web View finished loading page: %@", webView);
 }
 
 

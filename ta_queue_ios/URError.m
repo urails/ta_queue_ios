@@ -21,7 +21,7 @@
 + (NSError *) initWithErrorAttributes:(NSDictionary *)string {
 
     
-//    return error;
+    return nil;
 }
 
 @end

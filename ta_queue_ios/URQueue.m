@@ -54,7 +54,7 @@
     }
     
     NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-        return [[evaluatedObject inQueue] boolValue];
+        return [evaluatedObject inQueue];
     }];
     
     studentsInQueue = [students filteredArrayUsingPredicate:predicate];
@@ -67,7 +67,22 @@
     
     currentUser = [[users filteredArrayUsingPredicate:predicate] objectAtIndex:0];
     
-    NSLog(@"Current User is %@", currentUser.username);
+    // Hydrate TAs' student association
+    
+    for (URStudent *student in students) {
+        if (student.taId) {
+
+            predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+                return [[evaluatedObject userId] isEqualToString:student.taId];
+            }];
+            
+            NSArray *matchingTas = [tas filteredArrayUsingPredicate:predicate];
+            
+            URTa *ta = [matchingTas objectAtIndex:0];
+            
+            ta.student = student;
+        }
+    }
 }
 
 static URQueue *_sharedQueue = nil;

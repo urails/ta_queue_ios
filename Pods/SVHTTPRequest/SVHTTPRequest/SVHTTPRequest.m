@@ -177,7 +177,7 @@ typedef NSUInteger SVHTTPRequestState;
         } 
         
         else if([obj isKindOfClass:[NSData class]]) {
-            if(![method isEqualToString:@"POST"] && ![method isEqualToString:@"P	UT"]) {
+            if(![method isEqualToString:@"POST"] && ![method isEqualToString:@"PUT"]) {
                 NSLog(@"**SVHTTPRequest: You can only send multipart/form-data over a POST and PUT requests.");
                 exit(0);
             }

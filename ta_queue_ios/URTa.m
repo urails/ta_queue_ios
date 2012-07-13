@@ -10,6 +10,8 @@
 
 @implementation URTa
 
+@synthesize student = _student;
+
 - (BOOL) isTa {
     return YES;
 }

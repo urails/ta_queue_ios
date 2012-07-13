@@ -11,8 +11,8 @@
 
 @interface URStudent : URUser
 
-@property (nonatomic, retain) NSString* question;
-@property (nonatomic, retain) NSNumber* inQueue;
-@property (nonatomic, retain) NSString* taId;
+@property (nonatomic, strong) NSString* question;
+@property (nonatomic, assign) BOOL inQueue;
+@property (nonatomic, strong) NSString* taId;
 
 @end

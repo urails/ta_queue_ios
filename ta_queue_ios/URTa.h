@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "URUser.h"
+#import "URStudent.h"
 
 @interface URTa : URUser
+
+@property (strong, nonatomic) URStudent *student;
 
 @end

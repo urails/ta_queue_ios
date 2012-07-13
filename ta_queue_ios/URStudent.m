@@ -17,11 +17,18 @@
 }
 
 - (void) parse:(NSDictionary *)attributes {
-    taId = [attributes valueForKey:@"ta_id"];
-    question = [attributes valueForKey:@"question"];
-    inQueue = [attributes valueForKey:@"in_queue"];
-    
     [super parse:attributes];
+
+    if ([attributes valueForKey:@"ta_id"] != [NSNull null]) {
+        taId = [attributes valueForKey:@"ta_id"];
+    } else {
+        taId = nil;
+    }
+
+    inQueue = [[attributes valueForKey:@"in_queue"] boolValue];
+    question = [attributes valueForKey:@"question"];
+    
+
 }
 
 - (BOOL) isTa {

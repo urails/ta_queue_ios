@@ -77,19 +77,27 @@
 }
 
 - (void) loginTaWithUsername:(NSString *)username andPassword:(NSString *)password toQueue:(URQueue *)queue {
-    NSString* url = [NSString stringWithFormat:@"/schools/%@/%@/tas", 
+    NSString* url = [NSString stringWithFormat:@"/schools/%@/%@/%@/tas", 
                      queue.instructor.school.abbreviation, 
-                     queue.instructor.username];
+                     queue.instructor.username,
+                     queue.classNumber];
     
     NSMutableDictionary *fields = [NSMutableDictionary dictionary];
     [fields setValue:username forKey:@"username"];
     [fields setValue:password forKey:@"password"];
     
-    NSDictionary *params = [NSDictionary dictionaryWithObject:fields forKey:@"student"];
+    NSDictionary *params = [NSDictionary dictionaryWithObject:fields forKey:@"ta"];
     
     [_client POST:url parameters:params completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
             [URAlertView showMessage:error.localizedDescription];
+        } else if (urlResponse.statusCode != 201) {
+            UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"WTF"
+                                                           message:[response description]
+                                                          delegate:nil 
+                                                 cancelButtonTitle:@"OK" 
+                                                 otherButtonTitles:nil];
+            [view show];
         } else {
             URUser *user = [URTa withAttributes:response];
             [_delegate networkManager:self didLoginUser:user error:error];

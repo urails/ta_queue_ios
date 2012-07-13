@@ -12,7 +12,7 @@
 #import "URLoginNetworkManager.h"
 #import "URQueueViewController.h"
 
-@interface URLoginViewController : UITableViewController <UITextFieldDelegate, URLoginNetworkManagerDelegate, URQueueViewControllerDelegate>
+@interface URLoginViewController : UIViewController <UITextFieldDelegate, URLoginNetworkManagerDelegate, URQueueViewControllerDelegate>
 
 #pragma mark IBOutlets
 
@@ -29,7 +29,5 @@
 #pragma mark IBAction methods
 
 - (IBAction)loginTapped:(id)sender;
-
-- (void) logout:(URUser*)user;
 
 @end

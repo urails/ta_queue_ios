@@ -14,5 +14,5 @@
     #import "URAlertView.h"
     #import "URError.h"
     #import "NSString_URMethods.h"
-    #define gBaseUrl @"http://localhost:3000"
+    #define gBaseUrl @"http://nine.eng.utah.edu"
 #endif
