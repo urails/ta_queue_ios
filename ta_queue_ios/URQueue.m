@@ -27,8 +27,8 @@
 - (void) parse:(NSDictionary *)attributes {
     title = [attributes valueForKey:@"title"];
     status = [attributes valueForKey:@"status"];
-    active = [attributes valueForKey:@"active"];
-    frozen = [attributes valueForKey:@"frozen"];
+    active = [[attributes valueForKey:@"active"] boolValue];
+    frozen = [[attributes valueForKey:@"frozen"] boolValue];
     classNumber = [attributes valueForKey:@"class_number"];
     
     NSArray* _students = [attributes valueForKey:@"students"];
@@ -81,8 +81,19 @@
             URTa *ta = [matchingTas objectAtIndex:0];
             
             ta.student = student;
+            student.ta = ta;
         }
     }
+}
+
+- (URTa *)taWithID:(NSString *)userID {
+    return nil;
+}
+- (URStudent *)studentWithID:(NSString *)userID {
+    return nil;
+}
+- (URUser *)userWithID:(NSString *)userID {
+    return nil;
 }
 
 static URQueue *_sharedQueue = nil;

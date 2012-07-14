@@ -150,16 +150,33 @@
     
     
     if (indexPath.section == TA_SECTION) {
+        URTa *ta = [_queue.tas objectAtIndex:indexPath.row];
         URTACell *_cell = [self.tableView dequeueReusableCellWithIdentifier:taIdentifier];
-        _cell.textLabel.text = [[_queue.tas objectAtIndex:indexPath.row] username];
+
+        _cell.textLabel.text = ta.username;
+
+        if (ta.student) {
+            _cell.detailTextLabel.text = [NSString stringWithFormat:@"Helping %@", ta.student.username];
+        } else {
+            _cell.detailTextLabel.text = @"";
+        }
 
         cell = _cell;
     }
     else {
         URStudent *student = [_queue.studentsInQueue objectAtIndex:indexPath.row];
         URStudentCell *_cell = [self.tableView dequeueReusableCellWithIdentifier:studentIdentifier];
-        _cell.textLabel.text = student.username;
-        _cell.detailTextLabel.text = student.location;
+
+        NSString *userLabel = [NSString stringWithFormat:@"%@ @ %@", student.username, student.location];
+
+        _cell.textLabel.text = userLabel;
+        
+        if (student.ta) {
+            _cell.detailTextLabel.text = [NSString stringWithFormat:@"Being helped by %@", student.ta.username];
+        } else {
+            _cell.detailTextLabel.text = @"";
+        }
+
 
         cell = _cell;
     }
@@ -189,6 +206,10 @@
 
 - (NSArray *) studentBarItems:(URStudent *)student {
     NSMutableArray *items = [NSMutableArray array];
+    
+    if (!_queue.active) {
+        return items;
+    }
 
     if (student.inQueue) {
         UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Exit Queue" style:UIBarButtonItemStyleBordered target:self action:@selector(exitQueue)];
@@ -211,6 +232,8 @@
     if (indexPath.section == STUDENT_SECTION && _queue.studentsInQueue.count > 0) {
         
         // There's a chance that if they have the last person in the list selected that
+        // when they were removed the user, it's selecting off the end of the list. In
+        // which case we want to back it off.
         NSUInteger row = indexPath.row;
         while (row >= _queue.studentsInQueue.count) {
             row--;
@@ -243,15 +266,16 @@
     
     [items addObject:item];
     
-    NSString *active = ([_queue.active boolValue] ? @"Deactivate" : @"Activate");
+    NSString *active = (_queue.active ? @"Deactivate" : @"Activate");
 
     
     item =[[UIBarButtonItem alloc] initWithTitle:active style:UIBarButtonItemStyleBordered target:self action:@selector(toggleActive)];
     
     [items addObject:item];
     
-    if ([_queue.active boolValue]) {
-        NSString *frozen = ([_queue.frozen boolValue] ? @"Unfreeze" : @"Freeze");
+    // You can't freeze/unfreeze the queue unless it is active
+    if (_queue.active) {
+        NSString *frozen = (_queue.frozen ? @"Unfreeze" : @"Freeze");
         
         item =[[UIBarButtonItem alloc] initWithTitle:frozen style:UIBarButtonItemStyleBordered target:self action:@selector(toggleFrozen)];
         

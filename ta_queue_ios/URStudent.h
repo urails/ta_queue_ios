@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "URUser.h"
 
+@class URTa;
+
 @interface URStudent : URUser
 
 @property (nonatomic, strong) NSString* question;
 @property (nonatomic, assign) BOOL inQueue;
 @property (nonatomic, strong) NSString* taId;
+@property (nonatomic, strong) URTa *ta;
 
 @end

@@ -160,7 +160,7 @@
 }
 
 - (void) toggleFrozen {
-    BOOL frozen = ![_queue.frozen boolValue];
+    BOOL frozen = !_queue.frozen;
     NSDictionary *params = [NSDictionary dictionaryWithObject:
                             [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:frozen] 
                                                         forKey:@"frozen"] 
@@ -173,7 +173,7 @@
 }
 
 - (void) toggleActive {
-    BOOL active = ![_queue.active boolValue];
+    BOOL active = !_queue.active;
     NSDictionary *params = [NSDictionary dictionaryWithObject:
                             [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:active] 
                                                         forKey:@"active"] 

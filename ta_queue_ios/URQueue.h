@@ -11,14 +11,15 @@
 #import "URObject.h"
 #import "URUser.h"
 
-@interface URQueue : URObject {
+@class URTa;
+@class URStudent;
 
-}
+@interface URQueue : URObject 
 
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) NSString *status;
-@property (nonatomic, retain) NSNumber *active;
-@property (nonatomic, retain) NSNumber *frozen;
+@property (nonatomic, assign) BOOL active;
+@property (nonatomic, assign) BOOL frozen;
 @property (nonatomic, retain) NSString *classNumber;
 @property (nonatomic, retain) NSArray  *students;
 @property (nonatomic, retain) NSArray  *studentsInQueue;
@@ -28,5 +29,9 @@
 @property (nonatomic, retain) URUser* currentUser;
 
 + (URQueue*) sharedQueue;
+
+- (URTa *)taWithID:(NSString *)userID;
+- (URStudent *)studentWithID:(NSString *)userID;
+- (URUser *)userWithID:(NSString *)userID;
 
 @end

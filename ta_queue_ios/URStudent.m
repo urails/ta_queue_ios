@@ -10,7 +10,7 @@
 
 @implementation URStudent
 
-@synthesize inQueue, taId, question;
+@synthesize inQueue, taId, question, ta;
 
 - (void) mapLoginResponse:(NSDictionary *)response {
     
