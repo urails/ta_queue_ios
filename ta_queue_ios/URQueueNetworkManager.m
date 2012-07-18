@@ -8,6 +8,7 @@
 
 #import "URQueueNetworkManager.h"
 #import "SVHTTPClient.h"
+#import "URDefaults.h"
 
 @interface URQueueNetworkManager ()
 
@@ -36,7 +37,7 @@
         
         _client = [[SVHTTPClient alloc] init];
         
-        [_client setBasePath:gBaseUrl];
+        [_client setBasePath:[URDefaults currentBaseURL]];
         
         _client.sendParametersAsJSON = YES;
         
@@ -102,11 +103,10 @@
                      andCompletion:(void (^)(id, NSHTTPURLResponse *, NSError *))completionBlock {
     self.loading = NO;
     if (error) {
-        [URAlertView showMessage:error.localizedDescription];
+        [_delegate networkManager:self didReceiveConnectionError:error];
     } else if (urlResponse.statusCode >= 400) {
-        [URAlertView showMessage:[NSString stringWithFormat:@"Got code %i", urlResponse.statusCode]];
+        [_delegate networkManager:self didReceiveErrorCode:urlResponse.statusCode response:response];
     } else {
-        
         completionBlock(response, urlResponse, nil);
     }
 }
@@ -147,6 +147,16 @@
     NSString* url = [NSString stringWithFormat:@"/students/%@/ta_putback", student.userId];
     
     [self makeRequest:URRequestTypeGET urlString:url withParams:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        [self refreshQueue];
+    }];
+}
+
+- (void) updateQueueStatus:(NSString *)status {
+    NSString *url = @"/queue";
+    
+    NSDictionary *params = [NSDictionary dictionaryWithObject:[NSDictionary dictionaryWithObject:status forKey:@"status"] forKey:@"queue"];
+    
+    [self makeRequest:URRequestTypePUT urlString:url withParams:params completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         [self refreshQueue];
     }];
 }

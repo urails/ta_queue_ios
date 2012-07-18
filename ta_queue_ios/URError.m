@@ -10,18 +10,14 @@
 
 @implementation URError
 
-+ (NSError *) initWithMessage:(NSString *)string {
-    NSMutableDictionary* details = [NSMutableDictionary dictionary];
-    [details setValue:string forKey:NSLocalizedDescriptionKey];
-    NSError *error = [NSError errorWithDomain:@"world" code:200 userInfo:details];
-
-    return error;
-}
-
-+ (NSError *) initWithErrorAttributes:(NSDictionary *)string {
-
++ (NSString *) errorMessageWithResponse:(NSDictionary *)dictionary {
+    NSString *message = @"";
     
-    return nil;
+    for (NSString *mess in [dictionary objectForKey:@"errors"]) {
+        message = [message stringByAppendingFormat:@"%@\n", mess];
+    }
+    
+    return message;
 }
 
 @end

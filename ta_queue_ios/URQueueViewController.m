@@ -10,9 +10,11 @@
 #import "SVPullToRefresh.h"
 #import "URStudentCell.h"
 #import "URTACell.h"
+#import "URDefaults.h"
 
-#define TA_SECTION 0
-#define STUDENT_SECTION 1
+#define STATUS_SECTION 0
+#define TA_SECTION 1
+#define STUDENT_SECTION 2
 
 @interface URQueueViewController ()
 
@@ -44,7 +46,7 @@
     
     [_networkManager refreshQueue];
     
-    __weak URQueueNetworkManager *tempManager = _networkManager;
+    __block URQueueNetworkManager *tempManager = _networkManager;
     
     [self.tableView addPullToRefreshWithActionHandler:^{
         [tempManager refreshQueue];
@@ -53,15 +55,13 @@
     if (_queue.studentsInQueue.count > 0) {
         [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:STUDENT_SECTION] animated:YES scrollPosition:UITableViewScrollPositionNone];
     }
-    
 
-    
     [_networkManager setDelegate:self];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
     [URQueueViewController setCurrentQueueController:self];
-    _timer = [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(refreshQueue) userInfo:nil repeats:YES];   
+    [self startTimer];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -78,10 +78,23 @@
     // e.g. self.myOutlet = nil;
 }
 
+- (void) startTimer {
+    _timer = [NSTimer scheduledTimerWithTimeInterval:[URDefaults currentQueryInterval] target:self selector:@selector(refreshQueue) userInfo:nil repeats:YES];   
+    NSLog(@"Querying at %i", [URDefaults currentQueryInterval]);
+}
+
 #pragma mark NSTimer Methods
 
 - (void) refreshQueue {
     [_networkManager refreshQueue];
+}
+
+#pragma mark URQueueSettingsViewController
+
+- (void) settingsViewControllerDidFinish:(URQueueSettingsViewController *)controller {
+    [self dismissModalViewControllerAnimated:YES];
+    [_timer invalidate];
+    [self startTimer];
 }
 
 #pragma mark RKRequestDelegate methods
@@ -104,27 +117,58 @@
     [_delegate queueViewController:self didLogoutUser:user];
 }
 
-#pragma mark 
+- (void) networkManager:(URQueueNetworkManager *)manager didReceiveErrorCode:(NSInteger)code response:(id)response {
+    // A 401 is the unauthorized status code, which must me they are no longer logged in and
+    // the server timed them out.
+    if (code == 401) {
+        [_delegate queueViewController:self didLogoutUser:_currentUser];
+        [URAlertView showMessage:@"You are no longer logged in, possibly due to inactivity. Please login again."];
+    } 
+    // Any other error could be anything, so display it to the user.
+    else {
+        [URAlertView showMessage:[URError errorMessageWithResponse:response]];
+    }
+}
+
+- (void) networkManager:(URQueueNetworkManager *)manager didReceiveConnectionError:(NSError *)error {
+    [URAlertView showMessage:error.localizedDescription];
+}
+
+#pragma mark UIViewController methods
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"queueSettings"]) {
+        URQueueSettingsViewController *controller = (URQueueSettingsViewController *)segue.destinationViewController;
+        controller.delegate = self;
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) {
+    if (section == TA_SECTION) {
         return _queue.tas.count;
+    } else if (section == STUDENT_SECTION) {
+        return _queue.studentsInQueue.count;
+    } else if (section == STATUS_SECTION) {
+        if ([self shouldShowQueueStatus]) {
+            return 1;
+        }
     }
     
-    return _queue.studentsInQueue.count;
+    return 0;
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -144,6 +188,7 @@
     
     static NSString *studentIdentifier = @"studentCell";
     static NSString *taIdentifier = @"taCell";
+    static NSString *statusIdentifier = @"queueStatus";
     
     UITableViewCell *cell = nil;
     
@@ -163,7 +208,7 @@
 
         cell = _cell;
     }
-    else {
+    else if (indexPath.section == STUDENT_SECTION) {
         URStudent *student = [_queue.studentsInQueue objectAtIndex:indexPath.row];
         URStudentCell *_cell = [self.tableView dequeueReusableCellWithIdentifier:studentIdentifier];
 
@@ -179,6 +224,19 @@
 
 
         cell = _cell;
+    } else if (indexPath.section == STATUS_SECTION) {
+        cell = [self.tableView dequeueReusableCellWithIdentifier:statusIdentifier];
+
+        if (_currentUser.isTa) {
+            if ([_queue.status isEqualToString:@""]) {
+                cell.textLabel.text = @"Tap here to update the Queue status";
+            }
+            else {
+                cell.textLabel.text = _queue.status;
+            }
+        } else {
+            cell.textLabel.text = _queue.status;
+        }
     }
     
     return cell;
@@ -186,10 +244,20 @@
 }
 
 - (NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (section == 0)
+    if (section == TA_SECTION)
         return @"TAs";
-    else
+    else if (section == STUDENT_SECTION)
         return @"Students";
+    else {
+        if (![self shouldShowQueueStatus]) {
+            return nil;
+        }
+        return @"Queue Status";
+    }
+}
+
+- (BOOL) shouldShowQueueStatus {
+    return _queue.active && (_currentUser.isTa || (_queue.status && ![_queue.status isEqualToString:@""]));
 }
 
 - (void) setupUserActionToolbar {
@@ -342,7 +410,28 @@ static URQueueViewController* _currentQueueController = nil;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self setupUserActionToolbar];
+    if (indexPath.section == STATUS_SECTION) {
+        if (_currentUser.isTa) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Update Status" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+            alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+            [alertView show];
+        }
+    } else {
+        [self setupUserActionToolbar];
+    }
+
+}
+
+#pragma mark UIAlertView delegate
+
+- (void) alertViewCancel:(UIAlertView *)alertView {
+    
+}
+
+- (void) alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        [_networkManager updateQueueStatus:[[alertView textFieldAtIndex:0] text]];
+    }
 }
 
 @end

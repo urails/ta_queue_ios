@@ -19,14 +19,24 @@
 - (void) fetchSchools;
 - (void) loginStudentWithUsername:(NSString *)username andLocation:(NSString *)location toQueue:(URQueue *)queue;
 - (void) loginTaWithUsername:(NSString *)username andPassword:(NSString *)password toQueue:(URQueue *)queue;
+- (void) setBasePath:(NSString *)basePath;
+- (void) refreshBasePath;
 
 @end
+
+
+
+
+
+
 
 @protocol URLoginNetworkManagerDelegate <NSObject>
 
 @optional
 
 - (void) networkManager:(URLoginNetworkManager *)manager didFetchSchools:(NSArray *)schools;
-- (void) networkManager:(URLoginNetworkManager *)manager didLoginUser:(URUser *)user error:(NSError *)error;
+- (void) networkManager:(URLoginNetworkManager *)manager didLoginUser:(URUser *)user;
+- (void) networkManager:(URLoginNetworkManager *)manager didReceiveErrorCode:(NSInteger)code response:(id)response;
+- (void) networkManager:(URLoginNetworkManager *)manager didReceiveConnectionError:(NSString *)error;
 
 @end

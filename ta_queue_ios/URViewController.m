@@ -39,21 +39,45 @@
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    _networkManager.delegate = nil;
+    [self setNetworkManager:nil];
+}
+
+#pragma mark Networking
+
 - (void) networkManager:(URLoginNetworkManager *)manager didFetchSchools:(NSArray *)schools {
     _schools = schools;
     [self.tableView.pullToRefreshView stopAnimating];
     [self.tableView reloadData];
 }
 
+#pragma URSchoolSettingsViewController
+
+- (void) settingsViewControllerDidFinish:(URSchoolSettingsViewController *)controller {
+    [self dismissModalViewControllerAnimated:YES];
+    [_networkManager refreshBasePath];
+}
+
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSIndexPath* indexPath = [self.tableView indexPathForCell:sender];
     
-    URQueue* queue = [[[_schools objectAtIndex:indexPath.section] aggregatedQueues] objectAtIndex:indexPath.row];
-        
+            
     if ([segue.identifier isEqualToString:@"queueLogin"]) {
-        URLoginViewController* viewController = (URLoginViewController*) segue.destinationViewController;
+
+        URQueue* queue = [[[_schools objectAtIndex:indexPath.section] aggregatedQueues] objectAtIndex:indexPath.row];
+
+        URLoginViewController *viewController = (URLoginViewController *) segue.destinationViewController;
         [viewController setSchoolQueue:queue];
+        
+    } else if ([segue.identifier isEqualToString:@"schoolSettings"]) {
+
+        URSchoolSettingsViewController *viewController = (URSchoolSettingsViewController *)segue.destinationViewController;
+        
+        viewController.delegate = self;
     }
 }
 
@@ -89,16 +113,6 @@
     return cell;
 }
 
-
-#pragma mark RKObjectLoaderDelegate Methods
-
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    _networkManager.delegate = nil;
-    [self setNetworkManager:nil];
-}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

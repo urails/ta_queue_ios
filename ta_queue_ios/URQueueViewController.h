@@ -12,10 +12,11 @@
 #import "URStudent.h"
 #import "URTa.h"
 #import "URQueueNetworkManager.h"
+#import "URQueueSettingsViewController.h"
 
 @protocol URQueueViewControllerDelegate;
 
-@interface URQueueViewController : UIViewController <URQueueNetworkManagerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface URQueueViewController : UIViewController <URQueueNetworkManagerDelegate, URQueueSettingsViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 
 @property (strong) URQueue *queue;
 @property (assign) URUser *currentUser;

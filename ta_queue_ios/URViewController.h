@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "URLoginNetworkManager.h"
+#import "URSchoolSettingsViewController.h"
 
-@interface URViewController : UITableViewController <URLoginNetworkManagerDelegate>
+@interface URViewController : UITableViewController <URLoginNetworkManagerDelegate, URSchoolSettingsViewControllerDelegate>
 
 @property (nonatomic, retain) NSArray* schools;
 @property (strong) URLoginNetworkManager *networkManager;

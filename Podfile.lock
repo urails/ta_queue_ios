@@ -1,7 +1,7 @@
 PODS:
-  - SVHTTPRequest (0.0.1)
+  - SVHTTPRequest (0.2)
   - SVPullToRefresh (0.2)
 
 DEPENDENCIES:
-  - SVHTTPRequest
+  - SVHTTPRequest (= 0.2)
   - SVPullToRefresh

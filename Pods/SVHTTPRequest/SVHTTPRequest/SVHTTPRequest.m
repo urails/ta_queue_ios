@@ -141,6 +141,9 @@ typedef NSUInteger SVHTTPRequestState;
     self.operationRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
     [self.operationRequest setTimeoutInterval:kSVHTTPRequestTimeoutInterval];
     
+    // pipeline all but POST
+    self.operationRequest.HTTPShouldUsePipelining = (method != SVHTTPRequestMethodPOST);
+    
     if(method == SVHTTPRequestMethodGET)
         [self.operationRequest setHTTPMethod:@"GET"];
     else if(method == SVHTTPRequestMethodPOST)
@@ -231,6 +234,9 @@ typedef NSUInteger SVHTTPRequestState;
     [self.operationRequest setValue:authValue forHTTPHeaderField:@"Authorization"];
 }
 
+- (void)setValue:(NSString *)value forHTTPHeaderField:(NSString *)field {
+    [self.operationRequest setValue:value forHTTPHeaderField:field];
+}
 
 - (void)setTimeoutTimer:(NSTimer *)newTimer {
     
@@ -255,17 +261,15 @@ typedef NSUInteger SVHTTPRequestState;
         return;
     }
     
-#if TARGET_OS_IPHONE
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-#endif
     
     if(self.operationParameters)
         [self addParametersToRequest:self.operationParameters];
     
     if(self.userAgent)
         [self.operationRequest setValue:userAgent forHTTPHeaderField:@"User-Agent"];
-    
-    [self.operationRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+
+    if (self.sendParametersAsJSON)
+        [self.operationRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     [self willChangeValueForKey:@"isExecuting"];
     self.state = SVHTTPRequestStateExecuting;    
@@ -324,11 +328,33 @@ typedef NSUInteger SVHTTPRequestState;
     return self.state == SVHTTPRequestStateExecuting;
 }
 
+- (SVHTTPRequestState)state {
+    @synchronized(self) {
+        return state;
+    }
+}
+
+- (void)setState:(SVHTTPRequestState)newState {
+    @synchronized(self) {
+        [self willChangeValueForKey:@"state"];
+        state = newState;
+        [self didChangeValueForKey:@"state"];
+    }
+}
+
 #pragma mark -
 #pragma mark Delegate Methods
 
 - (void)requestTimeout {
-    NSError *timeoutError = [NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorTimedOut userInfo:nil];
+    
+    NSURL *failingURL = self.operationRequest.URL;
+    
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                              @"The operation timed out.", NSLocalizedDescriptionKey,
+                              failingURL, NSURLErrorFailingURLErrorKey,
+                              failingURL.absoluteString, NSURLErrorFailingURLStringErrorKey, nil];
+    
+    NSError *timeoutError = [NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorTimedOut userInfo:userInfo];
     [self connection:nil didFailWithError:timeoutError];
 }
 
@@ -367,7 +393,7 @@ typedef NSUInteger SVHTTPRequestState;
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    dispatch_group_notify(self.saveDataDispatchGroup, dispatch_get_main_queue(), ^{
+    dispatch_group_notify(self.saveDataDispatchGroup, self.saveDataDispatchQueue, ^{
         id response = nil;
         NSError *JSONError = nil;
         if(self.operationData && self.operationData.length > 0) {
@@ -388,15 +414,13 @@ typedef NSUInteger SVHTTPRequestState;
 
 - (void)callCompletionBlockWithResponse:(id)response error:(NSError *)error {
     self.timeoutTimer = nil;
-    
-#if TARGET_OS_IPHONE
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-#endif
-    
-    if(self.operationCompletionBlock && !self.isCancelled)
-        self.operationCompletionBlock(response, self.operationURLResponse, error);
-    
-    [self finish];
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if(self.operationCompletionBlock && !self.isCancelled)
+            self.operationCompletionBlock(response, self.operationURLResponse, error);
+        
+        [self finish];
+    });
 }
 
 @end

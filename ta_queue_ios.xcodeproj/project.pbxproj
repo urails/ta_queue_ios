@@ -46,6 +46,9 @@
 		5F92B8EB154876EA006AB042 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F92B8C9154876EA006AB042 /* Foundation.framework */; };
 		5F92B8F3154876EA006AB042 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5F92B8F1154876EA006AB042 /* InfoPlist.strings */; };
 		5F92B8F6154876EA006AB042 /* ta_queue_iosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F92B8F5154876EA006AB042 /* ta_queue_iosTests.m */; };
+		5FB832A315B67B9F00F4F037 /* URDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FB832A215B67B9F00F4F037 /* URDefaults.m */; };
+		5FB832A815B6844B00F4F037 /* URSchoolSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FB832A715B6844B00F4F037 /* URSchoolSettingsViewController.m */; };
+		5FB832AB15B7042400F4F037 /* URQueueSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FB832AA15B7042400F4F037 /* URQueueSettingsViewController.m */; };
 		5FC90FCF15A6B82A00B217E2 /* URLoginNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC90FCE15A6B82A00B217E2 /* URLoginNetworkManager.m */; };
 		5FC90FD315A6C4ED00B217E2 /* URQueueNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC90FD215A6C4ED00B217E2 /* URQueueNetworkManager.m */; };
 		5FCE985E1558C72800071715 /* URTACell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FCE985D1558C72800071715 /* URTACell.m */; };
@@ -120,6 +123,12 @@
 		5F92B8F2154876EA006AB042 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5F92B8F4154876EA006AB042 /* ta_queue_iosTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ta_queue_iosTests.h; sourceTree = "<group>"; };
 		5F92B8F5154876EA006AB042 /* ta_queue_iosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ta_queue_iosTests.m; sourceTree = "<group>"; };
+		5FB832A115B67B9F00F4F037 /* URDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URDefaults.h; sourceTree = "<group>"; };
+		5FB832A215B67B9F00F4F037 /* URDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URDefaults.m; sourceTree = "<group>"; };
+		5FB832A615B6844B00F4F037 /* URSchoolSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URSchoolSettingsViewController.h; sourceTree = "<group>"; };
+		5FB832A715B6844B00F4F037 /* URSchoolSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URSchoolSettingsViewController.m; sourceTree = "<group>"; };
+		5FB832A915B7042400F4F037 /* URQueueSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URQueueSettingsViewController.h; sourceTree = "<group>"; };
+		5FB832AA15B7042400F4F037 /* URQueueSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URQueueSettingsViewController.m; sourceTree = "<group>"; };
 		5FC90FCD15A6B82A00B217E2 /* URLoginNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLoginNetworkManager.h; sourceTree = "<group>"; };
 		5FC90FCE15A6B82A00B217E2 /* URLoginNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLoginNetworkManager.m; sourceTree = "<group>"; };
 		5FC90FD115A6C4ED00B217E2 /* URQueueNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URQueueNetworkManager.h; sourceTree = "<group>"; };
@@ -172,6 +181,8 @@
 				5F7B329A15A74F4300FD4973 /* URError.h */,
 				5F7B329B15A74F4300FD4973 /* URError.m */,
 				5F7B329D15A74FE300FD4973 /* NSString_URMethods.h */,
+				5FB832A115B67B9F00F4F037 /* URDefaults.h */,
+				5FB832A215B67B9F00F4F037 /* URDefaults.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -258,6 +269,7 @@
 		5F92B8CD154876EA006AB042 /* ta_queue_ios */ = {
 			isa = PBXGroup;
 			children = (
+				5FB832A515B6840C00F4F037 /* Settings */,
 				5F7B329915A74F2800FD4973 /* Util */,
 				5FCE98551558C60900071715 /* Views */,
 				5FCE984E1558B4D400071715 /* Networking */,
@@ -300,6 +312,17 @@
 				5F92B8F1154876EA006AB042 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5FB832A515B6840C00F4F037 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				5FB832A615B6844B00F4F037 /* URSchoolSettingsViewController.h */,
+				5FB832A715B6844B00F4F037 /* URSchoolSettingsViewController.m */,
+				5FB832A915B7042400F4F037 /* URQueueSettingsViewController.h */,
+				5FB832AA15B7042400F4F037 /* URQueueSettingsViewController.m */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 		5FCE984E1558B4D400071715 /* Networking */ = {
@@ -472,6 +495,9 @@
 				5FC90FD315A6C4ED00B217E2 /* URQueueNetworkManager.m in Sources */,
 				5F7B329715A725A000FD4973 /* URAlertView.m in Sources */,
 				5F7B329C15A74F4300FD4973 /* URError.m in Sources */,
+				5FB832A315B67B9F00F4F037 /* URDefaults.m in Sources */,
+				5FB832A815B6844B00F4F037 /* URSchoolSettingsViewController.m in Sources */,
+				5FB832AB15B7042400F4F037 /* URQueueSettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface URError : NSError
+@interface URError : NSObject
 
-+ (NSError *) initWithMessage:(NSString*)string;
++ (NSString *) errorMessageWithResponse:(NSDictionary *)dictionary;
 
 @end

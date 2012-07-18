@@ -12,6 +12,7 @@
 #import "URStudent.h"
 #import "URTa.h"
 
+
 typedef enum {
     URRequestTypeGET,
     URRequestTypePOST,
@@ -33,6 +34,7 @@ typedef enum {
 - (void) acceptStudent:(URStudent *)student;
 - (void) removeStudent:(URStudent *)student;
 - (void) putBackStudent:(URStudent *)student;
+- (void) updateQueueStatus:(NSString *)status;
 
 #pragma mark Queue Actions
 - (void) refreshQueue;
@@ -48,6 +50,8 @@ typedef enum {
 @protocol URQueueNetworkManagerDelegate <NSObject>
 
 - (void) networkManager:(URQueueNetworkManager *)manager didReceiveQueueUpdate:(URQueue *)queue;
+- (void) networkManager:(URQueueNetworkManager *)manager didReceiveErrorCode:(NSInteger)code response:(id)response;
+- (void) networkManager:(URQueueNetworkManager *)manager didReceiveConnectionError:(NSError *)error;
 - (void) networkManager:(URQueueNetworkManager *)manager didLogoutUser:(URUser *)user;
 
 @end

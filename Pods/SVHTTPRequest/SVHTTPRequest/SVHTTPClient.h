@@ -11,7 +11,7 @@
 
 @interface SVHTTPClient : NSObject
 
-+ (SVHTTPClient*)sharedClient;
++ (id)sharedClient;
 
 - (void)setBasicAuthWithUsername:(NSString*)username password:(NSString*)password;
 
@@ -26,6 +26,9 @@
 
 - (void)cancelRequestsWithPath:(NSString*)path;
 - (void)cancelAllRequests;
+
+// header values common to all requests, e.g. API keys
+- (void)setValue:(NSString *)value forHTTPHeaderField:(NSString *)field;
 
 @property (nonatomic, strong) NSString *username;
 @property (nonatomic, strong) NSString *password;

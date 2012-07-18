@@ -21,15 +21,17 @@
             progress:(void (^)(float))progressBlock
           completion:(void (^)(id, NSHTTPURLResponse*, NSError*))completionBlock;
 
+@property (nonatomic, strong) NSMutableDictionary *HTTPHeaderFields;
+
 @end
 
 
 @implementation SVHTTPClient
 
-@synthesize username, password, basePath, userAgent, sendParametersAsJSON, cachePolicy, operationQueue;
+@synthesize username, password, basePath, userAgent, sendParametersAsJSON, cachePolicy, operationQueue, HTTPHeaderFields;
 
 
-+ (SVHTTPClient*)sharedClient {
++ (id)sharedClient {
 	
     static SVHTTPClient *_sharedInstance = nil;
     static dispatch_once_t oncePredicate;
@@ -42,9 +44,34 @@
 }
 
 - (id)init {
-    self = [super init];
-    self.operationQueue = [[NSOperationQueue alloc] init];
+    if (self = [super init]) {
+        self.operationQueue = [[NSOperationQueue alloc] init];
+        
+        [self.operationQueue addObserver:self
+                              forKeyPath:@"operationCount"
+                                 options:NSKeyValueObservingOptionNew
+                                 context:&self->operationQueue];
+    }
+    
     return self;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"operationCount"]) {
+#if TARGET_OS_IPHONE
+        dispatch_async(dispatch_get_main_queue(), ^{
+            BOOL indicatorVisible = self.operationQueue.operationCount > 0;
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:indicatorVisible];
+        });
+#endif
+    }
+    else
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+}
+
+- (void)dealloc
+{
+    [self.operationQueue removeObserver:self forKeyPath:@"operationCount" context:&self->operationQueue];
 }
 
 #pragma mark - Setters
@@ -106,6 +133,17 @@
 
 #pragma mark -
 
+- (NSMutableDictionary *)HTTPHeaderFields {
+    if(HTTPHeaderFields == nil)
+        HTTPHeaderFields = [NSMutableDictionary new];
+    
+    return HTTPHeaderFields;
+}
+
+- (void)setValue:(NSString *)value forHTTPHeaderField:(NSString *)field {
+    [self.HTTPHeaderFields setValue:value forKey:field];
+}
+
 - (void)queueRequest:(NSString*)path 
               method:(SVHTTPRequestMethod)method 
           parameters:(NSDictionary*)parameters 
@@ -118,6 +156,10 @@
     requestOperation.sendParametersAsJSON = self.sendParametersAsJSON;
     requestOperation.cachePolicy = self.cachePolicy;
     requestOperation.userAgent = self.userAgent;
+    
+    [self.HTTPHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString *field, NSString *value, BOOL *stop) {
+        [(id<SVHTTPRequestPrivateMethods>)requestOperation setValue:value forHTTPHeaderField:field];
+    }];
     
     if(self.username && self.password)
         [(id<SVHTTPRequestPrivateMethods>)requestOperation signRequestWithUsername:self.username password:self.password];

@@ -20,7 +20,6 @@
         
         connectionString = url;
 
-        [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", gBaseUrl, url]]]];
         
         NSLog(@"Loading URL: %@", url);
         

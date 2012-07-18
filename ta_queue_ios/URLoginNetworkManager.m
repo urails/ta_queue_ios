@@ -10,6 +10,7 @@
 #import "URUser.h"
 #import "URStudent.h"
 #import "URTa.h"
+#import "URDefaults.h"
 
 @interface URLoginNetworkManager ()
 
@@ -27,11 +28,20 @@
     
     if (self) {
         _client = [[SVHTTPClient alloc] init];
-        [_client setBasePath:gBaseUrl];
+        [_client setBasePath:[URDefaults currentBaseURL]];
         [_client setSendParametersAsJSON:YES];
     }
     
     return self;
+}
+
+- (void) setBasePath:(NSString *)basePath {
+    [_client setBasePath:basePath];
+    [self fetchSchools];
+}
+
+- (void) refreshBasePath {
+    [self setBasePath:[URDefaults currentBaseURL]];
 }
 
 - (void) fetchSchools {
@@ -52,7 +62,9 @@
                      queue.instructor.school.abbreviation, 
                      queue.instructor.username,
                      queue.classNumber];
+    
     NSMutableDictionary *fields = [NSMutableDictionary dictionary];
+    
     [fields setValue:username forKey:@"username"];
     [fields setValue:location forKey:@"location"];
     
@@ -61,16 +73,16 @@
     [_client POST:url parameters:params completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         /* If there's a connection error, render it */
         if (error) {
-            [URAlertView showMessage:[response description]];
+            [_delegate networkManager:self didReceiveConnectionError:[error localizedDescription]];
         } else {
             /* If we didn't get the expected status code, render the rails errors */
             /* TODO: Unify error reporting here, similar to URQueueNetworkManager
                and unify the error reporting on the server */
             if (urlResponse.statusCode != 201) {
-                [URAlertView showMessage:[NSString stringWithFormat:@"Got a %i", urlResponse.statusCode]];
+                [_delegate networkManager:self didReceiveErrorCode:urlResponse.statusCode response:response];
             } else {
                 URUser *user = [URStudent withAttributes:response];
-                [_delegate networkManager:self didLoginUser:user error:error];
+                [_delegate networkManager:self didLoginUser:user];
             }
         }
     }];
@@ -83,6 +95,7 @@
                      queue.classNumber];
     
     NSMutableDictionary *fields = [NSMutableDictionary dictionary];
+    
     [fields setValue:username forKey:@"username"];
     [fields setValue:password forKey:@"password"];
     
@@ -90,17 +103,12 @@
     
     [_client POST:url parameters:params completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
-            [URAlertView showMessage:error.localizedDescription];
+            [_delegate networkManager:self didReceiveConnectionError:[error localizedDescription]];
         } else if (urlResponse.statusCode != 201) {
-            UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"WTF"
-                                                           message:[response description]
-                                                          delegate:nil 
-                                                 cancelButtonTitle:@"OK" 
-                                                 otherButtonTitles:nil];
-            [view show];
+            [_delegate networkManager:self didReceiveErrorCode:urlResponse.statusCode response:response];
         } else {
             URUser *user = [URTa withAttributes:response];
-            [_delegate networkManager:self didLoginUser:user error:error];
+            [_delegate networkManager:self didLoginUser:user];
         }
     }];
 }

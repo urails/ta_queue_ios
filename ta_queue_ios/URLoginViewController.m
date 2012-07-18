@@ -89,18 +89,18 @@
     }
 }
 
-- (void) networkManager:(URLoginNetworkManager *)manager didLoginUser:(URUser *)user error:(NSError *)error {
-    if (error) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"WFT?"
-                                                            message:error.localizedDescription 
-                                                           delegate:nil 
-                                                  cancelButtonTitle:@"OK" 
-                                                  otherButtonTitles:nil];
-        [alertView show];
-    } else {
-        _loggedInUser = user;
-        [self performSegueWithIdentifier:@"loggedIn" sender:self];
-    }
+- (void) networkManager:(URLoginNetworkManager *)manager didLoginUser:(URUser *)user {
+    _loggedInUser = user;
+    [self performSegueWithIdentifier:@"loggedIn" sender:self];
+
+}
+
+- (void) networkManager:(URLoginNetworkManager *)manager didReceiveConnectionError:(NSString *)error {
+    [URAlertView showMessage:error];
+}
+
+- (void) networkManager:(URLoginNetworkManager *)manager didReceiveErrorCode:(NSInteger)code response:(id)response {
+    [URAlertView showMessage:[URError errorMessageWithResponse:response]];
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
