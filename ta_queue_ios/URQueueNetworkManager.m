@@ -127,6 +127,7 @@
 }
 
 #pragma mark TA Actions
+
 - (void) acceptStudent:(URStudent *)student {
     NSString* url = [NSString stringWithFormat:@"/students/%@/ta_accept", student.userId];
     
@@ -202,7 +203,6 @@
             [_delegate networkManager:self didLogoutUser:_user];
         }
     }];
-    
 }
 
 

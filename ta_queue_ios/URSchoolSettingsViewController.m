@@ -18,15 +18,6 @@
 @synthesize delegate = _delegate;
 @synthesize baseURLField = _baseURLField;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -44,11 +35,6 @@
 - (IBAction)doneTapped:(id)sender {
     [URDefaults setCurrentBaseURL:_baseURLField.text];
     [_delegate settingsViewControllerDidFinish:self];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 @end

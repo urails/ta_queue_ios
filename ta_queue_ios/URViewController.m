@@ -27,16 +27,18 @@
 {
     _networkManager = [[URLoginNetworkManager alloc] init];
     _networkManager.delegate = self;
-    __weak URLoginNetworkManager *weakManager = _networkManager;
+
+    __block URLoginNetworkManager *blockManager = _networkManager;
     
     [self.tableView addPullToRefreshWithActionHandler:^(void) {
-        [weakManager fetchSchools];
+        [blockManager fetchSchools];
     }];
     
-    [_networkManager fetchSchools];
-    
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [_networkManager fetchSchools];    
 }
 
 - (void)viewDidUnload
@@ -111,16 +113,6 @@
     [[cell detailTextLabel] setText:queue.instructor.name];
     
     return cell;
-}
-
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-    } else {
-        return YES;
-    }
 }
 
 @end

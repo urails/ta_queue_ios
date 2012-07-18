@@ -35,6 +35,8 @@
     return self;
 }
 
+#pragma mark Configuration
+
 - (void) setBasePath:(NSString *)basePath {
     [_client setBasePath:basePath];
     [self fetchSchools];
@@ -43,6 +45,8 @@
 - (void) refreshBasePath {
     [self setBasePath:[URDefaults currentBaseURL]];
 }
+
+#pragma mark API calls
 
 - (void) fetchSchools {
     [_client GET:@"/schools.json" parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {

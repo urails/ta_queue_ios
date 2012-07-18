@@ -22,15 +22,6 @@
 @synthesize secondsLabel = _secondsLabel;
 @synthesize stepper = _stepper;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -68,11 +59,6 @@
     UIStepper *stepper = (UIStepper *)sender;
     [URDefaults setCurrentQueryInterval:(NSUInteger)stepper.value];
     [self updateQueryLabel];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 @end

@@ -8,8 +8,6 @@
 
 #import "URQueueViewController.h"
 #import "SVPullToRefresh.h"
-#import "URStudentCell.h"
-#import "URTACell.h"
 #import "URDefaults.h"
 
 #define STATUS_SECTION 0
@@ -61,6 +59,7 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [URQueueViewController setCurrentQueueController:self];
+    NSLog(@"View Appeared");
     [self startTimer];
 }
 
@@ -92,9 +91,8 @@
 #pragma mark URQueueSettingsViewController
 
 - (void) settingsViewControllerDidFinish:(URQueueSettingsViewController *)controller {
-    [self dismissModalViewControllerAnimated:YES];
     [_timer invalidate];
-    [self startTimer];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark RKRequestDelegate methods
@@ -196,7 +194,7 @@
     
     if (indexPath.section == TA_SECTION) {
         URTa *ta = [_queue.tas objectAtIndex:indexPath.row];
-        URTACell *_cell = [self.tableView dequeueReusableCellWithIdentifier:taIdentifier];
+        UITableViewCell *_cell = [self.tableView dequeueReusableCellWithIdentifier:taIdentifier];
 
         _cell.textLabel.text = ta.username;
 
@@ -207,10 +205,10 @@
         }
 
         cell = _cell;
-    }
-    else if (indexPath.section == STUDENT_SECTION) {
+        
+    } else if (indexPath.section == STUDENT_SECTION) {
         URStudent *student = [_queue.studentsInQueue objectAtIndex:indexPath.row];
-        URStudentCell *_cell = [self.tableView dequeueReusableCellWithIdentifier:studentIdentifier];
+        UITableViewCell *_cell = [self.tableView dequeueReusableCellWithIdentifier:studentIdentifier];
 
         NSString *userLabel = [NSString stringWithFormat:@"%@ @ %@", student.username, student.location];
 
@@ -222,8 +220,8 @@
             _cell.detailTextLabel.text = @"";
         }
 
-
         cell = _cell;
+        
     } else if (indexPath.section == STATUS_SECTION) {
         cell = [self.tableView dequeueReusableCellWithIdentifier:statusIdentifier];
 
@@ -300,8 +298,8 @@
     if (indexPath.section == STUDENT_SECTION && _queue.studentsInQueue.count > 0) {
         
         // There's a chance that if they have the last person in the list selected that
-        // when they were removed the user, it's selecting off the end of the list. In
-        // which case we want to back it off.
+        // when they removed the user, it's selecting off the end of the list. In which 
+        // case we want to back it off.
         NSUInteger row = indexPath.row;
         while (row >= _queue.studentsInQueue.count) {
             row--;
@@ -423,10 +421,6 @@ static URQueueViewController* _currentQueueController = nil;
 }
 
 #pragma mark UIAlertView delegate
-
-- (void) alertViewCancel:(UIAlertView *)alertView {
-    
-}
 
 - (void) alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {

@@ -20,18 +20,9 @@
 }
 
 + (void) showMessage:(NSString *)message {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Message" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Friendly Message" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     
     [alertView show];
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

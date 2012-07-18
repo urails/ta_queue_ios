@@ -45,11 +45,6 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
     if (textField == _nameField) {
         [_locationField becomeFirstResponder];
@@ -122,7 +117,6 @@
         _locationField.enabled = NO;
         _locationField.secureTextEntry = YES;
         _locationField.enabled = YES;
-        [_locationField becomeFirstResponder];
     }
 }
 

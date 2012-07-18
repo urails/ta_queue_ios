@@ -10,6 +10,7 @@
 
 @implementation URError
 
+
 + (NSString *) errorMessageWithResponse:(NSDictionary *)dictionary {
     NSString *message = @"";
     

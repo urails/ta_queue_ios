@@ -51,8 +51,6 @@
 		5FB832AB15B7042400F4F037 /* URQueueSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FB832AA15B7042400F4F037 /* URQueueSettingsViewController.m */; };
 		5FC90FCF15A6B82A00B217E2 /* URLoginNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC90FCE15A6B82A00B217E2 /* URLoginNetworkManager.m */; };
 		5FC90FD315A6C4ED00B217E2 /* URQueueNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC90FD215A6C4ED00B217E2 /* URQueueNetworkManager.m */; };
-		5FCE985E1558C72800071715 /* URTACell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FCE985D1558C72800071715 /* URTACell.m */; };
-		5FCE98611558C73300071715 /* URStudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FCE98601558C73300071715 /* URStudentCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,10 +131,6 @@
 		5FC90FCE15A6B82A00B217E2 /* URLoginNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLoginNetworkManager.m; sourceTree = "<group>"; };
 		5FC90FD115A6C4ED00B217E2 /* URQueueNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URQueueNetworkManager.h; sourceTree = "<group>"; };
 		5FC90FD215A6C4ED00B217E2 /* URQueueNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URQueueNetworkManager.m; sourceTree = "<group>"; };
-		5FCE985C1558C72800071715 /* URTACell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URTACell.h; sourceTree = "<group>"; };
-		5FCE985D1558C72800071715 /* URTACell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URTACell.m; sourceTree = "<group>"; };
-		5FCE985F1558C73300071715 /* URStudentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URStudentCell.h; sourceTree = "<group>"; };
-		5FCE98601558C73300071715 /* URStudentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URStudentCell.m; sourceTree = "<group>"; };
 		B8F312897FA241DAAAE72D47 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -269,9 +263,8 @@
 		5F92B8CD154876EA006AB042 /* ta_queue_ios */ = {
 			isa = PBXGroup;
 			children = (
-				5FB832A515B6840C00F4F037 /* Settings */,
 				5F7B329915A74F2800FD4973 /* Util */,
-				5FCE98551558C60900071715 /* Views */,
+				5FB832A515B6840C00F4F037 /* Settings */,
 				5FCE984E1558B4D400071715 /* Networking */,
 				5F88C26D15542441006EFC6E /* Controllers */,
 				5F88C26C15542432006EFC6E /* Models */,
@@ -334,17 +327,6 @@
 				5FC90FD215A6C4ED00B217E2 /* URQueueNetworkManager.m */,
 			);
 			name = Networking;
-			sourceTree = "<group>";
-		};
-		5FCE98551558C60900071715 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				5FCE985C1558C72800071715 /* URTACell.h */,
-				5FCE985D1558C72800071715 /* URTACell.m */,
-				5FCE985F1558C73300071715 /* URStudentCell.h */,
-				5FCE98601558C73300071715 /* URStudentCell.m */,
-			);
-			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -489,8 +471,6 @@
 				5F88C288155462C5006EFC6E /* URUser.m in Sources */,
 				5F88C28B1554A2DF006EFC6E /* URObject.m in Sources */,
 				5F88C2F715575FAF006EFC6E /* URJuggernautClient.m in Sources */,
-				5FCE985E1558C72800071715 /* URTACell.m in Sources */,
-				5FCE98611558C73300071715 /* URStudentCell.m in Sources */,
 				5FC90FCF15A6B82A00B217E2 /* URLoginNetworkManager.m in Sources */,
 				5FC90FD315A6C4ED00B217E2 /* URQueueNetworkManager.m in Sources */,
 				5F7B329715A725A000FD4973 /* URAlertView.m in Sources */,
