@@ -11,8 +11,9 @@
 #import "URDefaults.h"
 
 #define STATUS_SECTION 0
-#define TA_SECTION 1
-#define STUDENT_SECTION 2
+#define TA_MESSAGE_SECTION 1
+#define TA_SECTION 2
+#define STUDENT_SECTION 3
 
 @interface URQueueViewController ()
 
@@ -150,7 +151,8 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    // See the top of this file for the #define directives for each section
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -159,6 +161,10 @@
         return _queue.tas.count;
     } else if (section == STUDENT_SECTION) {
         return _queue.studentsInQueue.count;
+    } else if (section == TA_MESSAGE_SECTION) {
+        if ([self shouldShowTaMessage]) {
+            return 1;
+        }
     } else if (section == STATUS_SECTION) {
         if ([self shouldShowQueueStatus]) {
             return 1;
@@ -171,13 +177,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     UITableViewCell *cell = [self cellForIndexPath:indexPath];
 
-    
-    cell.opaque = NO;    
-    
-    // Configure the cell...
+    cell.opaque = NO;
     
     return cell;
 }
@@ -187,6 +189,7 @@
     static NSString *studentIdentifier = @"studentCell";
     static NSString *taIdentifier = @"taCell";
     static NSString *statusIdentifier = @"queueStatus";
+    static NSString *taStatusIdentifier = @"taStatus";
     
     UITableViewCell *cell = nil;
     
@@ -222,7 +225,7 @@
 
         cell = _cell;
         
-    } else if (indexPath.section == STATUS_SECTION) {
+    } else if (indexPath.section == TA_MESSAGE_SECTION) {
         cell = [self.tableView dequeueReusableCellWithIdentifier:statusIdentifier];
 
         if (_currentUser.isTa) {
@@ -235,6 +238,17 @@
         } else {
             cell.textLabel.text = _queue.status;
         }
+    } else if (indexPath.section == STATUS_SECTION) {
+        cell = [self.tableView dequeueReusableCellWithIdentifier:taStatusIdentifier];
+        if (!_queue.active) {
+            cell.textLabel.text = @"The Queue is not active.";
+            cell.contentView.backgroundColor = [UIColor redColor];
+        } else if (_queue.frozen) {
+            cell.textLabel.text = @"The Queue is frozen, no more students may enter.";
+            cell.contentView.backgroundColor = [UIColor blueColor];
+        }
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.textLabel.backgroundColor = [UIColor clearColor];
     }
     
     return cell;
@@ -246,15 +260,26 @@
         return @"TAs";
     else if (section == STUDENT_SECTION)
         return @"Students";
-    else {
+    else if (section == TA_MESSAGE_SECTION){
+        if (![self shouldShowTaMessage]) {
+            return nil;
+        }
+        return @"TA Message";
+    } else if (section == STATUS_SECTION) {
         if (![self shouldShowQueueStatus]) {
             return nil;
         }
         return @"Queue Status";
     }
+    
+    return nil;
 }
 
 - (BOOL) shouldShowQueueStatus {
+    return (!_queue.active) || _queue.frozen;
+}
+
+- (BOOL) shouldShowTaMessage {
     return _queue.active && (_currentUser.isTa || (_queue.status && ![_queue.status isEqualToString:@""]));
 }
 
@@ -408,7 +433,7 @@ static URQueueViewController* _currentQueueController = nil;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == STATUS_SECTION) {
+    if (indexPath.section == TA_MESSAGE_SECTION) {
         if (_currentUser.isTa) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Update Status" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
             alertView.alertViewStyle = UIAlertViewStylePlainTextInput;

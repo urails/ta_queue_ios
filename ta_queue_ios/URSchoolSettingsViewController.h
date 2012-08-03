@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "URAboutViewController.h"
 
 @protocol URSchoolSettingsViewControllerDelegate;
 
-@interface URSchoolSettingsViewController : UITableViewController
+@interface URSchoolSettingsViewController : UITableViewController <URAboutViewControllerDelegate>
 
 @property (weak) NSObject<URSchoolSettingsViewControllerDelegate> *delegate;
 @property (strong, nonatomic) IBOutlet UITextField *baseURLField;

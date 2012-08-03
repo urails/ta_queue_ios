@@ -9,6 +9,7 @@
 #import "URSchoolSettingsViewController.h"
 #import "URDefaults.h"
 
+
 @interface URSchoolSettingsViewController ()
 
 @end
@@ -35,6 +36,18 @@
 - (IBAction)doneTapped:(id)sender {
     [URDefaults setCurrentBaseURL:_baseURLField.text];
     [_delegate settingsViewControllerDidFinish:self];
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"about"]) {
+        URAboutViewController *controller = (URAboutViewController *)segue.destinationViewController;
+        
+        controller.delegate = self;
+    }
+}
+
+- (void) aboutViewControllerDidFinish:(URAboutViewController *)controller {
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end

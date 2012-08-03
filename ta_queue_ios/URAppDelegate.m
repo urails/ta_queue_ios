@@ -16,7 +16,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [self customize];
     return YES;
+}
+
+- (void) customize {
+    [[UINavigationBar appearance] setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
