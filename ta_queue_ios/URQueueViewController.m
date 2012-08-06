@@ -9,11 +9,17 @@
 #import "URQueueViewController.h"
 #import "SVPullToRefresh.h"
 #import "URDefaults.h"
+#import "URQuestionViewController.h"
 
+// Table View Sections
 #define STATUS_SECTION 0
 #define TA_MESSAGE_SECTION 1
 #define TA_SECTION 2
 #define STUDENT_SECTION 3
+
+// Alert View Tags
+#define ALERT_VEIW_ASK_QUESTION_TAG 0
+#define ALERT_VIEW_UPDATE_STATUS_TAG 1
 
 @interface URQueueViewController ()
 
@@ -222,7 +228,7 @@
         } else {
             _cell.detailTextLabel.text = @"";
         }
-
+        
         cell = _cell;
         
     } else if (indexPath.section == TA_MESSAGE_SECTION) {
@@ -249,6 +255,18 @@
         }
         cell.textLabel.textColor = [UIColor whiteColor];
         cell.textLabel.backgroundColor = [UIColor clearColor];
+    }
+    
+    // Show the disclosure if the student is asking a question in question-based mode
+    if (_queue.isQuestionBased && indexPath.section == STUDENT_SECTION) {
+        NSString *question = [[[_queue studentsInQueue] objectAtIndex:indexPath.row] question];
+        if (question && question.length > 0) {
+            cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
     }
     
     return cell;
@@ -406,7 +424,18 @@
 }
 
 - (void) enterQueue {
-    [_networkManager enterQueue];
+    if (_currentUser.isStudent && _queue.isQuestionBased) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Question"
+                                                            message:@"What is your Question?"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel"
+                                                  otherButtonTitles:@"Enter Queue", nil];
+        alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+        alertView.tag = ALERT_VEIW_ASK_QUESTION_TAG;
+        [alertView show];
+    } else {
+        [_networkManager enterQueue];
+    }
 }
 
 - (void) exitQueue {
@@ -437,6 +466,7 @@ static URQueueViewController* _currentQueueController = nil;
         if (_currentUser.isTa) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Update Status" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
             alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+            alertView.tag = ALERT_VIEW_UPDATE_STATUS_TAG;
             [alertView show];
         }
     } else {
@@ -445,11 +475,33 @@ static URQueueViewController* _currentQueueController = nil;
 
 }
 
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+    URQuestionViewController *controller = (URQuestionViewController *)[[UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"questionVC"];
+    
+    controller.question = [[[_queue studentsInQueue] objectAtIndex:indexPath.row] question];
+    
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
 #pragma mark UIAlertView delegate
 
 - (void) alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
-        [_networkManager updateQueueStatus:[[alertView textFieldAtIndex:0] text]];
+        NSLog(@"%d", alertView.tag);
+        if (alertView.tag == ALERT_VIEW_UPDATE_STATUS_TAG) {
+            
+            [_networkManager updateQueueStatus:[[alertView textFieldAtIndex:0] text]];
+            
+        } else if (alertView.tag == ALERT_VEIW_ASK_QUESTION_TAG ) {
+            NSString *question = [alertView textFieldAtIndex:0].text;
+            if (question.length == 0) {
+                [URAlertView showMessage:@"You must enter a question to enter the queue."];
+            } else {
+                [_networkManager enterQueueWithQuestion:question];
+            }
+            
+        }
+
     }
 }
 

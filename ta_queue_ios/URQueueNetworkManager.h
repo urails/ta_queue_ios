@@ -28,6 +28,7 @@ typedef enum {
 
 #pragma mark Student Actions
 - (void) enterQueue;
+- (void) enterQueueWithQuestion:(NSString *)question;
 - (void) exitQueue;
 
 #pragma mark TA Actions

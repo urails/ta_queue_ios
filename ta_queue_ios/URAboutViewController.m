@@ -52,6 +52,9 @@
     }
 
 }
+- (IBAction)gotoWebClient:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://nine.eng.utah.edu/"]];
+}
 
 - (IBAction)doneTapped:(id)sender {
     [_delegate aboutViewControllerDidFinish:self];

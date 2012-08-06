@@ -19,6 +19,7 @@
 @synthesize classNumber;
 @synthesize students;
 @synthesize studentsInQueue;
+@synthesize questionBased;
 @synthesize tas;
 @synthesize users;
 @synthesize currentUser;
@@ -28,7 +29,9 @@
     title = [attributes valueForKey:@"title"];
     status = [attributes valueForKey:@"status"];
     active = [[attributes valueForKey:@"active"] boolValue];
+    questionBased = [[attributes valueForKey:@"is_question_based"] boolValue];
     frozen = [[attributes valueForKey:@"frozen"] boolValue];
+
     classNumber = [attributes valueForKey:@"class_number"];
     
     NSArray* _students = [attributes valueForKey:@"students"];

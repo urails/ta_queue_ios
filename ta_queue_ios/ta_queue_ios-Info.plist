@@ -14,15 +14,15 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
-				<string>ta_queue_icon_1x~ipad.png</string>
-				<string>ta_queue_icon.png</string>
-				<string>ta_queue_icon_1x_iphone.png</string>
-				<string>ta_queue_icon_2x_iphone.png</string>
+				<string>icon~iphone.png</string>
+				<string>icon~iphone@2x.png</string>
+				<string>icon~ipad.png</string>
+				<string>icon~ipad@2x.png</string>
 			</array>
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>mysterioustrousers.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>com.urails.ta-queue</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -37,15 +37,15 @@
 	<string>1.6</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>UIMainStoryboardFile</key>
-	<string>MainStoryboard_iPhone</string>
-	<key>UIMainStoryboardFile~ipad</key>
-	<string>MainStoryboard_iPhone</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SourceSansPro-Light.ttf</string>
 		<string>SourceSansPro-Regular.ttf</string>
 	</array>
+	<key>UIMainStoryboardFile</key>
+	<string>MainStoryboard_iPhone</string>
+	<key>UIMainStoryboardFile~ipad</key>
+	<string>MainStoryboard_iPhone</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

@@ -16,17 +16,18 @@
 
 @interface URQueue : URObject 
 
-@property (nonatomic, retain) NSString *title;
-@property (nonatomic, retain) NSString *status;
-@property (nonatomic, assign) BOOL active;
-@property (nonatomic, assign) BOOL frozen;
-@property (nonatomic, retain) NSString *classNumber;
-@property (nonatomic, retain) NSArray  *students;
-@property (nonatomic, retain) NSArray  *studentsInQueue;
-@property (nonatomic, retain) NSArray  *tas;
-@property (nonatomic, retain) NSArray  *users;
-@property (nonatomic, retain) URInstructor* instructor;
-@property (nonatomic, retain) URUser* currentUser;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *status;
+@property (nonatomic, assign, getter = isActive) BOOL active;
+@property (nonatomic, assign, getter = isFrozen) BOOL frozen;
+@property (nonatomic, strong) NSString *classNumber;
+@property (nonatomic, assign, getter = isQuestionBased) BOOL questionBased;
+@property (nonatomic, strong) NSArray  *students;
+@property (nonatomic, strong) NSArray  *studentsInQueue;
+@property (nonatomic, strong) NSArray  *tas;
+@property (nonatomic, strong) NSArray  *users;
+@property (nonatomic, strong) URInstructor* instructor;
+@property (nonatomic, strong) URUser* currentUser;
 
 + (URQueue*) sharedQueue;
 

@@ -13,10 +13,7 @@
 		5F7489DC15CC6A0A00DE3808 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F7489DB15CC6A0A00DE3808 /* MessageUI.framework */; };
 		5F7B329715A725A000FD4973 /* URAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7B329615A725A000FD4973 /* URAlertView.m */; };
 		5F7B329C15A74F4300FD4973 /* URError.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7B329B15A74F4300FD4973 /* URError.m */; };
-		5F7E084D15ADE5DF003E6CF4 /* ta_queue_icon_1x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F7E084C15ADE5DE003E6CF4 /* ta_queue_icon_1x~ipad.png */; };
-		5F7E084F15ADE5E6003E6CF4 /* ta_queue_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F7E084E15ADE5E6003E6CF4 /* ta_queue_icon.png */; };
-		5F7E085115ADE62F003E6CF4 /* ta_queue_icon_1x_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F7E085015ADE62E003E6CF4 /* ta_queue_icon_1x_iphone.png */; };
-		5F7E085315ADE633003E6CF4 /* ta_queue_icon_2x_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F7E085215ADE633003E6CF4 /* ta_queue_icon_2x_iphone.png */; };
+		5F8298A215CE2126002AE8E9 /* URQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F8298A115CE2125002AE8E9 /* URQuestionViewController.m */; };
 		5F88C25B155422E6006EFC6E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F88C25A155422E6006EFC6E /* CFNetwork.framework */; };
 		5F88C25D155422ED006EFC6E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F88C25C155422ED006EFC6E /* CoreData.framework */; };
 		5F88C25F155422F3006EFC6E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F88C25E155422F3006EFC6E /* Security.framework */; };
@@ -53,6 +50,10 @@
 		5FB832AB15B7042400F4F037 /* URQueueSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FB832AA15B7042400F4F037 /* URQueueSettingsViewController.m */; };
 		5FC90FCF15A6B82A00B217E2 /* URLoginNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC90FCE15A6B82A00B217E2 /* URLoginNetworkManager.m */; };
 		5FC90FD315A6C4ED00B217E2 /* URQueueNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FC90FD215A6C4ED00B217E2 /* URQueueNetworkManager.m */; };
+		5FC9C42C15CF8D8C001984C6 /* icon~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FC9C42815CF8D8C001984C6 /* icon~iphone.png */; };
+		5FC9C42D15CF8D8C001984C6 /* icon~iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FC9C42915CF8D8C001984C6 /* icon~iphone@2x.png */; };
+		5FC9C42E15CF8D8C001984C6 /* icon~ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FC9C42A15CF8D8C001984C6 /* icon~ipad@2x.png */; };
+		5FC9C42F15CF8D8C001984C6 /* icon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FC9C42B15CF8D8C001984C6 /* icon~ipad.png */; };
 		5FE4B1FA15CC2654002C3F42 /* SourceSansPro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5FE4B1F815CC2654002C3F42 /* SourceSansPro-Light.ttf */; };
 		5FE4B1FB15CC2654002C3F42 /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5FE4B1F915CC2654002C3F42 /* SourceSansPro-Regular.ttf */; };
 /* End PBXBuildFile section */
@@ -77,10 +78,8 @@
 		5F7B329A15A74F4300FD4973 /* URError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URError.h; sourceTree = "<group>"; };
 		5F7B329B15A74F4300FD4973 /* URError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URError.m; sourceTree = "<group>"; };
 		5F7B329D15A74FE300FD4973 /* NSString_URMethods.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSString_URMethods.h; sourceTree = "<group>"; };
-		5F7E084C15ADE5DE003E6CF4 /* ta_queue_icon_1x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ta_queue_icon_1x~ipad.png"; sourceTree = "<group>"; };
-		5F7E084E15ADE5E6003E6CF4 /* ta_queue_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ta_queue_icon.png; sourceTree = "<group>"; };
-		5F7E085015ADE62E003E6CF4 /* ta_queue_icon_1x_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ta_queue_icon_1x_iphone.png; sourceTree = "<group>"; };
-		5F7E085215ADE633003E6CF4 /* ta_queue_icon_2x_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ta_queue_icon_2x_iphone.png; sourceTree = "<group>"; };
+		5F8298A015CE2125002AE8E9 /* URQuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URQuestionViewController.h; sourceTree = "<group>"; };
+		5F8298A115CE2125002AE8E9 /* URQuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URQuestionViewController.m; sourceTree = "<group>"; };
 		5F88C25A155422E6006EFC6E /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		5F88C25C155422ED006EFC6E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		5F88C25E155422F3006EFC6E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -138,6 +137,10 @@
 		5FC90FCE15A6B82A00B217E2 /* URLoginNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLoginNetworkManager.m; sourceTree = "<group>"; };
 		5FC90FD115A6C4ED00B217E2 /* URQueueNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URQueueNetworkManager.h; sourceTree = "<group>"; };
 		5FC90FD215A6C4ED00B217E2 /* URQueueNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URQueueNetworkManager.m; sourceTree = "<group>"; };
+		5FC9C42815CF8D8C001984C6 /* icon~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon~iphone.png"; path = "../icon~iphone.png"; sourceTree = "<group>"; };
+		5FC9C42915CF8D8C001984C6 /* icon~iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon~iphone@2x.png"; path = "../icon~iphone@2x.png"; sourceTree = "<group>"; };
+		5FC9C42A15CF8D8C001984C6 /* icon~ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon~ipad@2x.png"; path = "../icon~ipad@2x.png"; sourceTree = "<group>"; };
+		5FC9C42B15CF8D8C001984C6 /* icon~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon~ipad.png"; path = "../icon~ipad.png"; sourceTree = "<group>"; };
 		5FE4B1F815CC2654002C3F42 /* SourceSansPro-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Light.ttf"; sourceTree = "<group>"; };
 		5FE4B1F915CC2654002C3F42 /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
 		B8F312897FA241DAAAE72D47 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -223,6 +226,8 @@
 				5F88C28115544AB9006EFC6E /* URLoginViewController.m */,
 				5F88C28315545DD8006EFC6E /* URQueueViewController.h */,
 				5F88C28415545DD8006EFC6E /* URQueueViewController.m */,
+				5F8298A015CE2125002AE8E9 /* URQuestionViewController.h */,
+				5F8298A115CE2125002AE8E9 /* URQuestionViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -231,10 +236,6 @@
 			isa = PBXGroup;
 			children = (
 				5F7489DB15CC6A0A00DE3808 /* MessageUI.framework */,
-				5F7E085215ADE633003E6CF4 /* ta_queue_icon_2x_iphone.png */,
-				5F7E085015ADE62E003E6CF4 /* ta_queue_icon_1x_iphone.png */,
-				5F7E084E15ADE5E6003E6CF4 /* ta_queue_icon.png */,
-				5F7E084C15ADE5DE003E6CF4 /* ta_queue_icon_1x~ipad.png */,
 				5F92B8CD154876EA006AB042 /* ta_queue_ios */,
 				5F92B8EE154876EA006AB042 /* ta_queue_iosTests */,
 				5F92B8C6154876E9006AB042 /* Frameworks */,
@@ -291,6 +292,7 @@
 		5F92B8CE154876EA006AB042 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5FC9C43015CF8D97001984C6 /* icons */,
 				5FE4B1F815CC2654002C3F42 /* SourceSansPro-Light.ttf */,
 				5FE4B1F915CC2654002C3F42 /* SourceSansPro-Regular.ttf */,
 				5F92B8CF154876EA006AB042 /* ta_queue_ios-Info.plist */,
@@ -331,6 +333,17 @@
 				5F7489D815CC651D00DE3808 /* URAboutViewController.m */,
 			);
 			name = Settings;
+			sourceTree = "<group>";
+		};
+		5FC9C43015CF8D97001984C6 /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				5FC9C42815CF8D8C001984C6 /* icon~iphone.png */,
+				5FC9C42915CF8D8C001984C6 /* icon~iphone@2x.png */,
+				5FC9C42A15CF8D8C001984C6 /* icon~ipad@2x.png */,
+				5FC9C42B15CF8D8C001984C6 /* icon~ipad.png */,
+			);
+			name = icons;
 			sourceTree = "<group>";
 		};
 		5FCE984E1558B4D400071715 /* Networking */ = {
@@ -421,12 +434,12 @@
 				5F92B8D2154876EA006AB042 /* InfoPlist.strings in Resources */,
 				5F92B8DB154876EA006AB042 /* MainStoryboard_iPhone.storyboard in Resources */,
 				5F92B8DE154876EA006AB042 /* MainStoryboard_iPad.storyboard in Resources */,
-				5F7E084D15ADE5DF003E6CF4 /* ta_queue_icon_1x~ipad.png in Resources */,
-				5F7E084F15ADE5E6003E6CF4 /* ta_queue_icon.png in Resources */,
-				5F7E085115ADE62F003E6CF4 /* ta_queue_icon_1x_iphone.png in Resources */,
-				5F7E085315ADE633003E6CF4 /* ta_queue_icon_2x_iphone.png in Resources */,
 				5FE4B1FA15CC2654002C3F42 /* SourceSansPro-Light.ttf in Resources */,
 				5FE4B1FB15CC2654002C3F42 /* SourceSansPro-Regular.ttf in Resources */,
+				5FC9C42C15CF8D8C001984C6 /* icon~iphone.png in Resources */,
+				5FC9C42D15CF8D8C001984C6 /* icon~iphone@2x.png in Resources */,
+				5FC9C42E15CF8D8C001984C6 /* icon~ipad@2x.png in Resources */,
+				5FC9C42F15CF8D8C001984C6 /* icon~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,6 +509,7 @@
 				5FB832A815B6844B00F4F037 /* URSchoolSettingsViewController.m in Sources */,
 				5FB832AB15B7042400F4F037 /* URQueueSettingsViewController.m in Sources */,
 				5F7489D915CC651D00DE3808 /* URAboutViewController.m in Sources */,
+				5F8298A215CE2126002AE8E9 /* URQuestionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -639,7 +653,8 @@
 			baseConfigurationReference = 5F7B0DC3E29F451EAC8CC01B /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DSTROOT = /tmp/xcodeproj.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ta_queue_ios/ta_queue_ios-Prefix.pch";
@@ -649,6 +664,7 @@
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = app;
 			};

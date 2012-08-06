@@ -113,7 +113,17 @@
 
 #pragma mark Student Actions
 - (void) enterQueue {
-    [self makeRequest:URRequestTypeGET urlString:@"/queue/enter_queue" withParams:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self enterQueueWithQuestion:nil];
+}
+
+- (void) enterQueueWithQuestion:(NSString *)question {
+    NSDictionary *params = nil;
+    
+    if (question) {
+        params = @{ @"question": question };
+    }
+
+    [self makeRequest:URRequestTypeGET urlString:@"/queue/enter_queue" withParams:params completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         self.queue = [URQueue withAttributes:response];
         [_delegate networkManager:self didReceiveQueueUpdate:self.queue];
     }];
