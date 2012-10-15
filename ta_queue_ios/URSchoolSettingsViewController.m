@@ -16,7 +16,6 @@
 
 @implementation URSchoolSettingsViewController
 
-@synthesize delegate = _delegate;
 @synthesize baseURLField = _baseURLField;
 
 - (void)viewDidLoad
@@ -35,7 +34,7 @@
 
 - (IBAction)doneTapped:(id)sender {
     [URDefaults setCurrentBaseURL:_baseURLField.text];
-    [_delegate settingsViewControllerDidFinish:self];
+    _finishedCallback(self);
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

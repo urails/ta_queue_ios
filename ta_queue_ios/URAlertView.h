@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface URAlertView : UIAlertView
+@interface URAlertView : UIAlertView <UIAlertViewDelegate>
 
-+ (void) showMessage:(NSString *)message;
++ (void) showMessage:(NSString *)message
+           withStyle:(UIAlertViewStyle)style
+                  ok:(void (^)(UIAlertView *alertView, NSString *text))okBlock
+              cancel:(void (^)(UIAlertView *alertView))cancelBlock;
 
 @end

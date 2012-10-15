@@ -10,7 +10,7 @@
 #import "URLoginNetworkManager.h"
 #import "URSchoolSettingsViewController.h"
 
-@interface URViewController : UITableViewController <URLoginNetworkManagerDelegate, URSchoolSettingsViewControllerDelegate>
+@interface URViewController : UITableViewController <URLoginNetworkManagerDelegate>
 
 @property (nonatomic, retain) NSArray* schools;
 @property (strong) URLoginNetworkManager *networkManager;

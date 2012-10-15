@@ -56,14 +56,6 @@
     [self.tableView reloadData];
 }
 
-#pragma URSchoolSettingsViewController
-
-- (void) settingsViewControllerDidFinish:(URSchoolSettingsViewController *)controller {
-    [self dismissModalViewControllerAnimated:YES];
-    [_networkManager refreshBasePath];
-}
-
-
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSIndexPath* indexPath = [self.tableView indexPathForCell:sender];
     
@@ -79,7 +71,9 @@
 
         URSchoolSettingsViewController *viewController = (URSchoolSettingsViewController *)segue.destinationViewController;
         
-        viewController.delegate = self;
+        viewController.finishedCallback = ^(URSchoolSettingsViewController *controller) {
+            [self dismissModalViewControllerAnimated:YES];
+        };
     }
 }
 

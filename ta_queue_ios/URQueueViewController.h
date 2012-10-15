@@ -16,7 +16,7 @@
 
 @protocol URQueueViewControllerDelegate;
 
-@interface URQueueViewController : UIViewController <URQueueNetworkManagerDelegate, URQueueSettingsViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
+@interface URQueueViewController : UIViewController <URQueueNetworkManagerDelegate, URQueueSettingsViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (strong) URQueue *queue;
 @property (assign) URUser *currentUser;

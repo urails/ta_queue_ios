@@ -17,10 +17,6 @@
 #define TA_SECTION 2
 #define STUDENT_SECTION 3
 
-// Alert View Tags
-#define ALERT_VEIW_ASK_QUESTION_TAG 0
-#define ALERT_VIEW_UPDATE_STATUS_TAG 1
-
 @interface URQueueViewController ()
 
 @end
@@ -127,16 +123,16 @@
     // the server timed them out.
     if (code == 401) {
         [_delegate queueViewController:self didLogoutUser:_currentUser];
-        [URAlertView showMessage:@"You are no longer logged in, possibly due to inactivity. Please login again."];
+        [URAlertView showMessage:@"You are no longer logged in, possibly due to inactivity. Please login again." withStyle:UIAlertViewStyleDefault ok:nil cancel:nil];
     } 
     // Any other error could be anything, so display it to the user.
     else {
-        [URAlertView showMessage:[URError errorMessageWithResponse:response]];
+        [URAlertView showMessage:[URError errorMessageWithResponse:response] withStyle:UIAlertViewStyleDefault ok:nil cancel:nil];
     }
 }
 
 - (void) networkManager:(URQueueNetworkManager *)manager didReceiveConnectionError:(NSError *)error {
-    [URAlertView showMessage:error.localizedDescription];
+    [URAlertView showMessage:error.localizedDescription withStyle:UIAlertViewStyleDefault ok:nil cancel:nil];
 }
 
 #pragma mark UIViewController methods
@@ -258,7 +254,7 @@
     }
     
     // Show the disclosure if the student is asking a question in question-based mode
-    if (_queue.isQuestionBased && indexPath.section == STUDENT_SECTION) {
+    if (_currentUser.isTa && _queue.isQuestionBased && indexPath.section == STUDENT_SECTION) {
         NSString *question = [[[_queue studentsInQueue] objectAtIndex:indexPath.row] question];
         if (question && question.length > 0) {
             cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
@@ -425,14 +421,16 @@
 
 - (void) enterQueue {
     if (_currentUser.isStudent && _queue.isQuestionBased) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Question"
-                                                            message:@"What is your Question?"
-                                                           delegate:self
-                                                  cancelButtonTitle:@"Cancel"
-                                                  otherButtonTitles:@"Enter Queue", nil];
-        alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
-        alertView.tag = ALERT_VEIW_ASK_QUESTION_TAG;
-        [alertView show];
+        
+        [URAlertView showMessage:@"What is your question? (You must enter one to enter the queue.)"
+                       withStyle:UIAlertViewStylePlainTextInput
+                              ok:^(UIAlertView *alertView, NSString *text) {
+                                  if (text.length == 0) {
+                                      [URAlertView showMessage:@"You must enter a question to enter the queue." withStyle:UIAlertViewStyleDefault ok:nil cancel:nil];
+                                  } else {
+                                      [_networkManager enterQueueWithQuestion:text];
+                                  }
+                              } cancel:nil];
     } else {
         [_networkManager enterQueue];
     }
@@ -464,11 +462,10 @@ static URQueueViewController* _currentQueueController = nil;
 {
     if (indexPath.section == TA_MESSAGE_SECTION) {
         if (_currentUser.isTa) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Update Status" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
-            alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
-            alertView.tag = ALERT_VIEW_UPDATE_STATUS_TAG;
-            [alertView show];
-        }
+            [URAlertView showMessage:@"Enter New Status" withStyle:UIAlertViewStylePlainTextInput ok:^(UIAlertView *alertView, NSString *text){
+                [_networkManager updateQueueStatus:[[alertView textFieldAtIndex:0] text]];
+            } cancel:nil];
+         }
     } else {
         [self setupUserActionToolbar];
     }
@@ -485,24 +482,5 @@ static URQueueViewController* _currentQueueController = nil;
 
 #pragma mark UIAlertView delegate
 
-- (void) alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 1) {
-        NSLog(@"%d", alertView.tag);
-        if (alertView.tag == ALERT_VIEW_UPDATE_STATUS_TAG) {
-            
-            [_networkManager updateQueueStatus:[[alertView textFieldAtIndex:0] text]];
-            
-        } else if (alertView.tag == ALERT_VEIW_ASK_QUESTION_TAG ) {
-            NSString *question = [alertView textFieldAtIndex:0].text;
-            if (question.length == 0) {
-                [URAlertView showMessage:@"You must enter a question to enter the queue."];
-            } else {
-                [_networkManager enterQueueWithQuestion:question];
-            }
-            
-        }
-
-    }
-}
 
 @end

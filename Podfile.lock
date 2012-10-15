@@ -1,7 +1,17 @@
+
 PODS:
-  - SVHTTPRequest (0.2)
-  - SVPullToRefresh (0.2)
+- SVHTTPRequest (0.2)
+- SVPullToRefresh (0.2)
+- TestFlightSDK (1.1)
 
 DEPENDENCIES:
-  - SVHTTPRequest (= 0.2)
-  - SVPullToRefresh
+- SVHTTPRequest (= 0.2)
+- SVPullToRefresh
+- TestFlightSDK
+
+SPEC CHECKSUMS:
+  SVHTTPRequest: b47647dc0fd9b20c7255b57fec32e1beb6979dab
+  SVPullToRefresh: cafc40e50668d7ce0119b7d99270a4cc0cfe5cce
+  TestFlightSDK: a62347405c04307e2953eda4b8cc465ee51a6c90
+
+COCOAPODS: 0.15.1

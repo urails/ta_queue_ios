@@ -54,6 +54,9 @@
 		5FC9C42D15CF8D8C001984C6 /* icon~iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FC9C42915CF8D8C001984C6 /* icon~iphone@2x.png */; };
 		5FC9C42E15CF8D8C001984C6 /* icon~ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FC9C42A15CF8D8C001984C6 /* icon~ipad@2x.png */; };
 		5FC9C42F15CF8D8C001984C6 /* icon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FC9C42B15CF8D8C001984C6 /* icon~ipad.png */; };
+		5FDBD3821627B9EA00A83631 /* Countly.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDBD37F1627B9EA00A83631 /* Countly.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5FDBD3831627B9EA00A83631 /* Countly_OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDBD3811627B9EA00A83631 /* Countly_OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5FDBD3861627BA5000A83631 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FDBD3851627BA5000A83631 /* CoreTelephony.framework */; };
 		5FE4B1FA15CC2654002C3F42 /* SourceSansPro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5FE4B1F815CC2654002C3F42 /* SourceSansPro-Light.ttf */; };
 		5FE4B1FB15CC2654002C3F42 /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5FE4B1F915CC2654002C3F42 /* SourceSansPro-Regular.ttf */; };
 /* End PBXBuildFile section */
@@ -141,6 +144,11 @@
 		5FC9C42915CF8D8C001984C6 /* icon~iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon~iphone@2x.png"; path = "../icon~iphone@2x.png"; sourceTree = "<group>"; };
 		5FC9C42A15CF8D8C001984C6 /* icon~ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon~ipad@2x.png"; path = "../icon~ipad@2x.png"; sourceTree = "<group>"; };
 		5FC9C42B15CF8D8C001984C6 /* icon~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon~ipad.png"; path = "../icon~ipad.png"; sourceTree = "<group>"; };
+		5FDBD37E1627B9EA00A83631 /* Countly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Countly.h; sourceTree = "<group>"; };
+		5FDBD37F1627B9EA00A83631 /* Countly.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Countly.m; sourceTree = "<group>"; };
+		5FDBD3801627B9EA00A83631 /* Countly_OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Countly_OpenUDID.h; sourceTree = "<group>"; };
+		5FDBD3811627B9EA00A83631 /* Countly_OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Countly_OpenUDID.m; sourceTree = "<group>"; };
+		5FDBD3851627BA5000A83631 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		5FE4B1F815CC2654002C3F42 /* SourceSansPro-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Light.ttf"; sourceTree = "<group>"; };
 		5FE4B1F915CC2654002C3F42 /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
 		B8F312897FA241DAAAE72D47 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,6 +159,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FDBD3861627BA5000A83631 /* CoreTelephony.framework in Frameworks */,
 				5F7489DC15CC6A0A00DE3808 /* MessageUI.framework in Frameworks */,
 				5F88C26715542311006EFC6E /* QuartzCore.framework in Frameworks */,
 				5F88C2651554230A006EFC6E /* libxml2.dylib in Frameworks */,
@@ -235,7 +244,6 @@
 		5F92B8B8154876E9006AB042 = {
 			isa = PBXGroup;
 			children = (
-				5F7489DB15CC6A0A00DE3808 /* MessageUI.framework */,
 				5F92B8CD154876EA006AB042 /* ta_queue_ios */,
 				5F92B8EE154876EA006AB042 /* ta_queue_iosTests */,
 				5F92B8C6154876E9006AB042 /* Frameworks */,
@@ -256,6 +264,8 @@
 		5F92B8C6154876E9006AB042 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5F7489DB15CC6A0A00DE3808 /* MessageUI.framework */,
+				5FDBD3851627BA5000A83631 /* CoreTelephony.framework */,
 				5F88C26615542311006EFC6E /* QuartzCore.framework */,
 				5F88C2641554230A006EFC6E /* libxml2.dylib */,
 				5F88C26215542303006EFC6E /* SystemConfiguration.framework */,
@@ -292,6 +302,7 @@
 		5F92B8CE154876EA006AB042 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5FDBD37D1627B9EA00A83631 /* vendor */,
 				5FC9C43015CF8D97001984C6 /* icons */,
 				5FE4B1F815CC2654002C3F42 /* SourceSansPro-Light.ttf */,
 				5FE4B1F915CC2654002C3F42 /* SourceSansPro-Regular.ttf */,
@@ -355,6 +366,17 @@
 				5FC90FD215A6C4ED00B217E2 /* URQueueNetworkManager.m */,
 			);
 			name = Networking;
+			sourceTree = "<group>";
+		};
+		5FDBD37D1627B9EA00A83631 /* vendor */ = {
+			isa = PBXGroup;
+			children = (
+				5FDBD37E1627B9EA00A83631 /* Countly.h */,
+				5FDBD37F1627B9EA00A83631 /* Countly.m */,
+				5FDBD3801627B9EA00A83631 /* Countly_OpenUDID.h */,
+				5FDBD3811627B9EA00A83631 /* Countly_OpenUDID.m */,
+			);
+			path = vendor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -510,6 +532,8 @@
 				5FB832AB15B7042400F4F037 /* URQueueSettingsViewController.m in Sources */,
 				5F7489D915CC651D00DE3808 /* URAboutViewController.m in Sources */,
 				5F8298A215CE2126002AE8E9 /* URQuestionViewController.m in Sources */,
+				5FDBD3821627B9EA00A83631 /* Countly.m in Sources */,
+				5FDBD3831627B9EA00A83631 /* Countly_OpenUDID.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,8 +677,8 @@
 			baseConfigurationReference = 5F7B0DC3E29F451EAC8CC01B /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DSTROOT = /tmp/xcodeproj.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ta_queue_ios/ta_queue_ios-Prefix.pch";

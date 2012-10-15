@@ -91,11 +91,11 @@
 }
 
 - (void) networkManager:(URLoginNetworkManager *)manager didReceiveConnectionError:(NSString *)error {
-    [URAlertView showMessage:error];
+    [URAlertView showMessage:error withStyle:UIAlertViewStyleDefault ok:nil cancel:nil];
 }
 
 - (void) networkManager:(URLoginNetworkManager *)manager didReceiveErrorCode:(NSInteger)code response:(id)response {
-    [URAlertView showMessage:[URError errorMessageWithResponse:response]];
+    [URAlertView showMessage:[URError errorMessageWithResponse:response] withStyle:UIAlertViewStyleDefault ok:nil cancel:nil];
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
