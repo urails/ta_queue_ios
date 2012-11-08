@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		08602C7AC5724FE8BF93C512 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8F312897FA241DAAAE72D47 /* libPods.a */; };
 		51F9E96F35534DE18D6DBB2C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8F312897FA241DAAAE72D47 /* libPods.a */; };
+		5F34D6A7162C9E8B00550241 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F34D6A6162C9E8B00550241 /* libTestFlight.a */; };
 		5F7489D915CC651D00DE3808 /* URAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7489D815CC651D00DE3808 /* URAboutViewController.m */; };
 		5F7489DC15CC6A0A00DE3808 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F7489DB15CC6A0A00DE3808 /* MessageUI.framework */; };
 		5F7B329715A725A000FD4973 /* URAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F7B329615A725A000FD4973 /* URAlertView.m */; };
@@ -72,6 +73,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5F34D6A6162C9E8B00550241 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = Pods/TestFlightSDK/libTestFlight.a; sourceTree = "<group>"; };
 		5F7489D715CC651D00DE3808 /* URAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URAboutViewController.h; sourceTree = "<group>"; };
 		5F7489D815CC651D00DE3808 /* URAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URAboutViewController.m; sourceTree = "<group>"; };
 		5F7489DB15CC6A0A00DE3808 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -165,6 +167,7 @@
 				5F88C2651554230A006EFC6E /* libxml2.dylib in Frameworks */,
 				5F88C26315542303006EFC6E /* SystemConfiguration.framework in Frameworks */,
 				5F88C261155422FC006EFC6E /* MobileCoreServices.framework in Frameworks */,
+				5F34D6A7162C9E8B00550241 /* libTestFlight.a in Frameworks */,
 				5F88C25F155422F3006EFC6E /* Security.framework in Frameworks */,
 				5F88C25D155422ED006EFC6E /* CoreData.framework in Frameworks */,
 				5F88C25B155422E6006EFC6E /* CFNetwork.framework in Frameworks */,
@@ -264,6 +267,7 @@
 		5F92B8C6154876E9006AB042 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5F34D6A6162C9E8B00550241 /* libTestFlight.a */,
 				5F7489DB15CC6A0A00DE3808 /* MessageUI.framework */,
 				5FDBD3851627BA5000A83631 /* CoreTelephony.framework */,
 				5F88C26615542311006EFC6E /* QuartzCore.framework */,
@@ -657,16 +661,21 @@
 			baseConfigurationReference = 5F7B0DC3E29F451EAC8CC01B /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: ROBERT WIGHTMAN (6M3BSZ6J39)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ROBERT WIGHTMAN (6M3BSZ6J39)";
 				DSTROOT = /tmp/xcodeproj.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ta_queue_ios/ta_queue_ios-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "ta_queue_ios/ta_queue_ios-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/Pods/TestFlightSDK\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "06636398-C5D4-46E0-8FD7-AACCB6E6E5A7";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "06636398-C5D4-46E0-8FD7-AACCB6E6E5A7";
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = app;
 			};
@@ -677,18 +686,21 @@
 			baseConfigurationReference = 5F7B0DC3E29F451EAC8CC01B /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: ROBERT WIGHTMAN (6M3BSZ6J39)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ROBERT WIGHTMAN (6M3BSZ6J39)";
 				DSTROOT = /tmp/xcodeproj.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ta_queue_ios/ta_queue_ios-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "ta_queue_ios/ta_queue_ios-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/Pods/TestFlightSDK\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "06636398-C5D4-46E0-8FD7-AACCB6E6E5A7";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "06636398-C5D4-46E0-8FD7-AACCB6E6E5A7";
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = app;
 			};

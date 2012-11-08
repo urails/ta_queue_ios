@@ -19,6 +19,8 @@ enum {
 
 typedef NSUInteger SVPullToRefreshState;
 
+static CGFloat const SVPullToRefreshViewHeight = 60;
+
 @interface SVPullToRefreshArrow : UIView
 @property (nonatomic, strong) UIColor *arrowColor;
 @end
@@ -116,8 +118,7 @@ typedef NSUInteger SVPullToRefreshState;
 
 - (SVPullToRefreshArrow *)arrow {
     if(!arrow && pullToRefreshActionHandler) {
-		arrow = [SVPullToRefreshArrow new];
-        arrow.frame = CGRectMake(0, 6, 22, 48);
+		self.arrow = [[SVPullToRefreshArrow alloc]initWithFrame:CGRectMake(0, 6, 22, 48)];
         arrow.backgroundColor = [UIColor clearColor];
 		
 		// assign a different default color for arrow
@@ -181,17 +182,15 @@ typedef NSUInteger SVPullToRefreshState;
     [self addSubview:self.arrow];
     	
     self.state = SVPullToRefreshStateHidden;    
-    self.frame = CGRectMake(0, -60, self.scrollView.bounds.size.width, 60);
+    self.frame = CGRectMake(0, -SVPullToRefreshViewHeight, self.scrollView.bounds.size.width, SVPullToRefreshViewHeight);
 }
 
 - (void)setInfiniteScrollingActionHandler:(void (^)(void))actionHandler {
+    self.originalTableFooterView = [(UITableView*)self.scrollView tableFooterView];
     infiniteScrollingActionHandler = [actionHandler copy];
     self.showsInfiniteScrolling = YES;
-    
-    self.frame = CGRectMake(0, 0, self.scrollView.bounds.size.width, 60);
-    self.originalTableFooterView = [(UITableView*)self.scrollView tableFooterView];
+    self.frame = CGRectMake(0, 0, self.scrollView.bounds.size.width, SVPullToRefreshViewHeight);
     [(UITableView*)self.scrollView setTableFooterView:self];
-    
     self.state = SVPullToRefreshStateHidden;    
     [self layoutSubviews];
 }
@@ -274,7 +273,7 @@ typedef NSUInteger SVPullToRefreshState;
     if(pullToRefreshActionHandler) {
         if (self.state == SVPullToRefreshStateLoading) {
             CGFloat offset = MAX(self.scrollView.contentOffset.y * -1, 0);
-            offset = MIN(offset, 60.0f);
+            offset = MIN(offset, self.originalScrollViewContentInset.top + SVPullToRefreshViewHeight);
             self.scrollView.contentInset = UIEdgeInsetsMake(offset, 0.0f, 0.0f, 0.0f);
         } else {
             CGFloat scrollOffsetThreshold = self.frame.origin.y-self.originalScrollViewContentInset.top;
@@ -301,7 +300,20 @@ typedef NSUInteger SVPullToRefreshState;
 
 - (void)triggerRefresh {
     self.state = SVPullToRefreshStateLoading;
-    [self.scrollView setContentOffset:CGPointMake(0, -60.0f) animated:YES];
+    [self.scrollView setContentOffset:CGPointMake(0, -SVPullToRefreshViewHeight) animated:YES];
+}
+
+- (void)startAnimating{
+    state = SVPullToRefreshStateLoading;
+    
+    titleLabel.text = NSLocalizedString(@"Loading...",);
+    [self.activityIndicatorView startAnimating];
+    UIEdgeInsets newInsets = self.originalScrollViewContentInset;
+    newInsets.top = self.frame.origin.y*-1+self.originalScrollViewContentInset.top;
+    newInsets.bottom = self.scrollView.contentInset.bottom;
+    [self setScrollViewContentInset:newInsets];
+    [self.scrollView setContentOffset:CGPointMake(0, -self.frame.size.height) animated:NO];
+    [self rotateArrow:0 hide:YES];
 }
 
 - (void)stopAnimating {
@@ -349,13 +361,7 @@ typedef NSUInteger SVPullToRefreshState;
                 break;
                 
             case SVPullToRefreshStateLoading:
-                titleLabel.text = NSLocalizedString(@"Loading...",);
-                [self.activityIndicatorView startAnimating];
-                UIEdgeInsets newInsets = self.originalScrollViewContentInset;
-                newInsets.top = self.frame.origin.y*-1+self.originalScrollViewContentInset.top;
-                newInsets.bottom = self.scrollView.contentInset.bottom;
-                [self setScrollViewContentInset:newInsets];
-                [self rotateArrow:0 hide:YES];
+                [self startAnimating];
                 pullToRefreshActionHandler();
                 break;
         }
@@ -378,6 +384,7 @@ typedef NSUInteger SVPullToRefreshState;
     [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         self.arrow.layer.transform = CATransform3DMakeRotation(degrees, 0, 0, 1);
         self.arrow.layer.opacity = !hide;
+        //[self.arrow setNeedsDisplay];//ios 4
     } completion:NULL];
 }
 
@@ -406,7 +413,7 @@ static char UIScrollViewInfiniteScrollingView;
     [self willChangeValueForKey:@"pullToRefreshView"];
     objc_setAssociatedObject(self, &UIScrollViewPullToRefreshView,
                              pullToRefreshView,
-                             OBJC_ASSOCIATION_ASSIGN);
+                             OBJC_ASSOCIATION_RETAIN);
     [self didChangeValueForKey:@"pullToRefreshView"];
 }
 
@@ -486,19 +493,43 @@ static char UIScrollViewInfiniteScrollingView;
 	CGContextSaveGState(c);
 	CGContextClip(c);
 	
-	
 	// Gradient Declaration
 	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-	NSArray* alphaGradientColors = [NSArray arrayWithObjects:
-									(id)[self.arrowColor colorWithAlphaComponent:0].CGColor,
-									(id)[self.arrowColor colorWithAlphaComponent:1].CGColor,
-									nil];
 	CGFloat alphaGradientLocations[] = {0, 0.8};
-	CGGradientRef alphaGradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)alphaGradientColors, alphaGradientLocations);
+    
+	CGGradientRef alphaGradient = nil;
+    if([[[UIDevice currentDevice] systemVersion]floatValue] >= 5){
+        NSArray* alphaGradientColors = [NSArray arrayWithObjects:
+                                        (id)[self.arrowColor colorWithAlphaComponent:0].CGColor,
+                                        (id)[self.arrowColor colorWithAlphaComponent:1].CGColor,
+                                        nil];
+        alphaGradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)alphaGradientColors, alphaGradientLocations);
+    }else{
+        const CGFloat * components = CGColorGetComponents([self.arrowColor CGColor]);
+        int numComponents = CGColorGetNumberOfComponents([self.arrowColor CGColor]);        
+        CGFloat colors[8];
+        switch(numComponents){
+            case 2:{
+                colors[0] = colors[4] = components[0];
+                colors[1] = colors[5] = components[0];
+                colors[2] = colors[6] = components[0];
+                break;
+            }
+            case 4:{
+                colors[0] = colors[4] = components[0];
+                colors[1] = colors[5] = components[1];
+                colors[2] = colors[6] = components[2];
+                break;
+            }
+        }
+        colors[3] = 0;
+        colors[7] = 1;
+        alphaGradient = CGGradientCreateWithColorComponents(colorSpace,colors,alphaGradientLocations,2);
+    }
 	
 	
 	CGContextDrawLinearGradient(c, alphaGradient, CGPointZero, CGPointMake(0, rect.size.height), 0);
-	
+    
 	CGContextRestoreGState(c);
 	
 	CGGradientRelease(alphaGradient);

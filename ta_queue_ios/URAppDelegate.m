@@ -18,9 +18,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [self customize];
+//    [self customize];
 	
 	[TestFlight takeOff:@"63fc6fb412be126d5010238f01c6fe50_NzExNDAyMDEyLTAzLTE3IDEwOjUzOjM4LjkwOTE2NA"];
+	
+
+	[TestFlight passCheckpoint:@"MyCheckpoint"];
 	
     return YES;
 }
