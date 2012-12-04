@@ -60,6 +60,7 @@
 		5FDBD3861627BA5000A83631 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FDBD3851627BA5000A83631 /* CoreTelephony.framework */; };
 		5FE4B1FA15CC2654002C3F42 /* SourceSansPro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5FE4B1F815CC2654002C3F42 /* SourceSansPro-Light.ttf */; };
 		5FE4B1FB15CC2654002C3F42 /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5FE4B1F915CC2654002C3F42 /* SourceSansPro-Regular.ttf */; };
+		5FFCFDF4166EBCDD00F8300D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FFCFDF3166EBCDD00F8300D /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,6 +153,7 @@
 		5FDBD3851627BA5000A83631 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		5FE4B1F815CC2654002C3F42 /* SourceSansPro-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Light.ttf"; sourceTree = "<group>"; };
 		5FE4B1F915CC2654002C3F42 /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
+		5FFCFDF3166EBCDD00F8300D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		B8F312897FA241DAAAE72D47 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -245,6 +247,7 @@
 		5F92B8B8154876E9006AB042 = {
 			isa = PBXGroup;
 			children = (
+				5FFCFDF3166EBCDD00F8300D /* Default-568h@2x.png */,
 				5F92B8CD154876EA006AB042 /* ta_queue_ios */,
 				5F92B8EE154876EA006AB042 /* ta_queue_iosTests */,
 				5F92B8C6154876E9006AB042 /* Frameworks */,
@@ -464,6 +467,7 @@
 				5FC9C42D15CF8D8C001984C6 /* icon~iphone@2x.png in Resources */,
 				5FC9C42E15CF8D8C001984C6 /* icon~ipad@2x.png in Resources */,
 				5FC9C42F15CF8D8C001984C6 /* icon~ipad.png in Resources */,
+				5FFCFDF4166EBCDD00F8300D /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
