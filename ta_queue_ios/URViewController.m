@@ -56,6 +56,10 @@
     [self.tableView reloadData];
 }
 
+- (void) networkManager:(URLoginNetworkManager *)manager didReceiveConnectionError:(NSString *)error {
+	[URAlertView showMessage:error];
+}
+
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSIndexPath* indexPath = [self.tableView indexPathForCell:sender];
     
@@ -72,6 +76,7 @@
         URSchoolSettingsViewController *viewController = (URSchoolSettingsViewController *)segue.destinationViewController;
         
         viewController.finishedCallback = ^(URSchoolSettingsViewController *controller) {
+			[self.networkManager setBasePath:[URDefaults currentBaseURL]];
             [self dismissModalViewControllerAnimated:YES];
         };
     }

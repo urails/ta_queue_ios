@@ -50,14 +50,19 @@
 
 - (void) fetchSchools {
     [_client GET:@"/schools.json" parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        
-        NSMutableArray *schools = [NSMutableArray array];
-        
-        for (NSDictionary *school in response) {
-            [schools addObject:[URSchool withAttributes:school]];
-        }
-        
-        [_delegate networkManager:self didFetchSchools:schools];
+		
+		if (error) {
+			[_delegate networkManager:self didReceiveConnectionError:error.localizedDescription];
+		} else {
+			NSMutableArray *schools = [NSMutableArray array];
+			
+			for (NSDictionary *school in response) {
+				[schools addObject:[URSchool withAttributes:school]];
+			}
+			
+			[_delegate networkManager:self didFetchSchools:schools];
+		}
+		
     }];
 }
 
@@ -83,7 +88,9 @@
             /* TODO: Unify error reporting here, similar to URQueueNetworkManager
                and unify the error reporting on the server */
             if (urlResponse.statusCode != 201) {
-                [_delegate networkManager:self didReceiveErrorCode:urlResponse.statusCode response:response];
+				if ([_delegate respondsToSelector:@selector(networkManager:didReceiveErrorCode:response:)]) {
+					[_delegate networkManager:self didReceiveErrorCode:urlResponse.statusCode response:response];
+				}
             } else {
                 URUser *user = [URStudent withAttributes:response];
                 [_delegate networkManager:self didLoginUser:user];

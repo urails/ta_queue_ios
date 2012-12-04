@@ -13,6 +13,6 @@
     #import <Foundation/Foundation.h>
     #import "URAlertView.h"
     #import "URError.h"
-    #import "NSString_URMethods.h"
+	#import "URDefaults.h"
     #define IS_LOCAL 0
 #endif

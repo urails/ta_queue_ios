@@ -15,4 +15,6 @@
                   ok:(void (^)(UIAlertView *alertView, NSString *text))okBlock
               cancel:(void (^)(UIAlertView *alertView))cancelBlock;
 
++ (void) showMessage:(NSString *)message;
+
 @end

@@ -48,6 +48,15 @@
     [alertView show];
 }
 
++ (void) showMessage:(NSString *)message {
+	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
+														message:message
+													   delegate:self
+											  cancelButtonTitle:@"OK"
+											  otherButtonTitles:nil];
+	[alertView show];
+}
+
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
         if (_cancelBlock) {

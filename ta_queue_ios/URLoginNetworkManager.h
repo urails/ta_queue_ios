@@ -32,11 +32,14 @@
 
 @protocol URLoginNetworkManagerDelegate <NSObject>
 
+@required
+
+- (void) networkManager:(URLoginNetworkManager *)manager didReceiveConnectionError:(NSString *)error;
+
 @optional
 
 - (void) networkManager:(URLoginNetworkManager *)manager didFetchSchools:(NSArray *)schools;
 - (void) networkManager:(URLoginNetworkManager *)manager didLoginUser:(URUser *)user;
 - (void) networkManager:(URLoginNetworkManager *)manager didReceiveErrorCode:(NSInteger)code response:(id)response;
-- (void) networkManager:(URLoginNetworkManager *)manager didReceiveConnectionError:(NSString *)error;
 
 @end
