@@ -11,11 +11,15 @@
 @interface URDefaults : NSObject
 
 + (NSString *)currentBaseURL;
-
 + (void)setCurrentBaseURL:(NSString *)baseURL;
 
 + (NSUInteger)currentQueryInterval;
-
 + (void)setCurrentQueryInterval:(NSUInteger)interval;
+
++ (NSString *)username;
++ (void)setUsername:(NSString *)username;
+
++ (NSString *)location;
++ (void)setLocation:(NSString *)location;
 
 @end

@@ -10,6 +10,8 @@
 
 #define UR_BASE_URL_KEY @"baseURL"
 #define UR_QUERY_INTERVAL_KEY @"queryInterval"
+#define UR_USERNAME_KEY @"username"
+#define UR_LOCATION_KEY @"location"
 
 #if IS_LOCAL
     #define UR_DEFAULT_BASE_URL @"http://localhost:3000"
@@ -49,6 +51,24 @@
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithUnsignedInteger:interval]
                                               forKey:UR_QUERY_INTERVAL_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (NSString *) username {
+	return [[NSUserDefaults standardUserDefaults] objectForKey:UR_USERNAME_KEY];
+}
+
++ (void) setUsername:(NSString *)username {
+	[[NSUserDefaults standardUserDefaults] setObject:username forKey:UR_USERNAME_KEY];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (NSString *) location {
+	return [[NSUserDefaults standardUserDefaults] objectForKey:UR_LOCATION_KEY];
+}
+
++ (void) setLocation:(NSString *)location {
+	[[NSUserDefaults standardUserDefaults] setObject:location forKey:UR_LOCATION_KEY];
+	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

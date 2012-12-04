@@ -28,9 +28,14 @@
     [super viewDidLoad];
 
     [_nameField setDelegate:self];
+	_nameField.text = [URDefaults username];
+	
     [_locationField setDelegate:self];
+	_locationField.text = [URDefaults location];
+	
     _networkManager = [[URLoginNetworkManager alloc] init];
     [_networkManager setDelegate:self];
+	
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
@@ -86,8 +91,11 @@
 
 - (void) networkManager:(URLoginNetworkManager *)manager didLoginUser:(URUser *)user {
     _loggedInUser = user;
+	[URDefaults setUsername:_nameField.text];
+	if (user.isStudent) {
+		[URDefaults setLocation:_locationField.text];
+	}
     [self performSegueWithIdentifier:@"loggedIn" sender:self];
-
 }
 
 - (void) networkManager:(URLoginNetworkManager *)manager didReceiveConnectionError:(NSString *)error {
@@ -108,6 +116,7 @@
 }
 
 - (IBAction)segmentChanged:(id)sender {
+	_locationField.text = nil;
     if (_typeControl.selectedSegmentIndex == 0) {
         _locationField.placeholder = @"Location";
         _locationField.secureTextEntry = NO;
