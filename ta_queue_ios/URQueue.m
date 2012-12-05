@@ -49,8 +49,10 @@
     
     if (_tas) {
         NSMutableArray* arr = [NSMutableArray arrayWithCapacity:5];
-        for (NSDictionary *dict in _tas) {
+        for (NSInteger i = 0; i < _tas.count; i++) {
+			NSDictionary *dict = [_tas objectAtIndex:i];
             [arr addObject:[URTa withAttributes:dict]];
+			[[arr lastObject] setColor:[URTa colorForIndex:i]];
         }
         
         tas = arr;

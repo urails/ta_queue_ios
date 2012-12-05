@@ -13,5 +13,8 @@
 @interface URTa : URUser
 
 @property (strong, nonatomic) URStudent *student;
+@property (strong, nonatomic) UIColor *color;
+
++ (UIColor *)colorForIndex:(NSInteger)index;
 
 @end

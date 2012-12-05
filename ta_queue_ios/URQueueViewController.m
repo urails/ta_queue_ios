@@ -202,7 +202,10 @@
         UITableViewCell *_cell = [self.tableView dequeueReusableCellWithIdentifier:taIdentifier];
 
         _cell.textLabel.text = ta.username;
-
+		_cell.contentView.backgroundColor = ta.color;
+		_cell.textLabel.backgroundColor = [UIColor clearColor];
+		_cell.detailTextLabel.backgroundColor = [UIColor clearColor];
+		
         if (ta.student) {
             _cell.detailTextLabel.text = [NSString stringWithFormat:@"Helping %@", ta.student.username];
         } else {
@@ -221,7 +224,11 @@
         
         if (student.ta) {
             _cell.detailTextLabel.text = [NSString stringWithFormat:@"Being helped by %@", student.ta.username];
+			_cell.contentView.backgroundColor = student.ta.color;
+			_cell.textLabel.backgroundColor = [UIColor clearColor];
+			_cell.detailTextLabel.backgroundColor = [UIColor clearColor];
         } else {
+			_cell.contentView.backgroundColor = [UIColor clearColor];
             _cell.detailTextLabel.text = @"";
         }
         
