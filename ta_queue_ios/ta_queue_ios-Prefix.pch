@@ -14,5 +14,6 @@
     #import "URAlertView.h"
     #import "URError.h"
 	#import "URDefaults.h"
+	#import "NSString+HTML.h"
     #define IS_LOCAL 0
 #endif

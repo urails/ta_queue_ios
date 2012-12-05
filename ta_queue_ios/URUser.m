@@ -23,7 +23,7 @@
 - (void) parse:(NSDictionary *)attributes {
     location = [attributes valueForKey:@"location"];
     token = [attributes valueForKey:@"token"];
-    username = [attributes valueForKey:@"username"];
+    username = [[attributes valueForKey:@"username"] stringByDecodingHTMLEntities];
     userId = [attributes valueForKey:@"id"];
 }
 

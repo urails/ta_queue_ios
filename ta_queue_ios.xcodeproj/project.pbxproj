@@ -61,6 +61,8 @@
 		5FE4B1FA15CC2654002C3F42 /* SourceSansPro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5FE4B1F815CC2654002C3F42 /* SourceSansPro-Light.ttf */; };
 		5FE4B1FB15CC2654002C3F42 /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5FE4B1F915CC2654002C3F42 /* SourceSansPro-Regular.ttf */; };
 		5FFCFDF4166EBCDD00F8300D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FFCFDF3166EBCDD00F8300D /* Default-568h@2x.png */; };
+		5FFCFDF7166EC3F200F8300D /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCFDF6166EC3F200F8300D /* NSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5FFCFDFA166EC4BB00F8300D /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCFDF9166EC4BB00F8300D /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -154,6 +156,10 @@
 		5FE4B1F815CC2654002C3F42 /* SourceSansPro-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Light.ttf"; sourceTree = "<group>"; };
 		5FE4B1F915CC2654002C3F42 /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
 		5FFCFDF3166EBCDD00F8300D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		5FFCFDF5166EC3F200F8300D /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
+		5FFCFDF6166EC3F200F8300D /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
+		5FFCFDF8166EC4BB00F8300D /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
+		5FFCFDF9166EC4BB00F8300D /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
 		B8F312897FA241DAAAE72D47 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -202,6 +208,10 @@
 				5F7B329B15A74F4300FD4973 /* URError.m */,
 				5FB832A115B67B9F00F4F037 /* URDefaults.h */,
 				5FB832A215B67B9F00F4F037 /* URDefaults.m */,
+				5FFCFDF5166EC3F200F8300D /* NSString+HTML.h */,
+				5FFCFDF6166EC3F200F8300D /* NSString+HTML.m */,
+				5FFCFDF8166EC4BB00F8300D /* GTMNSString+HTML.h */,
+				5FFCFDF9166EC4BB00F8300D /* GTMNSString+HTML.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -540,6 +550,8 @@
 				5F8298A215CE2126002AE8E9 /* URQuestionViewController.m in Sources */,
 				5FDBD3821627B9EA00A83631 /* Countly.m in Sources */,
 				5FDBD3831627B9EA00A83631 /* Countly_OpenUDID.m in Sources */,
+				5FFCFDF7166EC3F200F8300D /* NSString+HTML.m in Sources */,
+				5FFCFDFA166EC4BB00F8300D /* GTMNSString+HTML.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
