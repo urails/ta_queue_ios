@@ -261,9 +261,12 @@
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
+
+    // Workaround for iOS 8 bug that causes detail text labels not to show up properly.
+    // http://stackoverflow.com/questions/25987135/ios-8-uitableviewcell-detail-text-not-correctly-updating
+    [cell layoutSubviews];
     
     return cell;
-    
 }
 
 - (NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
