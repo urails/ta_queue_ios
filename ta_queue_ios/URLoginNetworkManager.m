@@ -14,22 +14,19 @@
 
 @interface URLoginNetworkManager ()
 
-@property (strong) SVHTTPClient *client;
+@property (nonatomic, strong) NSString *basePath;
+@property (nonatomic, strong) NSURLSession *session;
 
 @end
 
 @implementation URLoginNetworkManager
 
-@synthesize client = _client;
-@synthesize delegate = _delegate;
-
 - (id) init {
     self = [super init];
     
     if (self) {
-        _client = [[SVHTTPClient alloc] init];
-        [_client setBasePath:[URDefaults currentBaseURL]];
-        [_client setSendParametersAsJSON:YES];
+        _session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+        _basePath = [URDefaults currentBaseURL];
     }
     
     return self;
@@ -38,7 +35,7 @@
 #pragma mark Configuration
 
 - (void) setBasePath:(NSString *)basePath {
-    [_client setBasePath:basePath];
+    _basePath = basePath;
     [self fetchSchools];
 }
 
@@ -46,24 +43,29 @@
     [self setBasePath:[URDefaults currentBaseURL]];
 }
 
+- (NSURL *)URLForPath:(NSString *)path {
+    return [NSURL URLWithString:[self.basePath stringByAppendingPathComponent:path]];
+}
+
 #pragma mark API calls
 
 - (void) fetchSchools {
-    [_client GET:@"/schools.json" parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-		
-		if (error) {
-			[_delegate networkManager:self didReceiveConnectionError:error.localizedDescription];
-		} else {
-			NSMutableArray *schools = [NSMutableArray array];
-			
-			for (NSDictionary *school in response) {
-				[schools addObject:[URSchool withAttributes:school]];
-			}
-			
-			[_delegate networkManager:self didFetchSchools:schools];
-		}
-		
-    }];
+    [[self.session dataTaskWithURL:[self URLForPath:@"schools.json"] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (error) {
+                [_delegate networkManager:self didReceiveConnectionError:error.localizedDescription];
+            } else {
+                NSMutableArray *schools = [NSMutableArray array];
+                NSArray *JSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+
+                for (NSDictionary *school in JSON) {
+                    [schools addObject:[URSchool withAttributes:school]];
+                }
+
+                [_delegate networkManager:self didFetchSchools:schools];
+            }
+        });
+    }] resume];
 }
 
 - (void) loginStudentWithUsername:(NSString *)username andLocation:(NSString *)location toQueue:(URQueue *)queue {
@@ -72,31 +74,47 @@
                      queue.instructor.username,
                      queue.classNumber];
     
-    NSMutableDictionary *fields = [NSMutableDictionary dictionary];
-    
-    [fields setValue:username forKey:@"username"];
-    [fields setValue:location forKey:@"location"];
-    
-    NSDictionary *params = [NSDictionary dictionaryWithObject:fields forKey:@"student"];
-    
-    [_client POST:url parameters:params completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        /* If there's a connection error, render it */
-        if (error) {
-            [_delegate networkManager:self didReceiveConnectionError:[error localizedDescription]];
-        } else {
-            /* If we didn't get the expected status code, render the rails errors */
-            /* TODO: Unify error reporting here, similar to URQueueNetworkManager
-               and unify the error reporting on the server */
-            if (urlResponse.statusCode != 201) {
-				if ([_delegate respondsToSelector:@selector(networkManager:didReceiveErrorCode:response:)]) {
-					[_delegate networkManager:self didReceiveErrorCode:urlResponse.statusCode response:response];
-				}
-            } else {
-                URUser *user = [URStudent withAttributes:response];
-                [_delegate networkManager:self didLoginUser:user];
-            }
+    NSDictionary *params = @{
+        @"student": @{
+            @"username": username,
+            @"location": location
         }
-    }];
+    };
+
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[self URLForPath:url]];
+    request.HTTPMethod = @"POST";
+    request.HTTPBody = [NSJSONSerialization dataWithJSONObject:params options:0 error:nil];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+
+    NSLog(@"%@", [NSJSONSerialization JSONObjectWithData:[NSJSONSerialization dataWithJSONObject:params options:0 error:nil] options:0 error:nil]);
+
+    [[self.session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        /* If there's a connection error, render it */
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (error) {
+                [_delegate networkManager:self didReceiveConnectionError:[error localizedDescription]];
+            } else {
+                /* If we didn't get the expected status code, render the rails errors */
+                /* TODO: Unify error reporting here, similar to URQueueNetworkManager
+                 and unify the error reporting on the server */
+                NSInteger statusCode = ((NSHTTPURLResponse *)response).statusCode;
+                if (statusCode != 201) {
+                    if ([_delegate respondsToSelector:@selector(networkManager:didReceiveErrorCode:response:)]) {
+                        id responseObject = nil;
+                        if (data && data.length > 0) {
+                            responseObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                        }
+                        [_delegate networkManager:self didReceiveErrorCode:statusCode response:responseObject];
+                    }
+                } else {
+                    NSDictionary *JSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                    URUser *user = [URStudent withAttributes:JSON];
+                    [_delegate networkManager:self didLoginUser:user];
+                }
+            }
+        });
+    }] resume];
 }
 
 - (void) loginTaWithUsername:(NSString *)username andPassword:(NSString *)password toQueue:(URQueue *)queue {
@@ -105,23 +123,37 @@
                      queue.instructor.username,
                      queue.classNumber];
     
-    NSMutableDictionary *fields = [NSMutableDictionary dictionary];
-    
-    [fields setValue:username forKey:@"username"];
-    [fields setValue:password forKey:@"password"];
-    
-    NSDictionary *params = [NSDictionary dictionaryWithObject:fields forKey:@"ta"];
-    
-    [_client POST:url parameters:params completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        if (error) {
-            [_delegate networkManager:self didReceiveConnectionError:[error localizedDescription]];
-        } else if (urlResponse.statusCode != 201) {
-            [_delegate networkManager:self didReceiveErrorCode:urlResponse.statusCode response:response];
-        } else {
-            URUser *user = [URTa withAttributes:response];
-            [_delegate networkManager:self didLoginUser:user];
+    NSDictionary *params = @{
+        @"ta": @{
+            @"username": username,
+            @"password": password
         }
-    }];
+    };
+
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[self URLForPath:url]];
+    request.HTTPMethod = @"POST";
+    request.HTTPBody = [NSJSONSerialization dataWithJSONObject:params options:0 error:nil];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+
+    [[self.session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSInteger statusCode = ((NSHTTPURLResponse *)response).statusCode;
+            if (error) {
+                [_delegate networkManager:self didReceiveConnectionError:[error localizedDescription]];
+            } else if (statusCode != 201) {
+                id responseObject = nil;
+                if (data && data.length > 0) {
+                    responseObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                }
+                [_delegate networkManager:self didReceiveErrorCode:statusCode response:responseObject];
+            } else {
+                NSDictionary *JSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                URUser *user = [URTa withAttributes:JSON];
+                [_delegate networkManager:self didLoginUser:user];
+            }
+        });
+    }] resume];
 }
 
 @end

@@ -34,19 +34,11 @@
 
 - (IBAction)doneTapped:(id)sender {
     [URDefaults setCurrentBaseURL:_baseURLField.text];
-    _finishedCallback(self);
-}
-
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"about"]) {
-        URAboutViewController *controller = (URAboutViewController *)segue.destinationViewController;
-        
-        controller.delegate = self;
-    }
+    self.didFinish();
 }
 
 - (void) aboutViewControllerDidFinish:(URAboutViewController *)controller {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:^{ }];
 }
 
 @end

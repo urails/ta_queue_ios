@@ -12,17 +12,15 @@
 #import "URStudent.h"
 #import "URTa.h"
 #import "URQueueNetworkManager.h"
-#import "URQueueSettingsViewController.h"
 
 @protocol URQueueViewControllerDelegate;
 
-@interface URQueueViewController : UIViewController <URQueueNetworkManagerDelegate, URQueueSettingsViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface URQueueViewController : UIViewController <URQueueNetworkManagerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (strong) URQueue *queue;
-@property (assign) URUser *currentUser;
-@property (strong) NSTimer *timer;
+@property (strong) URUser *currentUser;
 @property (strong) URQueueNetworkManager *networkManager;
-@property (assign) NSObject<URQueueViewControllerDelegate> *delegate;
+@property (copy, nonatomic) void (^didFinish)();
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIToolbar *toolbar;
@@ -34,10 +32,4 @@
 + (void) setCurrentQueueController:(URQueueViewController *)queueController;
 
 
-@end
-
-@protocol URQueueViewControllerDelegate <NSObject>
-
-- (void) queueViewController:(URQueueViewController *)controller didLogoutUser:(URUser *)user;
-                              
 @end

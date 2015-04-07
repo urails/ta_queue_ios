@@ -7,9 +7,10 @@
 //
 
 #import "URQueueViewController.h"
-#import "SVPullToRefresh.h"
 #import "URDefaults.h"
 #import "URQuestionViewController.h"
+#import "SSPullToRefresh.h"
+@import WebKit;
 
 // Table View Sections
 #define STATUS_SECTION 0
@@ -17,19 +18,14 @@
 #define TA_SECTION 2
 #define STUDENT_SECTION 3
 
-@interface URQueueViewController ()
+@interface URQueueViewController () <SSPullToRefreshViewDelegate, WKScriptMessageHandler>
+
+@property (strong, nonatomic) SSPullToRefreshView *pullToRefreshView;
+@property (strong, nonatomic) WKWebView *webView;
 
 @end
 
 @implementation URQueueViewController
-
-@synthesize queue = _queue;
-@synthesize currentUser = _currentUser;
-@synthesize timer = _timer;
-@synthesize networkManager = _networkManager;
-@synthesize delegate = _delegate;
-@synthesize tableView = _tableView;
-@synthesize toolbar = _toolbar;
 
 - (void)viewDidLoad
 {
@@ -37,7 +33,7 @@
     
     self.navigationItem.hidesBackButton = YES;
     
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStyleBordered target:self action:@selector(logoutTapped)];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logoutTapped)];
     
     self.navigationItem.leftBarButtonItem = item;
     
@@ -47,42 +43,44 @@
     
     [_networkManager refreshQueue];
     
-    __block URQueueNetworkManager *tempManager = _networkManager;
-    
-    [self.tableView addPullToRefreshWithActionHandler:^{
-        [tempManager refreshQueue];
-    }];
-    
     if (_queue.studentsInQueue.count > 0) {
         [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:STUDENT_SECTION] animated:YES scrollPosition:UITableViewScrollPositionNone];
     }
 
     [_networkManager setDelegate:self];
+
+    self.webView = [[WKWebView alloc] initWithFrame:CGRectZero];
+    [self.webView.configuration.userContentController addScriptMessageHandler:self name:@"queueUpdate"];
+    NSString *URLString = [[URDefaults currentBaseURL] stringByAppendingPathComponent:@"queue/ios"];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:URLString]];
+    NSString *token = [[[NSString stringWithFormat:@"%@:%@", self.currentUser.userId, self.currentUser.token] dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:0];
+    NSString *header = [NSString stringWithFormat:@"Basic %@", token];
+    [request addValue:header forHTTPHeaderField:@"Authorization"];
+    [self.webView loadRequest:request];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
     [URQueueViewController setCurrentQueueController:self];
     NSLog(@"View Appeared");
-    [self startTimer];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
     [URQueueViewController setCurrentQueueController:nil];
-    [_timer invalidate];    
 }
 
-- (void)viewDidUnload
-{
-    [self setTimer:nil];
-    [self setToolbar:nil];
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+- (void)viewDidLayoutSubviews {
+    if(self.pullToRefreshView == nil) {
+        self.pullToRefreshView = [[SSPullToRefreshView alloc] initWithScrollView:self.tableView delegate:self];
+    }
 }
 
-- (void) startTimer {
-    _timer = [NSTimer scheduledTimerWithTimeInterval:[URDefaults currentQueryInterval] target:self selector:@selector(refreshQueue) userInfo:nil repeats:YES];   
-    NSLog(@"Querying at %i", [URDefaults currentQueryInterval]);
+- (void)pullToRefreshViewDidStartLoading:(SSPullToRefreshView *)view {
+    [self.pullToRefreshView startLoading];
+    [self refreshQueue];
+}
+
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
+    [self updateQueueStateWithQueue:[URQueue withAttributes:message.body]];
 }
 
 #pragma mark NSTimer Methods
@@ -91,38 +89,37 @@
     [_networkManager refreshQueue];
 }
 
-#pragma mark URQueueSettingsViewController
-
-- (void) settingsViewControllerDidFinish:(URQueueSettingsViewController *)controller {
-    [_timer invalidate];
-    [self dismissModalViewControllerAnimated:YES];
-}
-
-#pragma mark RKRequestDelegate methods
+#pragma mark URQueueNetworkManager methods
 
 - (void) networkManager:(URQueueNetworkManager *)manager didReceiveQueueUpdate:(URQueue *)queue {
+    [self updateQueueStateWithQueue:queue];
+}
+
+- (void)updateQueueStateWithQueue:(URQueue *)queue {
     self.queue = queue;
+
+    self.navigationItem.title = queue.classNumber;
     
     [URStudent setCurrentUser:queue.currentUser];
     
     NSIndexPath *path = [_tableView indexPathForSelectedRow];
-    
+
+    [self.pullToRefreshView finishLoading];
 
     [_tableView reloadData];
-    [_tableView.pullToRefreshView stopAnimating];
     [_tableView selectRowAtIndexPath:path animated:NO scrollPosition:UITableViewScrollPositionNone];
     [self setupUserActionToolbar];
 }
 
 - (void) networkManager:(URQueueNetworkManager *)manager didLogoutUser:(URUser *)user {
-    [_delegate queueViewController:self didLogoutUser:user];
+    self.didFinish();
 }
 
 - (void) networkManager:(URQueueNetworkManager *)manager didReceiveErrorCode:(NSInteger)code response:(id)response {
     // A 401 is the unauthorized status code, which must me they are no longer logged in and
     // the server timed them out.
     if (code == 401) {
-        [_delegate queueViewController:self didLogoutUser:_currentUser];
+        self.didFinish();
         [URAlertView showMessage:@"You are no longer logged in, possibly due to inactivity. Please login again." withStyle:UIAlertViewStyleDefault ok:nil cancel:nil];
     } 
     // Any other error could be anything, so display it to the user.
@@ -140,13 +137,6 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"queueSettings"]) {
-        URQueueSettingsViewController *controller = (URQueueSettingsViewController *)segue.destinationViewController;
-        controller.delegate = self;
-    }
 }
 
 #pragma mark - Table view data source
@@ -254,7 +244,7 @@
             cell.contentView.backgroundColor = [UIColor redColor];
         } else if (_queue.frozen) {
             cell.textLabel.text = @"The Queue is frozen, no more students may enter.";
-            cell.contentView.backgroundColor = [UIColor blueColor];
+            cell.contentView.backgroundColor = [UIColor colorWithRed:0.0863 green:0.4941 blue:0.9843 alpha:1.0];
         }
         cell.textLabel.textColor = [UIColor whiteColor];
         cell.textLabel.backgroundColor = [UIColor clearColor];
@@ -324,11 +314,11 @@
     }
 
     if (student.inQueue) {
-        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Exit Queue" style:UIBarButtonItemStyleBordered target:self action:@selector(exitQueue)];
+        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Exit Queue" style:UIBarButtonItemStylePlain target:self action:@selector(exitQueue)];
         [items addObject:item];
     }
     else {
-        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Enter Queue" style:UIBarButtonItemStyleBordered target:self action:@selector(enterQueue)];
+        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Enter Queue" style:UIBarButtonItemStylePlain target:self action:@selector(enterQueue)];
         [items addObject:item];
     }
     
@@ -359,17 +349,17 @@
         
         if (student.taId) {
             if ([ta.userId isEqualToString:student.taId]) {
-                UIBarButtonItem *item =[[UIBarButtonItem alloc] initWithTitle:@"Put Back" style:UIBarButtonItemStyleBordered target:self action:@selector(putBackStudent)];
+                UIBarButtonItem *item =[[UIBarButtonItem alloc] initWithTitle:@"Put Back" style:UIBarButtonItemStylePlain target:self action:@selector(putBackStudent)];
                 
                 [items addObject:item];
             }
         } else {
-            UIBarButtonItem *item =[[UIBarButtonItem alloc] initWithTitle:@"Accept" style:UIBarButtonItemStyleBordered target:self action:@selector(acceptStudent)];
+            UIBarButtonItem *item =[[UIBarButtonItem alloc] initWithTitle:@"Accept" style:UIBarButtonItemStylePlain target:self action:@selector(acceptStudent)];
             
             [items addObject:item];
         }
         
-        UIBarButtonItem *item =[[UIBarButtonItem alloc] initWithTitle:@"Remove" style:UIBarButtonItemStyleBordered target:self action:@selector(removeStudent)];
+        UIBarButtonItem *item =[[UIBarButtonItem alloc] initWithTitle:@"Remove" style:UIBarButtonItemStylePlain target:self action:@selector(removeStudent)];
         
         [items addObject:item];
     }
@@ -381,7 +371,7 @@
     NSString *active = (_queue.active ? @"Deactivate" : @"Activate");
 
     
-    item =[[UIBarButtonItem alloc] initWithTitle:active style:UIBarButtonItemStyleBordered target:self action:@selector(toggleActive)];
+    item =[[UIBarButtonItem alloc] initWithTitle:active style:UIBarButtonItemStylePlain target:self action:@selector(toggleActive)];
     
     [items addObject:item];
     
@@ -389,7 +379,7 @@
     if (_queue.active) {
         NSString *frozen = (_queue.frozen ? @"Unfreeze" : @"Freeze");
         
-        item =[[UIBarButtonItem alloc] initWithTitle:frozen style:UIBarButtonItemStyleBordered target:self action:@selector(toggleFrozen)];
+        item =[[UIBarButtonItem alloc] initWithTitle:frozen style:UIBarButtonItemStylePlain target:self action:@selector(toggleFrozen)];
         
         [items addObject:item];
     }
@@ -449,6 +439,7 @@
 
 
 - (void) logoutTapped {
+    [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"queueUpdate"];
     [_networkManager logout];
 }
 

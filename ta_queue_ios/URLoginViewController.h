@@ -12,7 +12,7 @@
 #import "URLoginNetworkManager.h"
 #import "URQueueViewController.h"
 
-@interface URLoginViewController : UIViewController <UITextFieldDelegate, URLoginNetworkManagerDelegate, URQueueViewControllerDelegate>
+@interface URLoginViewController : UIViewController <UITextFieldDelegate, URLoginNetworkManagerDelegate>
 
 #pragma mark IBOutlets
 
@@ -24,7 +24,7 @@
 
 @property (strong) URQueue *schoolQueue;
 @property (strong) URLoginNetworkManager *networkManager;
-@property (assign) URUser *loggedInUser;
+@property (strong) URUser *loggedInUser;
 
 #pragma mark IBAction methods
 

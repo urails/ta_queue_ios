@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "URAboutViewController.h"
 
-@interface URSchoolSettingsViewController : UITableViewController <URAboutViewControllerDelegate>
+@interface URSchoolSettingsViewController : UITableViewController
 
 @property (strong, nonatomic) IBOutlet UITextField *baseURLField;
-@property (strong, nonatomic) void (^finishedCallback)(URSchoolSettingsViewController *controller);
+@property (strong, nonatomic) void (^didFinish)();
 
 @end

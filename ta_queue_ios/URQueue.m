@@ -82,11 +82,13 @@
             }];
             
             NSArray *matchingTas = [tas filteredArrayUsingPredicate:predicate];
-            
-            URTa *ta = [matchingTas objectAtIndex:0];
-            
-            ta.student = student;
-            student.ta = ta;
+
+            if (matchingTas.count > 0) {
+                URTa *ta = [matchingTas objectAtIndex:0];
+
+                ta.student = student;
+                student.ta = ta;
+            }
         }
     }
 }

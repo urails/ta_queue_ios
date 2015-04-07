@@ -11,30 +11,36 @@
 #import "URStudent.h"
 #import "URInstructor.h"
 #import "URQueue.h"
-#import "SVPullToRefresh.h"
 #import "URLoginViewController.h"
+#import "SSPullToRefresh.h"
+#import "SSPullToRefreshSimpleContentView.h"
 
-@interface URViewController ()
+@interface URViewController () <SSPullToRefreshViewDelegate>
+
+@property (strong) SSPullToRefreshView *pullToRefreshView;
 
 @end
 
 @implementation URViewController
-
-@synthesize schools = _schools;
-@synthesize networkManager = _networkManager;
 
 - (void)viewDidLoad
 {
     _networkManager = [[URLoginNetworkManager alloc] init];
     _networkManager.delegate = self;
 
-    __block URLoginNetworkManager *blockManager = _networkManager;
-    
-    [self.tableView addPullToRefreshWithActionHandler:^(void) {
-        [blockManager fetchSchools];
-    }];
-    
     [super viewDidLoad];
+}
+
+- (void)viewDidLayoutSubviews {
+    if(self.pullToRefreshView == nil) {
+        self.pullToRefreshView = [[SSPullToRefreshView alloc] initWithScrollView:self.tableView delegate:self];
+        self.pullToRefreshView.contentView = [[SSPullToRefreshSimpleContentView alloc] initWithFrame:CGRectZero];
+    }
+}
+
+- (void)refresh {
+    [self.pullToRefreshView startLoading];
+    [self.networkManager fetchSchools];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -48,11 +54,17 @@
     [self setNetworkManager:nil];
 }
 
+#pragma mark SSPullToRefreshViewDelegate
+
+- (void)pullToRefreshViewDidStartLoading:(SSPullToRefreshView *)view {
+    [self refresh];
+}
+
 #pragma mark Networking
 
 - (void) networkManager:(URLoginNetworkManager *)manager didFetchSchools:(NSArray *)schools {
     _schools = schools;
-    [self.tableView.pullToRefreshView stopAnimating];
+    [self.pullToRefreshView finishLoading];
     [self.tableView reloadData];
 }
 
@@ -73,11 +85,12 @@
         
     } else if ([segue.identifier isEqualToString:@"schoolSettings"]) {
 
-        URSchoolSettingsViewController *viewController = (URSchoolSettingsViewController *)segue.destinationViewController;
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        URSchoolSettingsViewController *viewController = (URSchoolSettingsViewController *)navController.viewControllers[0];
         
-        viewController.finishedCallback = ^(URSchoolSettingsViewController *controller) {
+        viewController.didFinish = ^{
 			[self.networkManager setBasePath:[URDefaults currentBaseURL]];
-            [self dismissModalViewControllerAnimated:YES];
+            [self dismissViewControllerAnimated:true completion:^{ }];
         };
     }
 }

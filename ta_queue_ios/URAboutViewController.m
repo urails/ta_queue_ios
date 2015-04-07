@@ -47,8 +47,7 @@
         MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
         controller.mailComposeDelegate = self;
         [controller setToRecipients:[NSArray arrayWithObject:@"uofu.ta.queue@gmail.com"]];
-        [self presentModalViewController:controller
-                                animated:YES];
+        [self presentViewController:controller animated:YES completion:^{ }];
     }
 
 }
@@ -56,15 +55,10 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://nine.eng.utah.edu/"]];
 }
 
-- (IBAction)doneTapped:(id)sender {
-    [_delegate aboutViewControllerDidFinish:self];
-}
-
-
 #pragma mark MFMailComposeViewControllerDelegate methods
 
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:^{ }];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

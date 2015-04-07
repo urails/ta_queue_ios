@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SVHTTPClient.h"
 #import "URQueue.h"
 
 @protocol URLoginNetworkManagerDelegate;

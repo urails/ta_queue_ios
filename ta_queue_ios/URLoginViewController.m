@@ -16,13 +16,6 @@
 
 @implementation URLoginViewController
 
-@synthesize typeControl = _typeControl;
-@synthesize nameField = _nameField;
-@synthesize locationField = _locationField;
-@synthesize schoolQueue = _schoolQueue;
-@synthesize networkManager = _networkManager;
-@synthesize loggedInUser = _loggedInUser;
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -62,17 +55,6 @@
     return YES;
 }
 
-#pragma mark - URQueueViewControllerDelegate methods
-
-- (void) queueViewController:(URQueueViewController *)controller didLogoutUser:(URUser *)user {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-#pragma mark - Table view data source
-
-
-#pragma mark - Table view delegate
-
 - (IBAction)loginTapped:(id)sender {
     [_locationField resignFirstResponder];
     [_nameField resignFirstResponder];
@@ -110,7 +92,9 @@
     if ([segue.identifier isEqualToString:@"loggedIn"]) {
         URQueueViewController* controller = (URQueueViewController*)segue.destinationViewController;
         
-        controller.delegate = self;
+        controller.didFinish = ^{
+            [self.navigationController popViewControllerAnimated:YES];
+        };
         controller.currentUser = _loggedInUser;
     }
 }

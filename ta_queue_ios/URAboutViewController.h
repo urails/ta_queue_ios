@@ -11,14 +11,5 @@
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 
-@protocol URAboutViewControllerDelegate;
-
 @interface URAboutViewController : UIViewController <MFMailComposeViewControllerDelegate>
-@property (weak, nonatomic) id<URAboutViewControllerDelegate> delegate;
-@end
-
-@protocol URAboutViewControllerDelegate <NSObject>
-
-- (void) aboutViewControllerDidFinish:(URAboutViewController *)controller;
-
 @end
