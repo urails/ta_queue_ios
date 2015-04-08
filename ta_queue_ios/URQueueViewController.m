@@ -56,6 +56,8 @@
     NSString *token = [[[NSString stringWithFormat:@"%@:%@", self.currentUser.userId, self.currentUser.token] dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:0];
     NSString *header = [NSString stringWithFormat:@"Basic %@", token];
     [request addValue:header forHTTPHeaderField:@"Authorization"];
+    self.webView.frame = CGRectMake(-1, -1, 1, 1);
+    [self.view addSubview:self.webView];
     [self.webView loadRequest:request];
 }
 
